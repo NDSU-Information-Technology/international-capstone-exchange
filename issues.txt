@@ -1,0 +1,24 @@
+Delete proposals until pairing
+Delete subjects that aren't available and don't have associated records
+Need account submission page with follow up about what will happen next
+Send notification email upon approval
+Just a little bit pretty
+Any ideas how to better handle the cost field?  There are several options like a fixed cost, covering expenses, optional contribution, etc.
+Deactivate a user
+Display institution / country info to admins
+Display cost/size/duration/effort in proposal grid view to users
+Grey font should go away and become black
+Institution edit page to update names
+
+DONE
+
+Pending departments are chooseable by new people. - Likely just get rid of departments
+First time users can create a department and choose an existing one
+Spell check on description - Using native browser option now, added note that to get to browser suggestions, must control right click.
+Allow for editing of account info
+Better country and institution listings (probably switch to datatable) - Switched to datatable, institutions has a bit of a painful load time
+New account signup phone number entry and validation
+New account signup email validation
+Checkbox the subjects instead of using the pallette which is causing problems
+Make page title obvious to admins
+Edit proposals until pairing
