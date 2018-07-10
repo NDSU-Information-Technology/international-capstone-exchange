@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.ndsu.eci</groupId>
     <artifactId>international-capstone-exchange</artifactId>
-    <version>1.0.7-SNAPSHOT</version>
+    <version>1.0.8-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>International Capstone Exchange </name>
         <dependencies>
@@ -138,6 +138,12 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-email</artifactId>
           <version>1.5</version>
+          <exclusions>
+            <exclusion>
+              <groupId>com.sun.mail</groupId>
+              <artifactId>javax.mail</artifactId>
+            </exclusion>
+          </exclusions>
         </dependency>
         <dependency>
           <groupId>org.apache.velocity</groupId>
@@ -322,9 +328,5 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <slf4j-release-version>1.7.19</slf4j-release-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <scm>
-      <developerConnection>scm:svn:https://vcs.ndsu.nodak.edu/sysadm/its/ads/international-capstone-exchange/trunk</developerConnection>
-      <url>https://vcs.ndsu.nodak.edu/sysadm/its/ads/international-capstone-exchange/trunk</url>
-    </scm>
     <description>Internation Capstone Exchange application to gather school applications to be part of the program.</description>
 </project>
