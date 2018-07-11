@@ -46,6 +46,7 @@ import org.tynamo.security.services.impl.SecurityFilterChain;
 
 import edu.ndsu.eci.international_capstone_exchange.auth.FederatedAccountsRealm;
 import edu.ndsu.eci.international_capstone_exchange.auth.ILACRealm;
+import edu.ndsu.eci.international_capstone_exchange.auth.LocalDevRealm;
 import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.services.impl.ECIFederatedAccountService;
 import edu.ndsu.eci.international_capstone_exchange.services.impl.EmailServiceImpl;
@@ -168,6 +169,9 @@ public class AppModule {
     configuration.add(authorizingRealm);
     ILACRealm ilac = new ILACRealm(environment, userInfo);
     configuration.add(ilac);
+    
+    LocalDevRealm localRealm = new LocalDevRealm("foobar");
+    configuration.add(localRealm);
     
 //    configuration.add(new Pac4jFederatedRealm(logger, federatedAccountService));
   }

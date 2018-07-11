@@ -28,6 +28,7 @@ import edu.ndsu.eci.international_capstone_exchange.auth.FederatedAccountsRealm;
 import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
 import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
+import edu.ndsu.eci.international_capstone_exchange.util.SingleAuthToken;
 
 /**
  * Implementation of the userInfo service
@@ -51,27 +52,32 @@ public class UserInfoImpl implements UserInfo {
     String userId = (String) principals.getPrimaryPrincipal();
     List l = principals.asList();
     
-    Pac4jAuthenticationToken token = null;
     for (Object obj : l) {
       if (obj instanceof Pac4jAuthenticationToken) {
-        token = (Pac4jAuthenticationToken) obj;
+        return getPac4jUser((Pac4jAuthenticationToken) obj, userId, context);
+      } else if (obj instanceof SingleAuthToken) {
+        return getSingleUser((SingleAuthToken) obj, userId, context);
       }
     }
-    
-    if (token == null) {
-      return null;
-    }
-    
+        
+    return null;
+  }
+
+  private User getPac4jUser(Pac4jAuthenticationToken token, String userId, ObjectContext context) {
     Object principal = token.getPrincipal();
     // find type, then go.
     if (principal instanceof Google2Profile) {
       // TODO remove the context?
       return map.getUser(context, "pac4j_google2", userId);
     }
-    
     return null;
   }
-
+  
+  private User getSingleUser(SingleAuthToken token, String userId, ObjectContext context) {
+    Object principal = token.getPrincipal();
+    return map.getUser(context, "pac4j_google2", userId);
+  }
+  
   @Override
   public boolean isAdmin() {
 	  
