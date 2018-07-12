@@ -130,7 +130,7 @@ public class AppModule {
     // You should change the passphrase immediately; the HMAC passphrase is used to secure
     // the hidden field data stored in forms to encrypt and digitally sign client-side data.
     configuration.add(SymbolConstants.HMAC_PASSPHRASE, oConfig.getHmac());
-
+    configuration.add(SecuritySymbols.REMEMBERME_CIPHERKERY, StringUtils.substring(oConfig.getHmac(), 0, 15));
 
     // these are the defaults, change as needed 
     // configuration.add(FederatedAccountSymbols.COMMITAFTER_OAUTH, “true”); 
