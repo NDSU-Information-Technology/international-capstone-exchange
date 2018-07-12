@@ -27,7 +27,7 @@
 	</h3>
 
 
-		<t:beaneditform t:id="form" object="proposal" add="subjects,propTypes" submitLabel="Save" exclude="created,proposalStatus,user,pairing,lastModified,institution" reorder="name,cost,potentialStart,teamSize,perStudentWeekly,durationInWeeks,subjects,propTypes,description">
+		<t:beaneditform t:id="form" object="proposal" add="subjects,propTypes" submitLabel="Save" exclude="created,proposalStatus,user,pairing,lastModified,institution,company" reorder="name,cost,potentialStart,teamSize,perStudentWeekly,durationInWeeks,subjects,propTypes,description">
 			<p:description>
 				<t:label for="description">Description - Subject area (e.g. CS/ME/etc.) and any notes (e.g. prefer web design/power systems/etc.).</t:label>
 				<t:textarea t:id="description" t:mixins="summernote" value="proposal.description" t:validate="required"></t:textarea>
