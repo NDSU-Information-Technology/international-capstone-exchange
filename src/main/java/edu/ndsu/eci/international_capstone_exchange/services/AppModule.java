@@ -13,8 +13,11 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.services;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.web.filter.authc.LogoutFilter;
@@ -56,6 +59,7 @@ import edu.ndsu.eci.international_capstone_exchange.services.impl.UserInfoImpl;
 import edu.ndsu.eci.international_capstone_exchange.services.impl.VelocityEmailServiceImpl;
 import edu.ndsu.eci.international_capstone_exchange.services.impl.VelocityServiceImpl;
 import edu.ndsu.eci.international_capstone_exchange.util.OAuthConfig;
+import edu.ndsu.eci.international_capstone_exchange.util.SingleUserMode;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
@@ -63,10 +67,10 @@ import edu.ndsu.eci.international_capstone_exchange.util.OAuthConfig;
  * 
  */
 public class AppModule {
-  
+
   // FIXME needs to be a symbol with data loaded from JNDI to make the Western Sydney Capstone project go smoother, although we allow anyone in the world to impersonate us....
   public static final String FROM_ADDRESS = "ndsu.icpe@ndsu.edu";
-  
+
   /** run mode environment variable */
   public static final String RUN_MODE = "run.mode";
 
@@ -75,11 +79,11 @@ public class AppModule {
 
   /** development value in run mode for development */
   public static final String RUN_MODE_DEVELOPMENT = "development";
-  
+
   /** local development value in run mode for active development, enables back door authentication */
   public static final String RUN_MODE_PROTOTYPE = "prototype";
 
-  
+
   public static void bind(ServiceBinder binder) {
     binder.bind(FederatedAccountService.class, ECIFederatedAccountService.class);
     binder.bind(AuthorizingRealm.class, FederatedAccountsRealm.class).withId(FederatedAccountsRealm.class.getSimpleName());
@@ -90,17 +94,17 @@ public class AppModule {
     binder.bind(VelocityService.class, VelocityServiceImpl.class);
     binder.bind(VelocityEmailService.class, VelocityEmailServiceImpl.class);
   }
-  
+
   public static void contributeFederatedAccountService(MappedConfiguration<String, Object> configuration) {
     // you can either map each realm to the same entity...
     configuration.add("*", User.class);
     // or, you can use different entities
-      // configuration.add(Constants.TWITTER_REALM, TwitterAccount.class);
-      // configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.google2.name(), GoogleAccount.class);
+    // configuration.add(Constants.TWITTER_REALM, TwitterAccount.class);
+    // configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.google2.name(), GoogleAccount.class);
 
     // Now, you also have to map the desired id (the subject principal) to an attribute of the entity
-//    configuration.add("facebook.id", "facebookId");
-//    configuration.add("twitter.id", "twitterId");
+    //    configuration.add("facebook.id", "facebookId");
+    //    configuration.add("twitter.id", "twitterId");
   }
 
   public static void contributeFactoryDefaults(MappedConfiguration<String, Object> configuration) {
@@ -121,12 +125,12 @@ public class AppModule {
     configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
 
     OAuthConfig oConfig = OAuthConfig.getFromJNDI("bean/pac4j"); 
-    
+
     // You should change the passphrase immediately; the HMAC passphrase is used to secure
     // the hidden field data stored in forms to encrypt and digitally sign client-side data.
     configuration.add(SymbolConstants.HMAC_PASSPHRASE, oConfig.getHmac());
-    
-    
+
+
     // these are the defaults, change as needed 
     // configuration.add(FederatedAccountSymbols.COMMITAFTER_OAUTH, “true”); 
     // configuration.add(FederatedAccountSymbols.HTTPCLIENT_ON_GAE, “false”); 
@@ -134,49 +138,55 @@ public class AppModule {
 
     // set your oauth app credentials
     // Use the constants in Pac4jFederatedRealm for pac4j app credentials 
-//   configuration.add(Pac4jFederatedRealm.GOOGLE_CLIENTID, "<your_google_api_app_key_here>");
+    //   configuration.add(Pac4jFederatedRealm.GOOGLE_CLIENTID, "<your_google_api_app_key_here>");
 
-//    configuration.add(Pac4jFederatedRealm.FACEBOOK_CLIENTID, oConfig.getFacebookId());
-//    configuration.add(Pac4jFederatedRealm.FACEBOOK_CLIENTSECRET, oConfig.getFacebookSecret());
-//    configuration.add(Pac4jFederatedRealm.TWITTER_CLIENTID, oConfig.getTwitterId());
-//    configuration.add(Pac4jFederatedRealm.TWITTER_CLIENTSECRET, oConfig.getTwitterSecret());
+    //    configuration.add(Pac4jFederatedRealm.FACEBOOK_CLIENTID, oConfig.getFacebookId());
+    //    configuration.add(Pac4jFederatedRealm.FACEBOOK_CLIENTSECRET, oConfig.getFacebookSecret());
+    //    configuration.add(Pac4jFederatedRealm.TWITTER_CLIENTID, oConfig.getTwitterId());
+    //    configuration.add(Pac4jFederatedRealm.TWITTER_CLIENTSECRET, oConfig.getTwitterSecret());
     configuration.add(Pac4jFederatedRealm.GOOGLE_CLIENTID, oConfig.getGoogleId());
     configuration.add(Pac4jFederatedRealm.GOOGLE_CLIENTSECRET, oConfig.getGoogleSecret());
-    
+
     configuration.add(SecuritySymbols.LOGIN_URL, "/login");
-    
+
     configuration.add(SymbolConstants.HOSTNAME, oConfig.getHostname());
     configuration.add(FederatedAccountSymbols.DEFAULT_RETURNPAGE, "init/route");
-//    configuration.add(SymbolConstants.HOSTPORT, "443");
-//    configuration.add(SymbolConstants.HOSTPORT_SECURE, "443");
-//    configuration.add(SymbolConstants.SECURE_ENABLED, "true");
-    
+    //    configuration.add(SymbolConstants.HOSTPORT, "443");
+    //    configuration.add(SymbolConstants.HOSTPORT_SECURE, "443");
+    //    configuration.add(SymbolConstants.SECURE_ENABLED, "true");
+
     // Uses run.mode from Tomcat to determine if production or not.
     // run.mode comes from lift standards
     String runMode = System.getProperty(RUN_MODE, RUN_MODE_DEVELOPMENT);
     configuration.add(RUN_MODE, runMode);
-    
+
     if (runMode.equals(RUN_MODE_PRODUCTION)) {
       configuration.add(SymbolConstants.PRODUCTION_MODE, Boolean.TRUE.toString());
     } else {
       configuration.add(SymbolConstants.PRODUCTION_MODE, Boolean.FALSE.toString());
     }
-    
+
     // This goes to true in production, and then parts of CKedit throw errors on minify, or rather the minifier throws errors on CKedit
     configuration.add(SymbolConstants.MINIFICATION_ENABLED, Boolean.FALSE.toString());
 
   }
-  
-  public static void contributeWebSecurityManager(Configuration<Realm> configuration, @InjectService("FederatedAccountsRealm") AuthorizingRealm authorizingRealm, Environment environment, UserInfo userInfo) {
+
+  public static void contributeWebSecurityManager(Configuration<Realm> configuration, @InjectService("FederatedAccountsRealm") AuthorizingRealm authorizingRealm, Environment environment, UserInfo userInfo, @Symbol(RUN_MODE) String runMode) throws NamingException {
 
     configuration.add(authorizingRealm);
     ILACRealm ilac = new ILACRealm(environment, userInfo);
     configuration.add(ilac);
-    
-    LocalDevRealm localRealm = new LocalDevRealm("foobar");
-    configuration.add(localRealm);
-    
-//    configuration.add(new Pac4jFederatedRealm(logger, federatedAccountService));
+
+    // only include this realm if it is running on a desktop
+    if (StringUtils.equals(runMode, RUN_MODE_PROTOTYPE)) {
+      Context initCtx = new InitialContext();
+      Context envCtx = (Context) initCtx.lookup("java:comp/env");
+      SingleUserMode singleConf =  (SingleUserMode) envCtx.lookup("bean/singleuser");
+      LocalDevRealm localRealm = new LocalDevRealm(singleConf.getCredential());
+      configuration.add(localRealm);
+    }
+
+    //    configuration.add(new Pac4jFederatedRealm(logger, federatedAccountService));
   }
 
   /**
@@ -188,17 +198,17 @@ public class AppModule {
     // Support for jQuery is new in Tapestry 5.4 and will become the only supported
     // option in 5.5.
     configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
-//    configuration.add(SymbolConstants.BOOTSTRAP_ROOT, "context:mybootstrap");
+    //    configuration.add(SymbolConstants.BOOTSTRAP_ROOT, "context:mybootstrap");
   }
-  
+
   @Contribute(FederatedSignInOptions.class)
   public static void provideDefaultSignInBlocks(MappedConfiguration<String,OptionType> configuration) {
-//    configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.facebook.name(), OptionType.primary);
-//    configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.twitter.name(), OptionType.primary);
+    //    configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.facebook.name(), OptionType.primary);
+    //    configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.twitter.name(), OptionType.primary);
     configuration.add(FederatedAccountType.pac4j_.name() + SupportedClient.google2.name(), OptionType.primary);
-    
+
   }
-  
+
   public static void contributeSecurityConfiguration(OrderedConfiguration<SecurityFilterChain> configuration, SecurityFilterChainFactory factory) {
     configuration.add("admin", factory.createChain("/admin/**").add(factory.roles(), FederatedAccountsRealm.ADMIN_ROLE).build());
     configuration.add("account", factory.createChain("/account/**").add(factory.roles(), FederatedAccountsRealm.APPROVED_USER_ROLE).build());
@@ -209,15 +219,15 @@ public class AppModule {
     logoutFilter.setRedirectUrl("/");
     configuration.add("logout", factory.createChain("/logout").add(logoutFilter).build());
   }
-  
+
   public static void contributeServiceOverride(MappedConfiguration<Class,Object> configuration, @Symbol(SymbolConstants.HOSTNAME) final String hostname) {
-      BaseURLSource source = new BaseURLSource() {
-          public String getBaseURL(boolean secure) {
-              return "https://" + hostname;
-          }
-      };
-   
-      configuration.add(BaseURLSource.class, source);
+    BaseURLSource source = new BaseURLSource() {
+      public String getBaseURL(boolean secure) {
+        return "https://" + hostname;
+      }
+    };
+
+    configuration.add(BaseURLSource.class, source);
   }
 
   /**
@@ -229,7 +239,7 @@ public class AppModule {
   public void contributeHttpServletRequestHandler(OrderedConfiguration<HttpServletRequestFilter> configuration, @InjectService("FormInputTrimmerFilter") HttpServletRequestFilter formInputTrimmerFilter) {
     configuration.add("FormInputTrimmerFilter", formInputTrimmerFilter);
   }
-    
+
   /**
    * By default, Tapestry's ExceptionReporter implementation writes verbose text files to the
    * "build/exceptions" directory. This replaces that implementation with one that does nothing.
@@ -237,11 +247,11 @@ public class AppModule {
    */
   @Decorate(serviceInterface = ExceptionReporter.class)
   public static ExceptionReporter preventExceptionFileWriting(final ExceptionReporter exceptionReporter) {
-      return new ExceptionReporter() {
-          @Override
-          public void reportException(Throwable exception) {
-          }
-      };
+    return new ExceptionReporter() {
+      @Override
+      public void reportException(Throwable exception) {
+      }
+    };
   }
-  
+
 }

@@ -23,10 +23,22 @@ import org.apache.shiro.subject.SimplePrincipalCollection;
 
 import edu.ndsu.eci.international_capstone_exchange.util.SingleAuthToken;
 
+/**
+ * Realm for a single user mode type operation. Only should 
+ * run in prototype run mode, as in it is for desktop development
+ * when the developer doesn't have a public IP and the ability to
+ * use Google OAuth.
+ *
+ */
 public class LocalDevRealm extends AuthenticatingRealm {
 
+  /** the one password to validate against */
   private final String password;
   
+  /**
+   * Constructor
+   * @param password the one password
+   */
   public LocalDevRealm(String password) {
     setAuthenticationTokenClass(UsernamePasswordToken.class);
     this.password = password;
@@ -37,16 +49,7 @@ public class LocalDevRealm extends AuthenticatingRealm {
     SimplePrincipalCollection collect = new SimplePrincipalCollection(token.getPrincipal(), getName());
     collect.add(new SingleAuthToken(token.getPrincipal().toString()), getName());
     
-    return new SimpleAuthenticationInfo(collect, token.getCredentials());
+    return new SimpleAuthenticationInfo(collect, password);
   }
-
-//  @Override
-//  protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-//    SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-//    authorizationInfo.addRole(FederatedAccountsRealm.ADMIN_ROLE);
-//    authorizationInfo.addRole(FederatedAccountsRealm.APPROVED_USER_ROLE);
-//        
-//    return authorizationInfo;
-//  }
 
 }
