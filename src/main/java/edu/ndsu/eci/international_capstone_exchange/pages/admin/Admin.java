@@ -13,34 +13,6 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages.admin;
 
-import org.apache.commons.mail.SimpleEmail;
-import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
-
-import edu.ndsu.eci.international_capstone_exchange.services.AppModule;
-import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
-import edu.ndsu.eci.international_capstone_exchange.services.VelocityEmailService;
-
 public class Admin {
-  /** user info service */
-  @Inject
-  private UserInfo userInfo;
  
-
-  @Inject
-  private VelocityEmailService emailService;
-  
-  public void onSendTestEmail() throws ResourceNotFoundException, ParseErrorException, Exception {
-    VelocityContext context = new VelocityContext();
-    context.put("user", userInfo.getUser().getSsoEmail());
-    
-    SimpleEmail email = emailService.setupSimpleEmail(context, "test.vm", "Test message");
-    email.setFrom(AppModule.FROM_ADDRESS);
-    email.addTo(userInfo.getUser().getSsoEmail());
-    email.addTo(userInfo.getUser().getEmail());
-    email.send();
-  }
-
 }

@@ -23,7 +23,6 @@
 <div>
 	TODO put status information in here like things that need to be acted upon.
 </div>
-<p><t:eventlink event="sendTestEmail">Send Test</t:eventlink></p>
    
 </body>  
 </html>
