@@ -59,3 +59,15 @@ Since you can't register without OAuth, you'll need to manually inject a user in
 
 insert into users (create,departmentName,email,id,institutionPk,name,pk,source,ssoEmail,ssoName,status,url,workPhone) values (now(),'<some department>','<your email>','<user id>',<pick a valid institution pk>,'<your name>',100,'pac4j_google2','<your email>','<your name>','APPROVED',null,'<a valid number with country code>');
 insert into roles(pk,role,userPk) values (100,'ADMIN',100);
+
+
+Coding Standards:
+
+Follow standards in the code.
+Tables are plural, resulting Java objects are singular. 
+Indentation is two spaces
+Open curly braces are on same line
+Else / else if is on same line as close curly brace
+Javadoc everything
+Refer back to main project owners for additional libraries. We want to keep consistent with what we are using elsewhere, and to preserve licensing.
+License all files with Apache License 2.0 headers as seen in the project Use mvn apache-rat:check to validate.
