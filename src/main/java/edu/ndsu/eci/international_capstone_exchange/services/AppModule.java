@@ -13,6 +13,8 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.services;
 
+import java.util.Base64;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -130,7 +132,8 @@ public class AppModule {
     // You should change the passphrase immediately; the HMAC passphrase is used to secure
     // the hidden field data stored in forms to encrypt and digitally sign client-side data.
     configuration.add(SymbolConstants.HMAC_PASSPHRASE, oConfig.getHmac());
-    configuration.add(SecuritySymbols.REMEMBERME_CIPHERKERY, StringUtils.substring(oConfig.getHmac(), 0, 15));
+    // this needs to be fixed length, and is assumed to be base64 encoded, which the HMAC likely isn't
+    configuration.add(SecuritySymbols.REMEMBERME_CIPHERKERY, Base64.getEncoder().encodeToString((StringUtils.substring(oConfig.getHmac(), 0, 16)).getBytes()));
 
     // these are the defaults, change as needed 
     // configuration.add(FederatedAccountSymbols.COMMITAFTER_OAUTH, “true”); 
