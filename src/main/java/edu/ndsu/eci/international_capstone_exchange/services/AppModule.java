@@ -61,7 +61,6 @@ import edu.ndsu.eci.international_capstone_exchange.util.OAuthConfig;
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to
  * configure and extend Tapestry, or to place your own service definitions.
  * 
- * FIXME include trimming filter
  */
 public class AppModule {
   
