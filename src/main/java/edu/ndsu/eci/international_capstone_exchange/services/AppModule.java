@@ -76,6 +76,9 @@ public class AppModule {
 
   /** development value in run mode for development */
   public static final String RUN_MODE_DEVELOPMENT = "development";
+  
+  /** local development value in run mode for active development, enables back door authentication */
+  public static final String RUN_MODE_PROTOTYPE = "prototype";
 
   
   public static void bind(ServiceBinder binder) {
@@ -152,7 +155,8 @@ public class AppModule {
     // Uses run.mode from Tomcat to determine if production or not.
     // run.mode comes from lift standards
     String runMode = System.getProperty(RUN_MODE, RUN_MODE_DEVELOPMENT);
-
+    configuration.add(RUN_MODE, runMode);
+    
     if (runMode.equals(RUN_MODE_PRODUCTION)) {
       configuration.add(SymbolConstants.PRODUCTION_MODE, Boolean.TRUE.toString());
     } else {
