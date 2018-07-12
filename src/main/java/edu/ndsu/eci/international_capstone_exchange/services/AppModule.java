@@ -166,7 +166,7 @@ public class AppModule {
       configuration.add(SymbolConstants.PRODUCTION_MODE, Boolean.FALSE.toString());
     }
 
-    // This goes to true in production, and then parts of CKedit throw errors on minify, or rather the minifier throws errors on CKedit
+    // This goes to true in production, and then parts of Summernote throw errors on minify, or rather the minifier throws errors on Summernote
     configuration.add(SymbolConstants.MINIFICATION_ENABLED, Boolean.FALSE.toString());
 
   }
