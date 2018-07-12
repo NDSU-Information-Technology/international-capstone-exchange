@@ -57,6 +57,11 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
   @Symbol(SymbolConstants.PRODUCTION_MODE)
   private boolean production;
   
+  /** from address */
+  @Inject
+  @Symbol(AppModule.FROM_ADDRESS)
+  private String fromAddress;
+  
   /**
    * Constructor
    * @param velocity velocity service
@@ -96,7 +101,7 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
   @Override
   public boolean sendAdminEmail(VelocityContext context, String templateName, String subject) throws ResourceNotFoundException, ParseErrorException, Exception {
     SimpleEmail email = setupSimpleEmail(context, templateName, subject);
-    email.setFrom(AppModule.FROM_ADDRESS);
+    email.setFrom(fromAddress);
 
     ObjectContext objContext = DataContext.createDataContext();
     List<User> admins = CapstoneDomainMap.getInstance().performUsersByRoleQuery(objContext, UserRole.ADMIN);
@@ -125,7 +130,7 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
   @Override
   public boolean sendUserEmail(VelocityContext context, String templateNull, User user, String subject) throws ResourceNotFoundException, ParseErrorException, Exception {
     SimpleEmail email = setupSimpleEmail(context, templateNull, subject);
-    email.setFrom(AppModule.FROM_ADDRESS);
+    email.setFrom(fromAddress);
     
     if (production) {
       email.addTo(user.getEmail());

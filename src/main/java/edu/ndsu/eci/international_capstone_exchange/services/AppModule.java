@@ -58,6 +58,7 @@ import edu.ndsu.eci.international_capstone_exchange.services.impl.HtmlCleanerImp
 import edu.ndsu.eci.international_capstone_exchange.services.impl.UserInfoImpl;
 import edu.ndsu.eci.international_capstone_exchange.services.impl.VelocityEmailServiceImpl;
 import edu.ndsu.eci.international_capstone_exchange.services.impl.VelocityServiceImpl;
+import edu.ndsu.eci.international_capstone_exchange.util.EmailConfig;
 import edu.ndsu.eci.international_capstone_exchange.util.OAuthConfig;
 import edu.ndsu.eci.international_capstone_exchange.util.SingleUserMode;
 
@@ -68,10 +69,10 @@ import edu.ndsu.eci.international_capstone_exchange.util.SingleUserMode;
  */
 public class AppModule {
 
-  // FIXME needs to be a symbol with data loaded from JNDI to make the Western Sydney Capstone project go smoother, although we allow anyone in the world to impersonate us....
-  public static final String FROM_ADDRESS = "ndsu.icpe@ndsu.edu";
+  /** from address symbol name */
+  public static final String FROM_ADDRESS = "from.address";
 
-  /** run mode environment variable */
+  /** run mode environment variable and symbol name */
   public static final String RUN_MODE = "run.mode";
 
   /** production value in run mode for production */
@@ -169,6 +170,11 @@ public class AppModule {
     // This goes to true in production, and then parts of Summernote throw errors on minify, or rather the minifier throws errors on Summernote
     configuration.add(SymbolConstants.MINIFICATION_ENABLED, Boolean.FALSE.toString());
 
+    Context initCtx = new InitialContext();
+    Context envCtx = (Context) initCtx.lookup("java:comp/env");
+    EmailConfig emailConf =  (EmailConfig) envCtx.lookup("bean/emailconf");
+    configuration.add(FROM_ADDRESS, emailConf.getFromAddress());
+    
   }
 
   public static void contributeWebSecurityManager(Configuration<Realm> configuration, @InjectService("FederatedAccountsRealm") AuthorizingRealm authorizingRealm, Environment environment, UserInfo userInfo, @Symbol(RUN_MODE) String runMode) throws NamingException {

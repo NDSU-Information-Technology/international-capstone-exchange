@@ -34,5 +34,10 @@
             factory="org.apache.naming.factory.BeanFactory"
             hostname="red.it.ndsu.edu" 
             googleId="something" googleSecret="something" hmac="something"/>
+            
+  <Resource name="bean/pac4j" auth="Container"
+            type="edu.ndsu.eci.international_capstone_exchange.util.EmailConfig"
+            factory="org.apache.naming.factory.BeanFactory"
+            fromAddress="ndsu.icpe@ndsu.edu" />
 
 </Context>
