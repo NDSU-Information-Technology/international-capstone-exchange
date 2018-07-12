@@ -51,7 +51,6 @@ public class Subjects {
     return context.performQuery(new SelectQuery(Subject.class));
   }
   
-  // FIXME limit the toolset for ckeditor
   @CommitAfter
   public void onSuccessFromForm() {
     subject.setCreated(new Date());
