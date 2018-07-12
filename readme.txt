@@ -57,5 +57,5 @@ If developing locally, you might not have the ability to do Google OAuth. If tha
 Just edit jetty-env.xml and set a credential. From there visit single/single. You'll need to provide a valid username from the DB, and then your password.
 Since you can't register without OAuth, you'll need to manually inject a user into the DB. You will likely want to make that user an admin:
 
-insert into user (create,departmentName,email,id,institutionPk,name,pk,source,ssoEmail,ssoName,status,url,workPhone) values (now(),'<some department>','<your email>','<user id>',<pick a valid institution pk>,'<your name>',100,'pac4j_google2','<your email>','<your name>','APPROVED',null,'<a valid number with country code>');
+insert into users (create,departmentName,email,id,institutionPk,name,pk,source,ssoEmail,ssoName,status,url,workPhone) values (now(),'<some department>','<your email>','<user id>',<pick a valid institution pk>,'<your name>',100,'pac4j_google2','<your email>','<your name>','APPROVED',null,'<a valid number with country code>');
 insert into roles(pk,role,userPk) values (100,'ADMIN',100);
