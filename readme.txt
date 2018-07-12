@@ -6,13 +6,7 @@ https://github.com/NDSU-Information-Technology/tapestry5-cayenne
 
 You need to get the f99b version at the moment from master.
 
-You also need the snapshot version of the tynamo-federated accounts project:
-
-https://github.com/tynamo/tynamo-federatedaccounts
-
-Both cases install with mvn install -DskipTests
-
-If you have access to ECI's repo, these should be taken care of for you.
+Install with mvn install -DskipTests
 
 At the moment the only federated accounts that work is Google.
 
