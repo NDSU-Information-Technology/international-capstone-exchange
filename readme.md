@@ -21,10 +21,10 @@ DB dependencies in our projects, and the two Commons projects are only needed wi
 This will run in RunJettyRun in Eclipse. At the moment it seems to require a mvn package to get the jetty-env.xml files updated.
 It users Jetty 6 due to the JNDI configuration. That could be easily update to Jetty 9 as a good task. Settings are as follows:
 
-*Context: /international-capstone-exchange
-*WebApp dir: target/international-capstone-exchange
-*Show Advanced Options
-*JNDI Support
+ * Context: /international-capstone-exchange
+ * WebApp dir: target/international-capstone-exchange
+ * Show Advanced Options
+ * JNDI Support
 
 Under VM arguments
 *-Dtapestry.compress-whitespace=false
@@ -61,11 +61,11 @@ insert into roles(pk,role,userPk) values (100,'ADMIN',100);
 
 Coding Standards:
 
-*Follow standards in the code.
-*Tables are plural, resulting Java objects are singular. 
-*Indentation is two spaces
-*Open curly braces are on same line
-*Else / else if is on same line as close curly brace
-*Javadoc everything
-*Refer back to main project owners for additional libraries. We want to keep consistent with what we are using elsewhere, and to preserve licensing.
-*License all files with Apache License 2.0 headers as seen in the project Use mvn apache-rat:check to validate.
+ * Follow standards in the code.
+ * Tables are plural, resulting Java objects are singular. 
+ * Indentation is two spaces
+ * Open curly braces are on same line
+ * Else / else if is on same line as close curly brace
+ * Javadoc everything
+ * Refer back to main project owners for additional libraries. We want to keep consistent with what we are using elsewhere, and to preserve licensing.
+ * License all files with Apache License 2.0 headers as seen in the project Use mvn apache-rat:check to validate.
