@@ -14,10 +14,10 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-<!DOCTYPE Configure SYSTEM "http://jetty.mortbay.org/configure.dtd">
-<Configure class="org.mortbay.jetty.webapp.WebAppContext">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
 	<!-- MySQL JNDI Configuration for MySQL -->
-	<New id="capstone" class="org.mortbay.jetty.plus.naming.Resource">
+	<New id="capstone" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg>jdbc/capstone</Arg>
 		<Arg>
 			<New class="org.apache.commons.dbcp.BasicDataSource">
@@ -37,11 +37,11 @@
 	</New>
 
 	<!-- Email configuration -->
-	<New id="mail" class="org.mortbay.jetty.plus.naming.Resource">
+	<New id="mail" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg></Arg>
 		<Arg>java:/comp/env/mail/Session</Arg>
 		<Arg>
-			<New class="org.mortbay.naming.factories.MailSessionReference">
+			<New class="org.eclipse.jetty.jndi.factories.MailSessionReference">
 				<Set name="user"></Set>
 				<Set name="password"></Set>
 				<Set name="properties">
@@ -55,20 +55,20 @@
 	</New>
 	
 	
-	<New id="rabbit" class="org.mortbay.jetty.plus.naming.Resource">
+	<New id="rabbit" class="org.eclipse.jetty.plus.jndi.Resource">
 		<Arg />
 		<Arg>java:/comp/env/bean/pac4j</Arg>
 		<Arg>
 			<New class="edu.ndsu.eci.international_capstone_exchange.util.OAuthConfig">
 				<Set name="hostname">home.frovarp.com</Set>
-				<Set name="googleId"></Set>
-				<Set name="googleSecret"></Set>
+				<Set name="googleId">home.frovarp.com</Set>
+				<Set name="googleSecret">home.frovarp.com</Set>
 				<Set name="hmac">change to something random</Set>
 			</New>
 		</Arg>
 	</New>
   
-    <New id="singleuser" class="org.mortbay.jetty.plus.naming.Resource">
+    <New id="singleuser" class="org.eclipse.jetty.plus.jndi.Resource">
     <Arg />
     <Arg>java:/comp/env/bean/singleuser</Arg>
     <Arg>
@@ -78,7 +78,7 @@
     </Arg>
   </New>
   
-      <New id="emailconf" class="org.mortbay.jetty.plus.naming.Resource">
+      <New id="emailconf" class="org.eclipse.jetty.plus.jndi.Resource">
     <Arg />
     <Arg>java:/comp/env/bean/emailconf</Arg>
     <Arg>
