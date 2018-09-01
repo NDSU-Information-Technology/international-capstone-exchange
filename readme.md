@@ -27,6 +27,7 @@ It users Jetty 6 due to the JNDI configuration. That could be easily update to J
  * JNDI Support
 
 Under VM arguments
+
 *-Dtapestry.compress-whitespace=false
 *-Drun.mode=prototype
 
