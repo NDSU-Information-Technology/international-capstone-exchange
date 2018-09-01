@@ -28,8 +28,8 @@ It users Jetty 6 due to the JNDI configuration. That could be easily update to J
 
 Under VM arguments
 
-*-Dtapestry.compress-whitespace=false
-*-Drun.mode=prototype
+  *-Dtapestry.compress-whitespace=false
+  *-Drun.mode=prototype
 
 Under Webapp Classpath -> User Custom classpath add the MySQL driver, Commons DBCP, and Commons Pool
 
