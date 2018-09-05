@@ -17,6 +17,22 @@
 <html
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
     xmlns:p="tapestry:parameter" t:type="adminlayout" title="Users">
+    
+<style>
+/* Ideally just the "thead" would work, but not in Chrome */
+/*   thead { */
+thead tr:nth-child(1) th {
+  background: white;
+  position: sticky;
+  top: 0;
+
+  /* Whatever styles you want on top of the positioning */
+  border-bottom: 1px solid black;
+
+  /* This wouldn't be required if sticky were working on Chrome */
+  z-index: 10;
+}
+</style>
     <div>A lot of functionality remains here, plus the layout is broken</div>
     <t:grid source="pending" add="approve,deny" row="row" reorder="approve,deny,created,institution,departmentName,name,email">
     	<p:approveCell><t:eventlink event="approve" context="row">Approve ${row.ssoemail}</t:eventlink></p:approveCell>
