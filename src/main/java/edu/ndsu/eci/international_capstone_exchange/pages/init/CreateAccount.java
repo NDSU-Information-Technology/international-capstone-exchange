@@ -235,12 +235,12 @@ public class CreateAccount {
     context.commitChanges();
     alerts.success("Account Creation Request Submitted. Wait until your request is approved");
     
-    notifyAdmins();
+    notifyAdmins(usr);
     
     return index;
   }
   
-  private void notifyAdmins() throws ResourceNotFoundException, ParseErrorException, Exception {
+  private void notifyAdmins(User user) throws ResourceNotFoundException, ParseErrorException, Exception {
     VelocityContext velContext = new VelocityContext();
     velContext.put("user", user);
     emailService.sendAdminEmail(velContext, "new-user.vm", "New user signup");
