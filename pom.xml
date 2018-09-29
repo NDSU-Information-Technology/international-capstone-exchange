@@ -44,10 +44,16 @@
           <version>1.4</version> 
         </dependency>
 
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.6</version>
+        </dependency>
+
         <dependency>   
           <groupId>mysql</groupId>  
            <artifactId>mysql-connector-java</artifactId>   
-           <version>5.1.47</version> 
+           <version>5.1.46</version>
          </dependency>
 
             <dependency>
@@ -246,72 +252,101 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
           </systemProperties>
         </configuration>
       </plugin>
-     <!--
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>rpm-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>rpm</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <copyright>2013, NDSU ECI</copyright>
-          <group>Web/Application</group>
-          <distribution>NDSU ECI</distribution>
-          <summary>${project.name}</summary>
-          <vendor>NDSU ECI</vendor>
-          <defaultDirmode>755</defaultDirmode>
-          <defaultFilemode>644</defaultFilemode>
-          <defaultUsername>root</defaultUsername>
-          <defaultGroupname>tomcat8</defaultGroupname>
-          <defineStatements>
-            <defineStatement>_build_name_fmt %{ARCH}/%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}.rpm</defineStatement>
-          </defineStatements>
+            <!--
+            <plugin>
+                <groupId>org.apache.cayenne.plugins</groupId>
+                <artifactId>maven-cayenne-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <dataSource>
+                        <driver>com.mysql.jdbc.Driver</driver>
+                        <url>jdbc:mysql://localhost:3306/capstone_exchange</url>
+                        <username>yifu</username>
+                        <password>password</password>
+                    </dataSource>
+                    <cayenneProject>${project.basedir}/src/main/resources/cayenne/cayenne.xml</cayenneProject>
+                    <map>${project.basedir}/src/main/resources/CapstoneDomainMap.map.xml</map>
+                    <dbImport>
+                        <defaultPackage>edu.ndsu.eci.international_capstone_exchange.persist</defaultPackage>
+                        <catalog>cayenne</catalog>
+                    </dbImport>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.46</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            -->
 
-          <mappings>
-            <mapping>
-              <directory>/usr/share/tomcat8/webapps/international-capstone-exchange</directory>
-            </mapping>
-            <mapping>
-              <directory>/usr/share/tomcat8/webapps/international-capstone-exchange</directory>
-              <sources>
-                <source>
-                  <location>target/international-capstone-exchange</location>
-                  <excludes>
-                    <exclude>**/web.xml</exclude>
-                    <exclude>**/cas-prototype.properties</exclude>
-                    <exclude>**/jetty-env*.xml</exclude>
-                  </excludes>
-                </source>
-              </sources>
-            </mapping>
-                <mapping>
-              <directory>/usr/share/tomcat8/conf/Catalina/localhost</directory>
-              <directoryIncluded>false</directoryIncluded>
-              <configuration>noreplace</configuration>
-              <sources>
-                <source>
-                  <location>src/main/international-capstone-exchange.xml</location>
-                </source>
-              </sources>
-            </mapping>
-            <mapping>
-              <directory>/usr/share/tomcat8/webapps/international-capstone-exchange/WEB-INF</directory>
-              <sources>
-                <source>
-                  <location>target/international-capstone-exchange/WEB-INF/web.xml</location>
-                  <filter>true</filter>
-                </source>
-              </sources>
-            </mapping>
-          </mappings>
-          <keyname>${gpg.name}</keyname>
-        </configuration>
-      </plugin>
-     --> 
+    <!--
+     <plugin>
+       <groupId>org.codehaus.mojo</groupId>
+       <artifactId>rpm-maven-plugin</artifactId>
+       <executions>
+         <execution>
+           <goals>
+             <goal>rpm</goal>
+           </goals>
+         </execution>
+       </executions>
+       <configuration>
+         <copyright>2013, NDSU ECI</copyright>
+         <group>Web/Application</group>
+         <distribution>NDSU ECI</distribution>
+         <summary>${project.name}</summary>
+         <vendor>NDSU ECI</vendor>
+         <defaultDirmode>755</defaultDirmode>
+         <defaultFilemode>644</defaultFilemode>
+         <defaultUsername>root</defaultUsername>
+         <defaultGroupname>tomcat8</defaultGroupname>
+         <defineStatements>
+           <defineStatement>_build_name_fmt %{ARCH}/%{NAME}-%{VERSION}-%{RELEASE}.%{ARCH}.rpm</defineStatement>
+         </defineStatements>
+
+         <mappings>
+           <mapping>
+             <directory>/usr/share/tomcat8/webapps/international-capstone-exchange</directory>
+           </mapping>
+           <mapping>
+             <directory>/usr/share/tomcat8/webapps/international-capstone-exchange</directory>
+             <sources>
+               <source>
+                 <location>target/international-capstone-exchange</location>
+                 <excludes>
+                   <exclude>**/web.xml</exclude>
+                   <exclude>**/cas-prototype.properties</exclude>
+                   <exclude>**/jetty-env*.xml</exclude>
+                 </excludes>
+               </source>
+             </sources>
+           </mapping>
+               <mapping>
+             <directory>/usr/share/tomcat8/conf/Catalina/localhost</directory>
+             <directoryIncluded>false</directoryIncluded>
+             <configuration>noreplace</configuration>
+             <sources>
+               <source>
+                 <location>src/main/international-capstone-exchange.xml</location>
+               </source>
+             </sources>
+           </mapping>
+           <mapping>
+             <directory>/usr/share/tomcat8/webapps/international-capstone-exchange/WEB-INF</directory>
+             <sources>
+               <source>
+                 <location>target/international-capstone-exchange/WEB-INF/web.xml</location>
+                 <filter>true</filter>
+               </source>
+             </sources>
+           </mapping>
+         </mappings>
+         <keyname>${gpg.name}</keyname>
+       </configuration>
+     </plugin>
+    -->
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
