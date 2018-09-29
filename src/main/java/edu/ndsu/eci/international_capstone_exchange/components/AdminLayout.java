@@ -13,6 +13,33 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.components;
 
-public class AdminLayout extends Layout {
+import org.apache.tapestry5.annotations.Import;
+import edu.ndsu.eci.international_capstone_exchange.persist.User;
+import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
+import org.apache.tapestry5.annotations.Environmental;
 
+
+@Import(stylesheet = "css/adminLayout.css")
+
+public class AdminLayout extends Layout{
+
+    @Environmental
+    private JavaScriptSupport javaScriptSupport;
+
+    /** user info service */
+    @Inject
+    private UserInfo userInfo;
+
+    /** logged in user */
+    @Property
+    private User user;
+
+
+    public void setupRender() {
+
+        user = userInfo.getUser();
+    }
 }

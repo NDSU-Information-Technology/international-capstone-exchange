@@ -18,11 +18,61 @@
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
     xmlns:p="tapestry:parameter" t:type="adminlayout" title="Admin Page">
     
- <body>   
+ <body>
+ <!--
+ <div class="text-success text-center">
+     Use tabs to select areas to modify.
+ </div>
+ <div class = "list-group">
+     <a href="/international-capstone-exchange/admin/countries"
+        class="list-group-item list-group-item-success">
+         <div>
+             Countries: Select countries to add to the International Capstone Exchange Project.
+         </div>
+     </a>
+     <a href="/international-capstone-exchange/admin/institutions"
+        class="list-group-item list-group-item-success">
+         <div>
+             Instituions: Select institutions to add to the International Capstone Exchange Project.
+         </div>
+     </a>
+     <a href="/international-capstone-exchange/admin/pairings"
+        class="list-group-item list-group-item-success">
+         <div>
+             Pairings: See current pairings of institutions.
+         </div>
+     </a>
+     <a href="/international-capstone-exchange/admin/proposals"
+        class="list-group-item list-group-item-success">
+         <div>
+             Proposals: See all current proposals from institutions.
+         </div>
+     </a>
+     <a href="/international-capstone-exchange/admin/proposaltypes"
+        class="list-group-item list-group-item-success">
+         <div>
+             Proposal Types: View current proposals types and add more.
+         </div>
+     </a>
+     <a href="/international-capstone-exchange/admin/subjects"
+        class="list-group-item list-group-item-success">
+         <div>
+             Subjects: View current subjects and add more.
+         </div>
+     </a>
+     <a href="/international-capstone-exchange/admin/users"
+        class="list-group-item list-group-item-success">
+         <div>
+             List of all users and admin users.
+         </div>
+     </a>
+ </div>
+ -->
  
-<div>
+<!--<div>
 	TODO put status information in here like things that need to be acted upon.
 </div>
+-->
    
 </body>  
 </html>

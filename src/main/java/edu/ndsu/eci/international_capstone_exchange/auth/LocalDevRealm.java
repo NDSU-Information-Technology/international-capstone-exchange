@@ -48,7 +48,7 @@ public class LocalDevRealm extends AuthenticatingRealm {
   protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
     SimplePrincipalCollection collect = new SimplePrincipalCollection(token.getPrincipal(), getName());
     collect.add(new SingleAuthToken(token.getPrincipal().toString()), getName());
-    
+
     return new SimpleAuthenticationInfo(collect, password);
   }
 

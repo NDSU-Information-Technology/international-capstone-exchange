@@ -23,6 +23,8 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
 import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
 import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
+import edu.ndsu.eci.international_capstone_exchange.persist.Subject;
 
 public class Proposals {
 
@@ -31,12 +33,26 @@ public class Proposals {
   
   @Property
   private Proposal row;
+
+  @Property
+  private Subject subject;
+
+  @Inject
+  private JavaScriptSupport javaScriptSupport;
   
   public List<Proposal> getPendingProposals() {
     return CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PENDING);
   }
+
+  public List<Proposal> getPairedProposals() {
+    return CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PAIRED);
+  }
   
   public List<Proposal> getAllProposals() {
     return context.performQuery(new SelectQuery(Proposal.class));
+  }
+
+  void afterRender() {
+    javaScriptSupport.require("bootstrap/tab");
   }
 }

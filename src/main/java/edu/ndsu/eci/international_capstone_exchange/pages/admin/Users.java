@@ -19,6 +19,7 @@ import org.apache.cayenne.ObjectContext;
 import org.apache.commons.mail.SimpleEmail;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
@@ -66,6 +67,9 @@ public class Users {
   public List<User> getAdmins() {
     return map.performUsersByRoleQuery(context, UserRole.ADMIN);
   }
+
+  @Inject
+  private JavaScriptSupport javaScriptSupport;
   
   @CommitAfter
   public void onApprove(User user) throws ResourceNotFoundException, ParseErrorException, Exception {
@@ -113,6 +117,9 @@ public class Users {
         break;
       }
     }
+  }
+  void afterRender() {
+    javaScriptSupport.require("bootstrap/tab");
   }
   
 }

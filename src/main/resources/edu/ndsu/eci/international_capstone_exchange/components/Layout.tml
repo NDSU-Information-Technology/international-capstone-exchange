@@ -46,7 +46,8 @@
 
 <body>
 
-<div class="navbar navbar-inverse" role="navigation">
+<!--<div class="navbar navbar-inverse" role="navigation">-->
+<div class="navbar navbar-inverse text-uppercase" role="navigation">
     <div class="container">
 	    <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -57,10 +58,10 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav ml-auto">
                 <t:loop source="pageNames" value="pageName">
                     <t:any element="li" class="prop:classForPageName">
-                        <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
+                        <t:pagelink page="prop:pageName" class="">${pageName}</t:pagelink>
                     </t:any>
                 </t:loop>
             </ul>

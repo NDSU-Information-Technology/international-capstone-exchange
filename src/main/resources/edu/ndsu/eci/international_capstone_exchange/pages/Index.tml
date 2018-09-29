@@ -39,13 +39,43 @@
   <h1>Welcome to International Capstone Project Exchange Website</h1>
   
 </div>
-<div id="Dept">
+    <div style="margin-top:40px"></div>
+    <div class="row">
+        <div class="col-sm-4 bg-success">
 
-<p>
 
-The <a href="https://icp.cs.ndsu.nodak.edu/">International Capstone Project Exchange</a> is a network of universities and companies that collaborate to give students real-world international experience without requiring travel.</p>
-</div>
 
+
+            <div id="Dept">
+
+                <p>
+
+                    The <a class="text-success" href="https://icp.cs.ndsu.nodak.edu/">International Capstone Project Exchange</a> is a network of universities and companies that collaborate to give students real-world international experience without requiring travel.</p>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="list-group">
+
+                <a href="/international-capstone-exchange/Contact"
+                   class="list-group-item text-center list-group-item-success">
+                    <div>Contact Information</div>
+                </a>
+                <a href="/international-capstone-exchange/Privacy"
+                   class="list-group-item text-center list-group-item-success">
+                    <div>Privacy Policy</div>
+                </a>
+                <!--
+                <a href="/international-capstone-exchange/Login"
+                   class="list-group-item text-center list-group-item-success">
+                    <div>Login</div>
+                </a>
+                -->
+            </div>
+
+
+        </div>
+    </div>
 </div>
 </body>
 </html>

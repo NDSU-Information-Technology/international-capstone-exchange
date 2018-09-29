@@ -32,6 +32,8 @@ import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
 import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
 import edu.ndsu.eci.international_capstone_exchange.util.Status;
+import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 
 /**
  * User's dashboard to direct them to after login.
@@ -70,6 +72,9 @@ public class Dashboard {
   
   @Property
   private Pairing pairRow;
+
+  @Inject
+  private JavaScriptSupport javaScriptSupport;
   
   /**
    * Setup render, get logged in user
@@ -83,6 +88,10 @@ public class Dashboard {
         pairings.add(proposal.getPairing());
       }
     }
+  }
+  
+  void afterRender() {
+    javaScriptSupport.require("bootstrap/tab");
   }
   
   /**
