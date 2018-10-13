@@ -49,10 +49,11 @@
         <div id="tab2" class="tab-pane">
             <h2>Pairings</h2>
             <p>Follow link for more details.</p>
-            <t:grid source="pairings" exclude="notes,proposals,admin" row="pairRow" add="A,B" reorder="name,a,b">
+            <t:grid source="pairings" exclude="notes,proposals,admin" row="pairRow" add="A,B,Note" reorder="name,a,b,Note">
                 <p:aCell>${pairRow.proposals.get(0).name}</p:aCell>
                 <p:bCell>${pairRow.proposals.get(1).name}</p:bCell>
                 <p:nameCell><t:pagelink page="account/pairview" context="pairRow">${pairRow.name}</t:pagelink></p:nameCell>
+                <p:noteCell><t:pagelink page="account/viewnotes" context="pairRow">View</t:pagelink></p:noteCell>
             </t:grid>
         </div>
         <div id="tab3" class="tab-pane">

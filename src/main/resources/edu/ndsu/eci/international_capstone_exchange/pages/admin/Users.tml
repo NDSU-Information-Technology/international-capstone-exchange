@@ -40,13 +40,13 @@
             </div>
             <div id="tab2" class="tab-pane">
                 <h2>Active Users</h2>
-                <t:grid source="active" add="makeAdmin" row="row" exclude="created, Source, id, ssoEmail, ssoName, workPhone, url, roles, CredentialsExpired, federatedId" reorder="institution,departmentName,name,email">
+                <t:grid source="active" add="makeAdmin" row="row" exclude="created, Source, id, ssoEmail, ssoName, workPhone, url, roles, CredentialsExpired, federatedId, pairingNotes" reorder="institution,departmentName,name,email">
                     <p:makeAdminCell><t:eventlink event="makeAdmin" context="row">Make <!--${row.ssoemail}--> admin</t:eventlink></p:makeAdminCell>
                 </t:grid>
             </div>
             <div id="tab3" class="tab-pane">
                 <h2>Admin Users</h2>
-                <t:grid source="admins" add="removeAdmin" row="row" exclude="created, Source, id, ssoEmail, ssoName, workPhone, url, roles, CredentialsExpired, federatedId" reorder="institution,departmentName,name,email">
+                <t:grid source="admins" add="removeAdmin" row="row" exclude="created, Source, id, ssoEmail, ssoName, workPhone, url, roles, CredentialsExpired, federatedId, pairingNotes" reorder="institution,departmentName,name,email">
                     <p:removeAdminCell><t:eventlink event="removeAdmin" context="row">Remove <!--${row.ssoemail}--> admin</t:eventlink></p:removeAdminCell>
                 </t:grid>
             </div>

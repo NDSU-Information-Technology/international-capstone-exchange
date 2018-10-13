@@ -14,6 +14,10 @@
 package edu.ndsu.eci.international_capstone_exchange.persist;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.auto._PairingNotes;
+import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
+import org.apache.cayenne.ObjectContext;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
 
 public class PairingNotes extends _PairingNotes {
 
