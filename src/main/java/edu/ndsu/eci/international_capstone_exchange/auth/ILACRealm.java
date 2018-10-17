@@ -13,15 +13,16 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.auth;
 
+import edu.ndsu.eci.international_capstone_exchange.persist.PairingNotes;
 import org.apache.cayenne.PersistenceState;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.tapestry5.plastic.MethodInvocation;
 import org.apache.tapestry5.services.Environment;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.Pairing;
-import edu.ndsu.eci.international_capstone_exchange.persist.PairingNotes;
 import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
+
 
 public class ILACRealm extends BaseILACRealm {
 
@@ -31,7 +32,6 @@ public class ILACRealm extends BaseILACRealm {
   /** ability to view pairing details */
   public static final String PAIRING_VIEW_INSTANCE = "pairing_view:instance";
 
-
   private final UserInfo userInfo;
 
   public ILACRealm(Environment environment, UserInfo userInfo) {
@@ -39,7 +39,7 @@ public class ILACRealm extends BaseILACRealm {
     this.userInfo = userInfo;
   }
 
-  @InstanceAccessMethod(PROPOSAL_EDIT_INSTANCE) 
+  @InstanceAccessMethod(PROPOSAL_EDIT_INSTANCE)
   public boolean isProposalEditMemeber() {
     MethodInvocation invocation = getInvocation();
 
@@ -66,16 +66,14 @@ public class ILACRealm extends BaseILACRealm {
     }
 
     Pairing pairing = (Pairing) invocation.getParameter(0);
-    Proposal proposal = (Proposal) invocation.getParameter(0);
-    
+
     for (Proposal prop : pairing.getProposals()) {
       if (StringUtils.equals(prop.getUser().getFederatedId(), userInfo.getUser().getFederatedId())) {
         return true;
       }
     }
-    
+
     return userInfo.isAdmin();
   }
-
 
 }
