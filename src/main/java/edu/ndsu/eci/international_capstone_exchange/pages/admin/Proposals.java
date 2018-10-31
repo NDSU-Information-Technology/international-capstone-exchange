@@ -47,6 +47,10 @@ public class Proposals {
   public List<Proposal> getPairedProposals() {
     return CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PAIRED);
   }
+
+  public List<Proposal> getRenewalProposals() {
+    return CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PendingRenewal);
+  }
   
   public List<Proposal> getAllProposals() {
     return context.performQuery(new SelectQuery(Proposal.class));

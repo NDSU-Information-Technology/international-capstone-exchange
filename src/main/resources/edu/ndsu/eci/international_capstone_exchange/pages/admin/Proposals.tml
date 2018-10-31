@@ -24,10 +24,13 @@
    <a href="#tab1" data-toggle="tab">Pending / Pairable Proposals</a>
   </li>
   <li>
-   <a href="#tab2" data-toggle="tab">Paired Proposals</a>
+   <a href="#tab2" data-toggle="tab">Pairing Renewal Proposals</a>
   </li>
   <li>
-   <a href="#tab3" data-toggle="tab">All Proposals</a>
+   <a href="#tab3" data-toggle="tab">Paired Proposals</a>
+  </li>
+  <li>
+   <a href="#tab4" data-toggle="tab">All Proposals</a>
   </li>
  </ul>
  <div class="tab-content">
@@ -42,6 +45,16 @@
   </div>
 
   <div id="tab2" class="tab-pane">
+   <h3>Pairing Renewal Proposals</h3>
+
+   <t:grid source="RenewalProposals" row="row" exclude="company,pairing,editable,proposalsStatus,name,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified" add="pair,country" reorder="pair,institution,country,subjects,types,user">
+    <p:descriptionCell><t:outputraw value="row.description"></t:outputraw></p:descriptionCell>
+    <p:pairCell>Pair <t:pagelink page="admin/setpairing" context="row">${row.name} <span class="sr-only">${row.institution}</span></t:pagelink></p:pairCell>
+    <p:countryCell>${row.institution.country}</p:countryCell>
+   </t:grid>
+  </div>
+
+  <div id="tab3" class="tab-pane">
    <h3>Paired Proposals</h3>
 
    <t:grid source="pairedProposals" row="row" add="country" exclude="potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified,description,company" reorder="institution,country,subjects,types,user">
@@ -55,7 +68,7 @@
    </t:grid>
   </div>
 
-  <div id="tab3" class="tab-pane">
+  <div id="tab4" class="tab-pane">
    <h3>All Proposals</h3>
 
    <!--<t:grid source="allProposals" row="row" add="country" reorder="institution,country,subjects,types,user,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified">-->
