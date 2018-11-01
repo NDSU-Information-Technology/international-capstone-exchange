@@ -134,7 +134,7 @@ public class SetPairing {
     dest.setProposalStatus(ProposalStatus.PAIRED);
     pairing.setAdmin((User) context.localObject(userInfo.getUser().getObjectId(), null));
     
-    notifyPairing(pairing);
+    //notifyPairing(pairing);
     
     return successPage;
   }

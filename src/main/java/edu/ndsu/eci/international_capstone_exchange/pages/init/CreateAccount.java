@@ -235,7 +235,7 @@ public class CreateAccount {
     context.commitChanges();
     alerts.success("Account Creation Request Submitted. Wait until your request is approved");
     
-    notifyAdmins();
+    //notifyAdmins();
     
     return index;
   }

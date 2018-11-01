@@ -48,6 +48,11 @@
         </div>
         <div id="tab2" class="tab-pane">
             <h2>Pairings</h2>
+
+            <t:form t:type="form" t:id="myForm" class="eg" >
+                <t:eventlink event="csvdownload" >DOWNLOAD CSV</t:eventlink>
+            </t:form>
+
             <p>Follow link for more details.</p>
             <t:grid source="pairings" exclude="notes,proposals,admin" row="pairRow" add="A,B,Note,Renew" reorder="name,a,b,Note,Tmstamp,Renew">
                 <p:aCell>${pairRow.proposals.get(0).name}</p:aCell>

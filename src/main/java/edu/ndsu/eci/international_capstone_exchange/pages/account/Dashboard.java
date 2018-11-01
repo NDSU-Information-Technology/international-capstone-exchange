@@ -37,11 +37,16 @@ import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
 import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
 import edu.ndsu.eci.international_capstone_exchange.util.Status;
-import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 
 
 /**
@@ -101,6 +106,7 @@ public class Dashboard {
   @Property
   private Proposal renewProposal;
 
+
   
   /**
    * Setup render, get logged in user
@@ -144,6 +150,83 @@ public class Dashboard {
     }
     context.deleteObject(proposal);
     context.commitChanges();
+  }
+
+  String fileName = System.getProperty("user.home")+"/Desktop/ALL CSV.csv";
+  private static final String NEW_LINE_SEPARATOR = "\n";
+
+  public void onCsvdownload() {
+
+    FileWriter fileWriter = null;
+    setupRender();
+
+    try {
+      fileWriter = new FileWriter(fileName);
+
+      //Write the CSV file header
+      fileWriter.append("PROJECT_NAME_1, ");
+      fileWriter.append("USER SUBMITTED_1, ");
+      fileWriter.append("COST_PROJECT_1,");
+      fileWriter.append("TEAM-SIZE_1,");
+      fileWriter.append("WEEKLY_INDIVIDUAL_WORKLOAD_1,");
+      fileWriter.append("DURATION_1,");
+      fileWriter.append("POTENTIAL_START_DATE_1,");
+      fileWriter.append("UNI_1, ");
+
+      fileWriter.append("PROJECT_NAME_2, ");
+      fileWriter.append("USER SUBMITTED_2, ");
+      fileWriter.append("COST_PROJECT_2,");
+      fileWriter.append("TEAM-SIZE_2,");
+      fileWriter.append("WEEKLY_INDIVIDUAL_WORKLOAD_2,");
+      fileWriter.append("DURATION_2,");
+      fileWriter.append("POTENTIAL_START_DATE_2,");
+      fileWriter.append("UNI_2 ");
+
+      fileWriter.append(NEW_LINE_SEPARATOR);
+
+      for (Proposal proposal : proposals) {
+        if (proposal.getProposalStatus() == ProposalStatus.PAIRED) {
+
+          //--PROPOSAL 1--//
+          fileWriter.append(proposal.getName()+ ", ");
+          fileWriter.append(proposal.getUser().getName()+ ", ");
+          fileWriter.append(proposal.getCost()+ ", ");
+          fileWriter.append(proposal.getTeamSize() +", ");
+          fileWriter.append(proposal.getPerStudentWeekly()+", ");
+          fileWriter.append(proposal.getDurationInWeeks()+ ", ");
+          fileWriter.append(proposal.getPotentialStart()+", ");
+          fileWriter.append(proposal.getInstitution() + ", " );
+
+          //--PROPOSAL 2--//
+          fileWriter.append( proposal.getPaired().getName()+ ", ");
+          fileWriter.append(proposal.getPaired().getUser().getName()+ ", ");
+          fileWriter.append(proposal.getPaired().getCost()+ ", ");
+          fileWriter.append(proposal.getPaired().getTeamSize() +", ");
+          fileWriter.append(proposal.getPaired().getPerStudentWeekly()+", ");
+          fileWriter.append(proposal.getPaired().getDurationInWeeks()+ ", ");
+          fileWriter.append(proposal.getPaired().getPotentialStart()+", ");
+          fileWriter.append(proposal.getPaired().getInstitution().toString());
+
+        }
+        fileWriter.append(NEW_LINE_SEPARATOR);
+      }
+
+      System.out.println("CSV file was created successfully !!!");
+
+    } catch (Exception e) {
+      System.out.println("Error in CsvFileWriter !!!");
+      e.printStackTrace();
+    } finally {
+
+      try {
+        fileWriter.flush();
+        fileWriter.close();
+      } catch (IOException e) {
+        System.out.println("Error while flushing/closing fileWriter !!!");
+        e.printStackTrace();
+      }
+
+    }
   }
 
 
