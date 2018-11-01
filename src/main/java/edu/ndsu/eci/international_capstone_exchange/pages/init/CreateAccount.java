@@ -13,10 +13,10 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages.init;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import org.apache.cayenne.ObjectContext;
+import org.apache.cayenne.query.SelectQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
@@ -54,16 +54,16 @@ import edu.ndsu.eci.international_capstone_exchange.util.Status;
  * Create account from SSO provided information
  *
  * Get name, email address, prepopulated with SSO information.
- * Have them specify an institution from autocomplete and then 
+ * Have them specify an institution from autocomplete and then
  * either choose or name a department at that institution.
- * 
+ *
  * http://jumpstart.doublenegative.com.au/jumpstart/examples/ajax/autocompletemixin
  */
 public class CreateAccount {
 
   /** logger */
   private static final Logger LOGGER = Logger.getLogger(CreateAccount.class);
-  
+
   /** alerts */
   @Inject
   private AlertManager alerts;
@@ -89,19 +89,24 @@ public class CreateAccount {
   private Form form;
 
   /** institution zone */
-  @InjectComponent
-  private Zone institutionZone;
+  /*@InjectComponent
+  private Zone institutionZone;*/
 
   /** Country */
   @Property
   private Country country;
 
-  @Property
-  private List<Institution> institutions;
+
+
+  /*@Property
+  private List<Institution> institutions;*/
+
+  private Set<String> institutions;
 
   /** institution */
-  @Property 
+  @Property
   private Institution institution;
+
 
   /** logged in user */
   @Property
@@ -113,12 +118,12 @@ public class CreateAccount {
 
   /** email that the user wants to use, rather than the one from SSO */
   @Property
-  private String email; 
-  
+  private String email;
+
   /** work phone */
   @Property
   private String phone;
-  
+
   /** url of personal website if so desired */
   @Property
   private String url;
@@ -126,32 +131,33 @@ public class CreateAccount {
   /** name for new dept */
   @Property
   private String departmentName;
-  
+
   /** page to send user to */
   @InjectPage
   private Index index;
-  
+
   @Property
   private boolean agree;
-  
+
   @Inject
   private VelocityEmailService emailService;
 
-  /** 
+  /**
    * Page setup
    */
   public void setupRender() {
     user = userInfo.getUser();
     name = user.getName();
     email = user.getEmail();
-    institutions = Collections.emptyList();
-  } 
+    //institutions = Collections.emptyList();
+  }
 
   /**
    * Handle when country is chosen to setup institutions
    * @param country chosen country
    */
-  public void onValueChangedFromCountry(Country country) {
+
+  /*public void onValueChangedFromCountry(Country country) {
     if (country == null) {
       institutions = Collections.emptyList();
     } else {
@@ -163,17 +169,38 @@ public class CreateAccount {
       ajaxReponse.addRender(institutionZone);
     }
 
+  }*/
+  public void onActivate() {
+    List<Institution> insts = context.performQuery(new SelectQuery(Institution.class));
+    institutions = new HashSet<>();
+    for (Institution inst : insts) {
+      institutions.add(inst.getName().toLowerCase());
+    }
+  }
+
+  public List<String> onProvideCompletionsFrominstitution(String partial) {
+
+    List<String> matches = new ArrayList<String>();
+    partial = partial.toLowerCase();
+
+    for (String institution : institutions) {
+      if (institution.contains(partial)) {
+        matches.add(institution);
+      }
+    }
+
+    return matches;
   }
 
   /**
    * Validate form submission
    */
   public void onValidateFromForm() {
-    
+
     if (!StringUtils.startsWith(phone, "+")) {
       phone = "+" + phone;
     }
-    
+
     PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
     PhoneNumber number;
     try {
@@ -186,7 +213,7 @@ public class CreateAccount {
         } else {
           form.recordError("Phone number format isn't valid, be sure to include country code. For most of North America, this is a 1");
           LOGGER.warn("Failed to validate number: " + number + " " + country.getName());
-        }  
+        }
       } else {
         phone = phoneUtil.format(number, PhoneNumberFormat.INTERNATIONAL);
       }
@@ -194,33 +221,33 @@ public class CreateAccount {
       form.recordError("Phone number format isn't valid, be sure to include country code. For most of North America, this is a 1");
       LOGGER.info("Failed to parse number", e);
     }
-    
-    
+
+
     if (!EmailValidator.getInstance().isValid(email)) {
       form.recordError("Email address is not valid");
     }
-    
+
     if (!agree) {
       form.recordError("Must agree to privacy policy.");
     }
   }
 
   /**
-   * Handle a successful form validate 
+   * Handle a successful form validate
    * @return page to send user to
-   * @throws Exception 
-   * @throws ParseErrorException 
-   * @throws ResourceNotFoundException 
+   * @throws Exception
+   * @throws ParseErrorException
+   * @throws ResourceNotFoundException
    */
   public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception{
-    
+
     User usr = (User) context.localObject(userInfo.getUser().getObjectId(), null);
     if (StringUtils.isBlank(email)) {
       usr.setEmail(usr.getSsoEmail());
     } else {
       usr.setEmail(email);
     }
-    
+
     if (StringUtils.isBlank(name)) {
       usr.setName(usr.getSsoName());
     } else {
@@ -234,12 +261,12 @@ public class CreateAccount {
 
     context.commitChanges();
     alerts.success("Account Creation Request Submitted. Wait until your request is approved");
-    
-    //notifyAdmins();
-    
+
+    notifyAdmins();
+
     return index;
   }
-  
+
   private void notifyAdmins() throws ResourceNotFoundException, ParseErrorException, Exception {
     VelocityContext velContext = new VelocityContext();
     velContext.put("user", user);
@@ -254,11 +281,6 @@ public class CreateAccount {
     return CapstoneDomainMap.getInstance().performCountries(context, Status.APPROVED);
   }
 }
-
-
-
-
-
 
 
 
