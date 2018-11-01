@@ -25,7 +25,7 @@
   <p>Let's get in touch. Send us a message:</p>
   <table class="table table-bordered">
     <thead>
-    <tr class="success">
+    <tr class="info">
       <th>Name</th>
       <th>Phone and Email</th>
       <th>Mailing Address</th>
@@ -33,7 +33,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr class="success">
+    <tr class="info">
       <td>
         <p><i class="fa fa-user fa-fw"></i><strong>Dr. Dean Knudson</strong><br/>
           Associate Professor &amp; Capstone Coordinator<br/>
@@ -42,7 +42,7 @@
       </td>
       <td>
         <p><i class="fa fa-phone fa-fw"></i> Phone: +1-701-231-5612<br/>
-          <i class="fa fa-envelope fa-fw"></i> Email: <a class="text-success" href="mailto:dean.knudson@ndsu.edu">dean.knudson@ndsu.edu</a></p>
+          <i class="fa fa-envelope fa-fw"></i> Email: <a href="mailto:dean.knudson@ndsu.edu">dean.knudson@ndsu.edu</a></p>
       </td>
       <td>
         <p>
@@ -64,7 +64,37 @@
     </tbody>
   </table>
 </div>
+<!--
+<div id="contact">
+  <h2>Contact</h2>
+  <p>Let's get in touch. Send us a message:</p>
+
+  <address>
+    <p><i class="fa fa-user fa-fw"></i><strong>Dr. Dean Knudson</strong><br/>
+      Associate Professor &amp; Capstone Coordinator<br/>
+      North Dakota State University
+    </p>
+    <p><i class="fa fa-phone fa-fw"></i> Phone: +1-701-231-5612<br/>
+    <i class="fa fa-envelope fa-fw"></i> Email: <a href="mailto:dean.knudson@ndsu.edu">dean.knudson@ndsu.edu</a></p>
+    <p>
+      <em>Mailing address:</em><br/>
+  	  Department of Computer Science<br/>
+      NDSU Dept #2740<br/>
+      PO Box 6050<br/>
+  	  Fargo, ND 58108-6050<br/>
+      USA
+    </p>
+    <p>
+      <em>Physical address:</em><br/>
+      1320 Albrecht Boulevard<br/>
+      Quentin Burdick Building 258<br/>
+      Fargo, ND 58102
+    </p>
+  </address>
+</div>
+-->
 </body>
 </html>
+
 
 
