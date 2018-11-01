@@ -16,11 +16,11 @@
 -->
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter" t:type="layout" title="Pairing Company">
 
-  <p>Enter the details of the company you are providing for this pairing. Address should be in a form usable by mapping software, such
+<p>Enter the details of the company you are providing for this pairing. Address should be in a form usable by mapping software, such
   as Google Maps or OpenStreetMap. URL is optional, but needs to be valid if provided.</p>
 
-  <t:beaneditform t:id="form" object="company" exclude="proposal" reorder="companyName,companyAddress,companyUrl">
+<t:beaneditform t:id="form" object="company" exclude="proposal" reorder="companyName,companyShare,companyAddress,companyUrl">
 
-  </t:beaneditform>
+</t:beaneditform>
 
 </html>

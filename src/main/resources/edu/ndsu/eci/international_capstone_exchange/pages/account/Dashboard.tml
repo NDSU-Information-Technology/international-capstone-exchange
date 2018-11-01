@@ -64,7 +64,7 @@
         </div>
         <div id="tab3" class="tab-pane">
             <h2>Proposals</h2>
-            <t:grid source="proposals" include="created,name,potentialStart,subjects,types,description" row="proposalRow" add="edit,delete">
+            <t:grid source="proposals" include="created,name,potentialStart,subjects,types,description,share" row="proposalRow" add="edit,delete">
                 <p:descriptionCell><t:outputraw value="proposalRow.description"></t:outputraw></p:descriptionCell>
 
                 <p:editCell>

@@ -13,6 +13,7 @@ import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
 public abstract class _PairingCompany extends CayenneDataObject {
 
     public static final String COMPANY_ADDRESS_PROPERTY = "companyAddress";
+    public static final String COMPANY_SHARE_PROPERTY = "companyShare";
     public static final String COMPANY_NAME_PROPERTY = "companyName";
     public static final String COMPANY_URL_PROPERTY = "companyUrl";
     public static final String PROPOSAL_PROPERTY = "proposal";
@@ -24,6 +25,13 @@ public abstract class _PairingCompany extends CayenneDataObject {
     }
     public String getCompanyAddress() {
         return (String)readProperty("companyAddress");
+    }
+
+    public void setCompanyShare(Boolean companyShare) {
+        writeProperty("companyShare", companyShare);
+    }
+    public Boolean getCompanyShare() {
+        return (Boolean)readProperty("companyShare");
     }
 
     public void setCompanyName(String companyName) {

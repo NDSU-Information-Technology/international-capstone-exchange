@@ -30,6 +30,7 @@ public abstract class _Proposal extends CayenneDataObject {
     public static final String PER_STUDENT_WEEKLY_PROPERTY = "perStudentWeekly";
     public static final String POTENTIAL_START_PROPERTY = "potentialStart";
     public static final String PROPOSAL_STATUS_PROPERTY = "proposalStatus";
+    public static final String SHARE_PROPERTY = "share";
     public static final String TEAM_SIZE_PROPERTY = "teamSize";
     public static final String COMPANY_PROPERTY = "company";
     public static final String INSTITUTION_PROPERTY = "institution";
@@ -101,6 +102,13 @@ public abstract class _Proposal extends CayenneDataObject {
     }
     public ProposalStatus getProposalStatus() {
         return (ProposalStatus)readProperty("proposalStatus");
+    }
+
+    public void setShare(Boolean share) {
+        writeProperty("share", share);
+    }
+    public Boolean getShare() {
+        return (Boolean)readProperty("share");
     }
 
     public void setTeamSize(Integer teamSize) {

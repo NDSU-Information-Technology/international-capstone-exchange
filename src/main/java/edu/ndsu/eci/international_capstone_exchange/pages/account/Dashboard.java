@@ -243,6 +243,7 @@ public class Dashboard {
           renewProposal.setCreated(new Date());
         }
         renewProposal.setLastModified(new Date());
+        renewProposal.setShare(prop.getShare());
         renewProposal.setProposalStatus(ProposalStatus.PendingRenewal);
         renewProposal.setDescription(prop.getDescription());
         renewProposal.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
