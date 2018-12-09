@@ -46,9 +46,9 @@
             </div>
             <div id="tab2" class="tab-pane">
                 <h2>Active Users</h2>
-                <t:jquery.DataTable t:row="row" source="active" model="bModel" options="options" add="makeAdmin"
+                <t:jquery.DataTable t:row="row" source="active" model="bModel" options="options" add="makeAdmin, deactivate"
                 exclude="created, id, source, ssoEmail, ssoName, status, url, workPhone, pairingNotes, roles, credentialsExpired, accountLocked, federatedId"
-                reorder="institution, departmentName, name, pairsmade, proposals, email, makeAdmin">
+                reorder="institution, departmentName, name, pairsmade, proposals, email, makeAdmin, deactivate">
                 	<p:pairsMadeCell>
                 		<t:If test="row.pairsMade">
                 			<ul>
@@ -72,13 +72,16 @@
                 	<p:makeAdminCell>
                 		<t:eventlink event="makeAdmin" context="row">Make <!--${row.ssoemail}--> admin</t:eventlink>
                 	</p:makeAdminCell>
+                	<p:deactivateCell>
+                		<t:EventLink event="deactivateUser" context="row">Deactivate</t:EventLink>
+                	</p:deactivateCell>
                 </t:jquery.DataTable>
             </div>
             <div id="tab3" class="tab-pane">
                 <h2>Admin Users</h2>
                 <t:jquery.DataTable t:row="row" source="admins" model="bModel" options="options" add="removeAdmin"
                 exclude="created, id, source, ssoEmail, ssoName, url, workPhone, pairingNotes, roles, credentialsExpired, federatedId"
-                reorder="institution, departmentName, name, email, status, pairsMade, proposals, accountLocked, removeAdmin">
+                reorder="institution, departmentName, name, pairsMade, proposals, email, status,  accountLocked, removeAdmin">
                 	<p:pairsMadeCell>
                 		<t:If test="row.pairsMade">
                 			<ul>
