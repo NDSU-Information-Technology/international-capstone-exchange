@@ -33,22 +33,76 @@
         <div class="tab-content">
             <div id="tab1" class="tab-pane active">
                 <h2>Pending Users</h2>
-                <t:grid source="pending" add="approve,deny" row="row" reorder="approve,deny,created,institution,departmentName,name,email">
-                    <p:approveCell><t:eventlink event="approve" context="row">Approve ${row.ssoemail}</t:eventlink></p:approveCell>
-                    <p:denyCell><t:eventlink event="deny" context="row">Deny ${row.ssoemail}</t:eventlink></p:denyCell>
-                </t:grid>
+                <t:jquery.DataTable t:row="row" source="pending" model="bModel" options="options" add="approve, deny"
+                exclude="id, source, ssoEmail, ssoName, status, url, workPhone, pairingNotes, pairsMade, proposals, roles, credentialsExpired, accountLocked, federatedId" 
+                reorder="approve, deny, created, institution, departmentName, name, email">
+                	<p:approveCell>
+                		<t:eventlink event="approve" context="row">Approve ${row.ssoemail}</t:eventlink>
+                	</p:approveCell>
+                    <p:denyCell>
+                    	<t:eventlink event="deny" context="row">Deny ${row.ssoemail}</t:eventlink>
+                    </p:denyCell>
+                </t:jquery.DataTable>
             </div>
             <div id="tab2" class="tab-pane">
                 <h2>Active Users</h2>
-                <t:grid source="active" add="makeAdmin" row="row" exclude="created, Source, id, ssoEmail, ssoName, workPhone, url, roles, CredentialsExpired, federatedId, pairingNotes" reorder="institution,departmentName,name,pairsmade,proposals,email,">
-                    <p:makeAdminCell><t:eventlink event="makeAdmin" context="row">Make <!--${row.ssoemail}--> admin</t:eventlink></p:makeAdminCell>
-                </t:grid>
+                <t:jquery.DataTable t:row="row" source="active" model="bModel" options="options" add="makeAdmin"
+                exclude="created, id, source, ssoEmail, ssoName, status, url, workPhone, pairingNotes, roles, credentialsExpired, accountLocked, federatedId"
+                reorder="institution, departmentName, name, pairsmade, proposals, email, makeAdmin">
+                	<p:pairsMadeCell>
+                		<t:If test="row.pairsMade">
+                			<ul>
+                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:pairsMadeCell>
+                	<p:proposalsCell>
+                		<t:If test="row.proposals">
+                			<ul>
+                				<li t:type="loop" t:source="row.proposals" t:value="proposal">${proposal.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:proposalsCell>
+                	<p:makeAdminCell>
+                		<t:eventlink event="makeAdmin" context="row">Make <!--${row.ssoemail}--> admin</t:eventlink>
+                	</p:makeAdminCell>
+                </t:jquery.DataTable>
             </div>
             <div id="tab3" class="tab-pane">
                 <h2>Admin Users</h2>
-                <t:grid source="admins" add="removeAdmin" row="row" exclude="created, Source, id, ssoEmail, ssoName, workPhone, url, roles, CredentialsExpired, federatedId, pairingNotes" reorder="institution,departmentName,name,email">
-                    <p:removeAdminCell><t:eventlink event="removeAdmin" context="row">Remove <!--${row.ssoemail}--> admin</t:eventlink></p:removeAdminCell>
-                </t:grid>
+                <t:jquery.DataTable t:row="row" source="admins" model="bModel" options="options" add="removeAdmin"
+                exclude="created, id, source, ssoEmail, ssoName, url, workPhone, pairingNotes, roles, credentialsExpired, federatedId"
+                reorder="institution, departmentName, name, email, status, pairsMade, proposals, accountLocked, removeAdmin">
+                	<p:pairsMadeCell>
+                		<t:If test="row.pairsMade">
+                			<ul>
+                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:pairsMadeCell>
+                	<p:proposalsCell>
+                		<t:If test="row.proposals">
+                			<ul>
+                				<li t:type="loop" t:source="row.proposals" t:value="proposal">${proposal.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:proposalsCell>
+                	<p:removeAdminCell>
+                		<t:eventlink event="removeAdmin" context="row">Remove <!--${row.ssoemail}--> admin</t:eventlink>
+                	</p:removeAdminCell>
+                </t:jquery.DataTable>
             </div>
         </div>
 </html>
