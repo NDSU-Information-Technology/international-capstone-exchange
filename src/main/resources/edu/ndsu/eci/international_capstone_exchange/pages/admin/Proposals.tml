@@ -30,18 +30,14 @@
 
 				<t:grid source="pendingProposals" row="row"
 					include="institution, subjects, types, user, share"
-					add="pair,country"
-					reorder="pair, institution, country, subjects, types, user, share">
-					<p:descriptionCell>
-						<t:outputraw value="row.description"></t:outputraw>
-					</p:descriptionCell>
-					<p:pairCell>
+					add="performPairing, country"
+					reorder="performPairing, institution, country, subjects, types, user, share">
+					<p:performPairingCell>
 						Pair
 						<t:pagelink page="admin/setpairing" context="row">
-							${row.name}
-							<span class="sr-only">${row.institution}</span>
+							<span class="action">${row.name}<span class="sr-only">${row.institution}</span></span>
 						</t:pagelink>
-					</p:pairCell>
+					</p:performPairingCell>
 					<p:countryCell>${row.institution.country}</p:countryCell>
 				</t:grid>
 			</div>
@@ -51,18 +47,14 @@
 
 				<t:grid source="RenewalProposals" row="row"
 					include="institution, subjects, types, user"
-					add="pair, country"
-					reorder="pair, institution, country, subjects, types, user, share">
-					<p:descriptionCell>
-						<t:outputraw value="row.description"></t:outputraw>
-					</p:descriptionCell>
-					<p:pairCell>
+					add="performPairing, country"
+					reorder="performPairing, institution, country, subjects, types, user, share">
+					<p:performPairingCell>
 						Pair
 						<t:pagelink page="admin/setpairing" context="row">
-							${row.name}
-							<span class="sr-only">${row.institution}</span>
+							<span class="action">${row.name}<span class="sr-only">${row.institution}</span></span>
 						</t:pagelink>
-					</p:pairCell>
+					</p:performPairingCell>
 					<p:countryCell>${row.institution.country}</p:countryCell>
 				</t:grid>
 			</div>

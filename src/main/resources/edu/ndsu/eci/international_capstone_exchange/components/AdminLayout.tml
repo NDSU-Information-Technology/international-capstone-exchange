@@ -37,6 +37,10 @@
 		p {
 			color: black;
 		}
+		.action {
+			color: #4185f2;
+			text-decoration: underline;
+		}
 		#footer-info {
 			color: #aaa;
 		}

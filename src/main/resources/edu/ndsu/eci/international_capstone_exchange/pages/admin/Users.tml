@@ -40,10 +40,10 @@
                 exclude="id, source, ssoEmail, ssoName, status, url, workPhone, pairingNotes, pairsMade, proposals, roles, credentialsExpired, accountLocked, federatedId" 
                 reorder="approve, deny, created, institution, departmentName, name, email">
                 	<p:approveCell>
-                		<t:eventlink event="approve" context="row">Approve ${row.ssoemail}</t:eventlink>
+                		<t:eventlink event="approve" context="row"><span class="action">Approve ${row.ssoemail}</span></t:eventlink>
                 	</p:approveCell>
                     <p:denyCell>
-                    	<t:eventlink event="deny" context="row">Deny ${row.ssoemail}</t:eventlink>
+                    	<t:eventlink event="deny" context="row"><span class="action">Deny ${row.ssoemail}</span></t:eventlink>
                     </p:denyCell>
                 </t:jquery.DataTable>
             </div>
@@ -73,10 +73,10 @@
                 		</t:If>
                 	</p:proposalsCell>
                 	<p:makeAdminCell>
-                		<t:eventlink event="makeAdmin" context="row">Make <!--${row.ssoemail}--> admin</t:eventlink>
+                		<t:eventlink event="makeAdmin" context="row"><span class="action">Make <!--${row.ssoemail}--> admin</span></t:eventlink>
                 	</p:makeAdminCell>
                 	<p:deactivateCell>
-                		<t:EventLink event="deactivateUser" context="row">Deactivate</t:EventLink>
+                		<t:EventLink event="deactivateUser" context="row"><span class="action">Deactivate</span></t:EventLink>
                 	</p:deactivateCell>
                 </t:jquery.DataTable>
             </div>
@@ -106,7 +106,7 @@
                 		</t:If>
                 	</p:proposalsCell>
                 	<p:reactivateCell>
-                		<t:EventLink event="reactivateUser" context="row">Reactivate</t:EventLink>
+                		<t:EventLink event="reactivateUser" context="row"><span class="action">Reactivate</span></t:EventLink>
                 	</p:reactivateCell>
                 </t:jquery.DataTable>
             </div>
@@ -136,7 +136,7 @@
                 		</t:If>
                 	</p:proposalsCell>
                 	<p:removeAdminCell>
-                		<t:eventlink event="removeAdmin" context="row">Remove <!--${row.ssoemail}--> admin</t:eventlink>
+                		<t:eventlink event="removeAdmin" context="row"><span class="action">Remove <!--${row.ssoemail}--> admin</span></t:eventlink>
                 	</p:removeAdminCell>
                 </t:jquery.DataTable>
             </div>
