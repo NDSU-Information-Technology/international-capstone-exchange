@@ -63,10 +63,10 @@
 				   <t:pagelink page="admin/pairings">Pairings</t:pagelink>
 			   </li>
 			   <li>
-				   <t:pagelink page="admin/proposals">Proposals</t:pagelink>
+				   <t:pagelink page="admin/proposals">Proposals (${proposalCount})</t:pagelink>
 			   </li>
 			   <li>
-				   <t:pagelink page="admin/users">Users</t:pagelink>
+				   <t:pagelink page="admin/users">Users (${userCount})</t:pagelink>
 			   </li>
 			   <li>
 				   <a href="#newSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Create/Edit</a>

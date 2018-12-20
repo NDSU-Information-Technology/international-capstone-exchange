@@ -14,11 +14,17 @@
 package edu.ndsu.eci.international_capstone_exchange.components;
 
 import org.apache.tapestry5.annotations.Import;
+
+import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
 import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
+import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
+import edu.ndsu.eci.international_capstone_exchange.util.Status;
+
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
+import org.apache.cayenne.ObjectContext;
 import org.apache.tapestry5.annotations.Environmental;
 
 
@@ -26,6 +32,10 @@ import org.apache.tapestry5.annotations.Environmental;
 
 public class AdminLayout extends Layout{
 
+    /** Cayenne database reference */
+    @Inject
+    private ObjectContext context;
+  
     @Environmental
     private JavaScriptSupport javaScriptSupport;
 
@@ -36,10 +46,21 @@ public class AdminLayout extends Layout{
     /** logged in user */
     @Property
     private User user;
+    
+    @Property
+    private int proposalCount;
+    
+    @Property
+    private int userCount;
+    
+    /** Database map reference */
+    private CapstoneDomainMap map = CapstoneDomainMap.getInstance();
 
 
     public void setupRender() {
 
         user = userInfo.getUser();
+        proposalCount = map.performProposalsByStatus(context, ProposalStatus.PENDING).size();
+        userCount = map.performUsersByStatus(context, Status.PENDING).size();
     }
 }
