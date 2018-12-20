@@ -41,6 +41,9 @@
 			color: #4185f2;
 			text-decoration: underline;
 		}
+		#status, #toOneList {
+			height: 40px;
+		}
 		#footer-info {
 			color: #aaa;
 		}
