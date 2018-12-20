@@ -9,6 +9,15 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
 	xmlns:p="tapestry:parameter" t:type="adminlayout" title="Proposals">
 
+	<head>
+		<style>
+			.description {
+				height: 80px;
+				overflow-y: scroll;
+			}
+		</style>
+	</head>
+
 	<body>
 		<ul t:id="tabs" t:type="any" class="nav nav-tabs">
 			<li class="active">
@@ -30,15 +39,17 @@
 
 				<t:grid source="pendingProposals" row="row"
 					include="institution, subjects, types, user, share"
-					add="performPairing, country"
-					reorder="performPairing, institution, country, subjects, types, user, share">
+					add="performPairing, country, notes"
+					reorder="performPairing, institution, country, subjects, types, user, notes">
 					<p:performPairingCell>
-						Pair
 						<t:pagelink page="admin/setpairing" context="row">
 							<span class="action">${row.name}<span class="sr-only">${row.institution}</span></span>
 						</t:pagelink>
 					</p:performPairingCell>
 					<p:countryCell>${row.institution.country}</p:countryCell>
+					<p:notesCell>
+						<div class="description"><t:outputraw value="row.description"></t:outputraw></div>
+					</p:notesCell>
 				</t:grid>
 			</div>
 
@@ -47,15 +58,17 @@
 
 				<t:grid source="RenewalProposals" row="row"
 					include="institution, subjects, types, user"
-					add="performPairing, country"
-					reorder="performPairing, institution, country, subjects, types, user, share">
+					add="performPairing, country, notes"
+					reorder="performPairing, institution, country, subjects, types, user, notes">
 					<p:performPairingCell>
-						Pair
 						<t:pagelink page="admin/setpairing" context="row">
 							<span class="action">${row.name}<span class="sr-only">${row.institution}</span></span>
 						</t:pagelink>
 					</p:performPairingCell>
 					<p:countryCell>${row.institution.country}</p:countryCell>
+					<p:notesCell>
+						<div class="description"><t:outputraw value="row.description"></t:outputraw></div>
+					</p:notesCell>
 				</t:grid>
 			</div>
 
