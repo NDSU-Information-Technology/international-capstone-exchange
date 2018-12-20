@@ -13,6 +13,38 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages.admin;
 
+import org.apache.cayenne.ObjectContext;
+import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.services.javascript.JavaScriptSupport;
+
+import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
+import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
+import edu.ndsu.eci.international_capstone_exchange.util.Status;
+
+@Import(library = { "../js/adminPage.js" })
 public class Admin {
  
+  /** Cayenne database reference */
+  @Inject
+  private ObjectContext context;
+  
+  /** JavaScript Support */
+  @Inject
+  private JavaScriptSupport javaScriptSupport;
+  
+  @Property
+  private int proposalCount;
+  
+  @Property
+  private int userCount;
+  
+  /** Database map reference */
+  private CapstoneDomainMap map = CapstoneDomainMap.getInstance();
+  
+  public void setupRender() {
+    proposalCount = map.performProposalsByStatus(context, ProposalStatus.PENDING).size();
+    userCount = map.performUsersByStatus(context, Status.PENDING).size();
+  }
 }
