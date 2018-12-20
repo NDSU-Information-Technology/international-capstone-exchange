@@ -30,6 +30,7 @@
     <h3>Options</h3>
     <t:grid source="proposals" row="row" add="subjects,types,pair" exclude="name" 
     reorder="score,pair,institution,country,subjects,types,user,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified">
+      <p:descriptionHeader>Notes</p:descriptionHeader>
       <p:descriptionCell>
       	<div class="description-small"><t:outputraw value="row.description"></t:outputraw></div>
       </p:descriptionCell>
@@ -86,13 +87,13 @@
 		}
 		
 		.description-small {
-			height: 80px;
+			max-height: 80px;
 			width: 200px;
 			overflow-y: scroll;
 		}
 		
 		.description-large {
-			height: 160px;
+			max-height: 160px;
 			overflow-y: scroll;
 			border: 1px solid #aaa;
 			padding: 5px;

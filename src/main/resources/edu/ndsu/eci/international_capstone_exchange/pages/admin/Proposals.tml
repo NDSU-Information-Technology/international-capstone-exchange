@@ -12,7 +12,7 @@
 	<head>
 		<style>
 			.description {
-				height: 80px;
+				max-height: 80px;
 				overflow-y: scroll;
 			}
 		</style>
