@@ -3,7 +3,7 @@ $(function(){
 	let proposal = document.getElementById("proposalCount");
 	let propCount = parseInt(proposal.innerText);
 	
-	if ( propCount >= countToBold ) {
+	if ( propCount >= countToBoldProposal ) {
 		proposal.style.fontWeight = 'bold';
 	} 
 	
@@ -11,7 +11,7 @@ $(function(){
 	let user = document.getElementById("userCount");
 	let userCount = parseInt(user.innerText);
 	
-	if ( userCount >= countToBold ) {
+	if ( userCount >= countToBoldUser ) {
 		user.style.fontWeight = 'bold';
 	} 
 });

@@ -28,8 +28,11 @@
 		</style>
 		
 		<script>
-			//Set value threshold that pending proposals or users unapproved should be bolded from emphasis at.
-			const countToBold = 5;
+			//Set value threshold that pending proposals should be bolded for emphasis at.
+			const countToBoldProposal = 5;
+			
+			//Set value threshold that users unapproved should be bolded for emphasis at.
+			const countToBoldUser = 5;
 		</script>
 		
 		<script type="text/javascript" language="JavaScript" src="../js/adminPage.js" />
