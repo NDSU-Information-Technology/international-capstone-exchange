@@ -106,7 +106,7 @@
 		
 		<t:Form id="logForm">
 			<t:Label for="levelSelect">Log Level:</t:Label>
-			<t:Select t:id="levelSelect" model="literal: DEBUG, INFO, WARN, ALL"/>
+			<t:Select t:id="levelSelect" model="literal: ALL, DEBUG, ERROR, FATAL, INFO, OFF, TRACE, WARN"/>
 			<t:Submit value="Select"/>
 			<t:if test="levelSelect">
 				${levelSelect} has been set.
