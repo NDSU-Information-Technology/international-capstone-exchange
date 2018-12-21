@@ -14,6 +14,8 @@
 package edu.ndsu.eci.international_capstone_exchange.pages.admin;
 
 import org.apache.cayenne.ObjectContext;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -34,17 +36,49 @@ public class Admin {
   @Inject
   private JavaScriptSupport javaScriptSupport;
   
+  /** Holds count of pending proposals. */
   @Property
   private int proposalCount;
   
+  /** Holds count of users needing approval. */
   @Property
   private int userCount;
+  
+  /** Holds log level selection. */
+  @Property
+  private String levelSelect;
+  
   
   /** Database map reference */
   private CapstoneDomainMap map = CapstoneDomainMap.getInstance();
   
+  /**
+   * Setup Render used to get pending task information.
+   */
   public void setupRender() {
     proposalCount = map.performProposalsByStatus(context, ProposalStatus.PENDING).size();
     userCount = map.performUsersByStatus(context, Status.PENDING).size();
+  }
+  
+  /**
+   * Get value of levelSelect.
+   */
+  public void onActivate(String value) {
+    this.levelSelect = value;
+  }
+  
+  /**
+   * Set submission value of levelSelect.
+   * @return Value of levelSelect.
+   */
+  public String onPassivate() {
+    return levelSelect;
+  }
+  
+  /**
+   * On Success of Log Form submission, change log level as appropriate.
+   */
+  public void onSuccess() {
+    LogManager.getRootLogger().setLevel(Level.toLevel(levelSelect));
   }
 }
