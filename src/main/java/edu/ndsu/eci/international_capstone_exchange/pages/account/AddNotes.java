@@ -37,91 +37,86 @@ import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
 
 public class AddNotes {
 
-    /** user info service */
-    @Inject
-    private UserInfo userInfo;
+  /** user info service */
+  @Inject
+  private UserInfo userInfo;
 
-    /** cayenne context */
-    @Inject
-    private ObjectContext context;
+  /** cayenne context */
+  @Inject
+  private ObjectContext context;
 
-    /** page to go back to */
-    @InjectPage
-    private ViewNotes viewNotes;
+  /** page to go back to */
+  @InjectPage
+  private ViewNotes viewNotes;
 
-    /** alerts */
-    @Inject
-    private AlertManager alerts;
+  /** alerts */
+  @Inject
+  private AlertManager alerts;
 
-    /** form object */
-    @Property
-    private PairingNotes pairingNotes;
+  /** form object */
+  @Property
+  private PairingNotes pairingNotes;
 
 
-    /** form */
-    @Component
-    private BeanEditForm form;
+  /** form */
+  @Component
+  private BeanEditForm form;
 
-    @Property
-    private Pairing pairing;
+  @Property
+  private Pairing pairing;
 
-    /** html cleaner */
-    @Inject
-    private HtmlCleaner cleaner;
+  /** html cleaner */
+  @Inject
+  private HtmlCleaner cleaner;
 
-    public Object onPassivate() {
-        return pairing;
+  public Object onPassivate() {
+    return pairing;
+  }
+
+  @RequiresPermissions(ILACRealm.PAIRING_VIEW_INSTANCE)
+  public void onActivate(Pairing pairing) {
+    this.pairing = pairing;
+    pairingNotes = new PairingNotes();
+  }
+
+  /**
+   * Validate the form
+   */
+  public void onValidateFromForm() {
+    if (StringUtils.isBlank(pairingNotes.getNote())) {
+      form.recordError("Must enter some notes");
+      context.rollbackChanges();
+    }
+  }
+
+  public boolean checkAdmin() {
+    return userInfo.isAdmin();
+  }
+
+  /**
+   * On form success submission
+   * @return return page
+   * @throws Exception
+   * @throws ParseErrorException
+   * @throws ResourceNotFoundException
+   */
+  @CommitAfter
+  public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception {
+
+    pairingNotes.setPairing(pairing);
+    pairingNotes.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
+    pairingNotes.setTmstamp(new Date());
+    pairingNotes.setNote(cleaner.cleanCapstone(pairingNotes.getNote()));
+    if(!checkAdmin()) {
+      pairingNotes.setAdminOnly(false);
+    } else {
+      pairingNotes.setAdminOnly(pairingNotes.getAdminOnly());
     }
 
-    @RequiresPermissions(ILACRealm.PAIRING_VIEW_INSTANCE)
-    public void onActivate(Pairing pairing) {
-        this.pairing = pairing;
-        pairingNotes = new PairingNotes();
-    }
+    alerts.success("Notes submitted");
 
-    /**
-     * Validate the form
-     */
-    public void onValidateFromForm() {
-        if (StringUtils.isBlank(pairingNotes.getNote())) {
-            form.recordError("Must enter some notes");
-            context.rollbackChanges();
-        }
-    }
-
-    public boolean checkAdmin()
-    {
-        return userInfo.isAdmin();
-    }
-
-    /**
-     * On form success submission
-     * @return return page
-     * @throws Exception
-     * @throws ParseErrorException
-     * @throws ResourceNotFoundException
-     */
-    @CommitAfter
-    public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception {
-
-        pairingNotes.setPairing(pairing);
-        pairingNotes.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
-        pairingNotes.setTmstamp(new Date());
-        pairingNotes.setNote(cleaner.cleanCapstone(pairingNotes.getNote()));
-        if(!checkAdmin())
-        {
-            pairingNotes.setAdminOnly(false);
-        }
-        else
-        {
-            pairingNotes.setAdminOnly(pairingNotes.getAdminOnly());
-        }
-
-        alerts.success("Notes submitted");
-
-        viewNotes.onActivate(pairingNotes.getPairing());
-        return viewNotes;
-    }
-
+    viewNotes.onActivate(pairingNotes.getPairing());
+    return viewNotes;
+  }
 
 }
