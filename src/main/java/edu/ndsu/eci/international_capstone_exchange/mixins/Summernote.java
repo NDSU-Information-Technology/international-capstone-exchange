@@ -35,8 +35,8 @@ public class Summernote {
    * @param writer write to write to
    */
   public void afterRender(MarkupWriter writer) {
-    javaScriptSupport.importJavaScriptLibrary("https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js");
-    StylesheetLink stylesheet = new StylesheetLink("https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css");
+    javaScriptSupport.importJavaScriptLibrary("https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-lite.js");
+    StylesheetLink stylesheet = new StylesheetLink("https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.10/summernote-lite.css");
     javaScriptSupport.importStylesheet(stylesheet);
     String id = textArea.getClientId();
     javaScriptSupport.addInitializerCall("initSummernote", id);

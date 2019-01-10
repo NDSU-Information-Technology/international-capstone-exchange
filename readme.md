@@ -1,13 +1,5 @@
 Setup:
 
-Needs integration library for Cayenne:
-
-https://github.com/NDSU-Information-Technology/tapestry5-cayenne
-
-You need to get the f99b version at the moment from master.
-
-Install with mvn install -DskipTests
-
 At the moment the only federated accounts that work is Google.
 
 You will need to use Apache Cayenne 3.0.2 modeler to work on project.
@@ -27,8 +19,9 @@ It users Jetty 6 due to the JNDI configuration. That could be easily update to J
  * JNDI Support
 
 Under VM arguments
-*-Dtapestry.compress-whitespace=false
-*-Drun.mode=prototype
+
+ * -Dtapestry.compress-whitespace=false
+ * -Drun.mode=prototype
 
 Under Webapp Classpath -> User Custom classpath add the MySQL driver, Commons DBCP, and Commons Pool
 

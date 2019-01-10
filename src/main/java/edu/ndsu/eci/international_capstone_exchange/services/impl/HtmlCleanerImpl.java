@@ -38,13 +38,12 @@ public class HtmlCleanerImpl implements HtmlCleaner {
     simpleAnchor.addTags("a").addAttributes("a", "href", "title");
     capstone = new Whitelist()
     .addTags(
-            "a", "b", "blockquote", "br", "caption", "cite", "code", "col",
+            "a", "b", "br", "caption", "cite", "code", "col",
             "colgroup", "dd", "div", "dl", "dt", "em", "h1", "h2", "h3", "h4", "h5", "h6",
             "i", "li", "ol", "p", "pre", "q", "strong",
             "table", "tbody", "td", "tfoot", "th", "thead", "tr", "u",
             "ul")
     .addAttributes("a", "href", "title")
-    .addAttributes("blockquote", "cite")
     .addAttributes("col", "span", "width")
     .addAttributes("colgroup", "span", "width")
     .addAttributes("img", "align", "alt", "height", "src", "title", "width")
@@ -57,7 +56,6 @@ public class HtmlCleanerImpl implements HtmlCleaner {
             "width")
     .addAttributes("ul", "type")
     .addProtocols("a", "href", "ftp", "http", "https", "mailto")
-    .addProtocols("blockquote", "cite", "http", "https")
     .addProtocols("cite", "cite", "http", "https")
     .addProtocols("q", "cite", "http", "https");
   }
