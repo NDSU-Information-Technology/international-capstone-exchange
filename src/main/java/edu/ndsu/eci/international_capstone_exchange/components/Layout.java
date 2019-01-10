@@ -32,6 +32,8 @@ import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
  */
 @Import(module="bootstrap/collapse")
 public class Layout {
+  
+  /** resources service */
   @Inject
   private ComponentResources resources;
 
@@ -50,6 +52,7 @@ public class Layout {
   @Inject
   private UserInfo userInfo;
   
+  /** security service */
   @Inject
   private SecurityService securityService;
 
