@@ -76,23 +76,43 @@ public class SetPairing {
   @Inject
   private VelocityEmailService emailService;
   
+//  public void onActivate(Proposal proposal) {
+//    if (proposal.getProposalStatus() != ProposalStatus.PENDING) {
+//      // FIXME probably do something a bit more dramatic here
+//      alerts.error("Not a valid proposal to pair");
+//    } else {
+//      source = proposal;
+//    }
+//  }
   public void onActivate(Proposal proposal) {
-    if (proposal.getProposalStatus() != ProposalStatus.PENDING) {
+    if (proposal.getProposalStatus() == ProposalStatus.PENDING || proposal.getProposalStatus() == ProposalStatus.PendingRenewal) {
       // FIXME probably do something a bit more dramatic here
-      alerts.error("Not a valid proposal to pair");
-    } else {
       source = proposal;
+    } else {
+      alerts.error("Not a valid proposal to pair");
     }
   }
   
   public List<PairingScore> getProposals() {
     List<PairingScore> scores = new ArrayList<>();
-    
-    for (Proposal proposal : CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PENDING)) {
-      if (proposal == source) {
-        continue;
+
+    if(source.getProposalStatus() == ProposalStatus.PENDING)
+    {
+      for (Proposal proposal : CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PENDING)) {
+        if (proposal == source) {
+          continue;
+        }
+        scores.add(new PairingScore(source, proposal));
       }
-      scores.add(new PairingScore(source, proposal));
+    }
+    else
+    {
+      for (Proposal proposal : CapstoneDomainMap.getInstance().performProposalsByStatus(context, ProposalStatus.PendingRenewal)) {
+        if (proposal == source) {
+          continue;
+        }
+        scores.add(new PairingScore(source, proposal));
+      }
     }
     scores.sort(Collections.reverseOrder(new ScoreComparator()));
     return scores;
@@ -114,7 +134,7 @@ public class SetPairing {
     dest.setProposalStatus(ProposalStatus.PAIRED);
     pairing.setAdmin((User) context.localObject(userInfo.getUser().getObjectId(), null));
     
-    notifyPairing(pairing);
+    //notifyPairing(pairing);
     
     return successPage;
   }

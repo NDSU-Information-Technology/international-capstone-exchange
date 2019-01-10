@@ -16,6 +16,8 @@ package edu.ndsu.eci.international_capstone_exchange.services.impl;
 import java.io.StringWriter;
 import java.util.List;
 
+import javax.naming.NamingException;
+
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.access.DataContext;
 import org.apache.commons.mail.EmailException;
@@ -37,6 +39,7 @@ import edu.ndsu.eci.international_capstone_exchange.services.EmailService;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
 import edu.ndsu.eci.international_capstone_exchange.services.VelocityEmailService;
 import edu.ndsu.eci.international_capstone_exchange.services.VelocityService;
+import edu.ndsu.eci.international_capstone_exchange.util.EmailConfig;
 import edu.ndsu.eci.international_capstone_exchange.util.UserRole;
 
 
@@ -62,6 +65,8 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
   @Symbol(AppModule.FROM_ADDRESS)
   private String fromAddress;
   
+  private EmailConfig emailConfig;
+  
   /**
    * Constructor
    * @param velocity velocity service
@@ -71,6 +76,11 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
     velocityService = velocity;
     emailService = email;
     this.userInfo = userInfo;
+    try {
+      emailConfig = EmailConfig.createConfig("bean/emailconf");
+    } catch (NamingException e) {
+      LOGGER.error("Could not send email due to error in email configuration settings. Please check the settings in the jetty-env.xml file.", e);
+    }
   }
 
   @Override
@@ -100,47 +110,53 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
 
   @Override
   public boolean sendAdminEmail(VelocityContext context, String templateName, String subject) throws ResourceNotFoundException, ParseErrorException, Exception {
-    SimpleEmail email = setupSimpleEmail(context, templateName, subject);
-    email.setFrom(fromAddress);
-
-    ObjectContext objContext = DataContext.createDataContext();
-    List<User> admins = CapstoneDomainMap.getInstance().performUsersByRoleQuery(objContext, UserRole.ADMIN);
-    
-    if (!production) {
-      User logged = userInfo.getUser();
-      for (User user : admins) {
-        if (logged.getFederatedId().equals(user.getFederatedId())) {
+    if(emailConfig.isEnabled()) {
+      SimpleEmail email = setupSimpleEmail(context, templateName, subject);
+      email.setFrom(emailConfig.getFromAddress());
+  
+      ObjectContext objContext = DataContext.createDataContext();
+      List<User> admins = CapstoneDomainMap.getInstance().performUsersByRoleQuery(objContext, UserRole.ADMIN);
+      
+      if (!production) {
+        User logged = userInfo.getUser();
+        for (User user : admins) {
+          if (logged.getFederatedId().equals(user.getFederatedId())) {
+            email.addTo(user.getEmail());
+            break;
+          }
+        }
+        if (email.getToAddresses().isEmpty()) {
+          email.addTo("richard.frovarp@ndsu.edu");
+        }
+      } else {
+        for (User user : admins) {
           email.addTo(user.getEmail());
-          break;
         }
       }
-      if (email.getToAddresses().isEmpty()) {
-        email.addTo("richard.frovarp@ndsu.edu");
-      }
-    } else {
-      for (User user : admins) {
-        email.addTo(user.getEmail());
-      }
+      
+      email.send();
+      return true;
     }
-    
-    email.send();
-    return true;
+    return false;
   }
 
   @Override
   public boolean sendUserEmail(VelocityContext context, String templateNull, User user, String subject) throws ResourceNotFoundException, ParseErrorException, Exception {
-    SimpleEmail email = setupSimpleEmail(context, templateNull, subject);
-    email.setFrom(fromAddress);
-    
-    if (production) {
-      email.addTo(user.getEmail());
-    } else {
-      email.addTo(userInfo.getUser().getEmail());
-    }    
-    
-    email.send();
-    
-    return true;
+    if(emailConfig.isEnabled()) {
+      SimpleEmail email = setupSimpleEmail(context, templateNull, subject);
+      email.setFrom(emailConfig.getFromAddress());
+      
+      if (production) {
+        email.addTo(user.getEmail());
+      } else {
+        email.addTo(userInfo.getUser().getEmail());
+      }    
+      
+      email.send();
+      
+      return true;
+    }
+    return false;
   }
 
 }

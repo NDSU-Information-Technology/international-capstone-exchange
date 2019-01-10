@@ -24,10 +24,11 @@
               removeAbandoned="true"
               validationQuery="select 1"
               timeBetweenEvictionRunsMillis="600000"
-              url="jdbc:mysql://red.it.ndsu.edu/capstone_exchange"
-              username="capstone_exchange"
-              password="password"
+              url="jdbc:mysql://localhost:3306/capstone_exchange"
+              username="yifu"
+              password="foobar"
     />
+  <!--url="jdbc:mysql://red.it.ndsu.edu/capstone_exchange"-->
 
   <Resource name="bean/pac4j" auth="Container"
             type="edu.ndsu.eci.international_capstone_exchange.util.OAuthConfig"

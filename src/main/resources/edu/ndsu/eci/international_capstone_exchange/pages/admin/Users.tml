@@ -15,38 +15,130 @@
  limitations under the License.
 -->
 <html
-    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
-    xmlns:p="tapestry:parameter" t:type="adminlayout" title="Users">
-    
-<style>
-/* Ideally just the "thead" would work, but not in Chrome */
-/*   thead { */
-thead tr:nth-child(1) th {
-  background: white;
-  position: sticky;
-  top: 0;
+        xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+        xmlns:p="tapestry:parameter" t:type="adminlayout" title="Users">
+        <!--<div>A lot of functionality remains here, plus the layout is broken</div>-->
+        <ul t:id="tabs" t:type="any" class="nav nav-tabs">
+            <li class="active">
+                <a href="#tab1" data-toggle="tab">Pending Users</a>
+            </li>
+            <li>
+                <a href="#tab2" data-toggle="tab">Active Users</a>
+            </li>
+            <li>
+            	<a href="#tab3" data-toggle="tab">Inactive Users</a>
+            </li>
+            <li>
+                <a href="#tab4" data-toggle="tab">Admin Users</a>
+            </li>
+        </ul>
 
-  /* Whatever styles you want on top of the positioning */
-  border-bottom: 1px solid black;
-
-  /* This wouldn't be required if sticky were working on Chrome */
-  z-index: 10;
-}
-</style>
-    <div>A lot of functionality remains here, plus the layout is broken</div>
-    <t:grid source="pending" add="approve,deny" row="row" reorder="approve,deny,created,institution,departmentName,name,email">
-    	<p:approveCell><t:eventlink event="approve" context="row">Approve ${row.ssoemail}</t:eventlink></p:approveCell>
-    	<p:denyCell><t:eventlink event="deny" context="row">Deny ${row.ssoemail}</t:eventlink></p:denyCell>
-    </t:grid>
-    
-    <h2>Active Users</h2>
-    <t:grid source="active" add="makeAdmin" row="row" reorder="created,institution,departmentName,name,email">
-      <p:makeAdminCell><t:eventlink event="makeAdmin" context="row">Make ${row.ssoemail} admin</t:eventlink></p:makeAdminCell>
-    </t:grid>
-    
-    <h2>Admin Users</h2>
-    <t:grid source="admins" add="removeAdmin" row="row" reorder="created,institution,departmentName,name,email">
-      <p:removeAdminCell><t:eventlink event="removeAdmin" context="row">Remove ${row.ssoemail} admin</t:eventlink></p:removeAdminCell>
-    
-    </t:grid>
+        <div class="tab-content">
+            <div id="tab1" class="tab-pane active">
+                <h2>Pending Users</h2>
+                <t:jquery.DataTable t:row="row" source="pending" model="bModel" options="options" add="approve, deny"
+                exclude="id, source, ssoEmail, ssoName, status, url, workPhone, pairingNotes, pairsMade, proposals, roles, credentialsExpired, accountLocked, federatedId" 
+                reorder="approve, deny, created, institution, departmentName, name, email">
+                	<p:approveCell>
+                		<t:eventlink event="approve" context="row"><span class="action">Approve ${row.ssoemail}</span></t:eventlink>
+                	</p:approveCell>
+                    <p:denyCell>
+                    	<t:eventlink event="deny" context="row"><span class="action">Deny ${row.ssoemail}</span></t:eventlink>
+                    </p:denyCell>
+                </t:jquery.DataTable>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <h2>Active Users</h2>
+                <t:jquery.DataTable t:row="row" source="active" model="bModel" options="options" add="makeAdmin, deactivate"
+                exclude="created, id, source, ssoEmail, ssoName, status, url, pairingNotes, roles, credentialsExpired, accountLocked, federatedId"
+                reorder="institution, departmentName, name, pairsmade, proposals, email, workPhone, makeAdmin, deactivate">
+                	<p:pairsMadeCell>
+                		<t:If test="row.pairsMade">
+                			<ul>
+                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:pairsMadeCell>
+                	<p:proposalsCell>
+                		<t:If test="row.proposals">
+                			<ul>
+                				<li t:type="loop" t:source="row.proposals" t:value="proposal">${proposal.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:proposalsCell>
+                	<p:makeAdminCell>
+                		<t:eventlink event="makeAdmin" context="row"><span class="action">Make <!--${row.ssoemail}--> admin</span></t:eventlink>
+                	</p:makeAdminCell>
+                	<p:deactivateCell>
+                		<t:EventLink event="deactivateUser" context="row"><span class="action">Deactivate</span></t:EventLink>
+                	</p:deactivateCell>
+                </t:jquery.DataTable>
+            </div>
+            <div id="tab3" class="tab-pane">
+                <h2>Inactive Users</h2>
+                <t:jquery.DataTable t:row="row" source="deactivated" model="bModel" options="options" add="reactivate"
+                exclude="created, id, source, ssoEmail, ssoName, status, url, pairingNotes, roles, credentialsExpired, accountLocked, federatedId"
+                reorder="institution, departmentName, name, pairsmade, proposals, email, workPhone, reactivate">
+                	<p:pairsMadeCell>
+                		<t:If test="row.pairsMade">
+                			<ul>
+                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:pairsMadeCell>
+                	<p:proposalsCell>
+                		<t:If test="row.proposals">
+                			<ul>
+                				<li t:type="loop" t:source="row.proposals" t:value="proposal">${proposal.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:proposalsCell>
+                	<p:reactivateCell>
+                		<t:EventLink event="reactivateUser" context="row"><span class="action">Reactivate</span></t:EventLink>
+                	</p:reactivateCell>
+                </t:jquery.DataTable>
+            </div>
+            <div id="tab4" class="tab-pane">
+                <h2>Admin Users</h2>
+                <t:jquery.DataTable t:row="row" source="admins" model="bModel" options="options" add="removeAdmin"
+                exclude="created, id, source, ssoEmail, ssoName, url, pairingNotes, roles, credentialsExpired, federatedId"
+                reorder="institution, departmentName, name, pairsMade, proposals, email, workPhone, status,  accountLocked, removeAdmin">
+                	<p:pairsMadeCell>
+                		<t:If test="row.pairsMade">
+                			<ul>
+                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:pairsMadeCell>
+                	<p:proposalsCell>
+                		<t:If test="row.proposals">
+                			<ul>
+                				<li t:type="loop" t:source="row.proposals" t:value="proposal">${proposal.name}</li> 
+                			</ul>
+                			<p:Else>
+                				None
+                			</p:Else>
+                		</t:If>
+                	</p:proposalsCell>
+                	<p:removeAdminCell>
+                		<t:eventlink event="removeAdmin" context="row"><span class="action">Remove <!--${row.ssoemail}--> admin</span></t:eventlink>
+                	</p:removeAdminCell>
+                </t:jquery.DataTable>
+            </div>
+        </div>
 </html>

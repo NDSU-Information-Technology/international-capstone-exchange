@@ -15,14 +15,134 @@
  limitations under the License.
 -->
 <html
-    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
-    xmlns:p="tapestry:parameter" t:type="adminlayout" title="Admin Page">
-    
- <body>   
- 
-<div>
-	TODO put status information in here like things that need to be acted upon.
-</div>
-   
-</body>  
+        xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+        xmlns:p="tapestry:parameter" t:type="adminlayout" title="Admin Page">
+
+	<head>
+		<style>
+			td {
+				padding-right: 10px;
+				padding-bottom: 10px;
+				font-size: 20px;
+			}
+			form {
+				margin-bottom: 10px;
+			}
+			#rootLevel, #cayenneLevel, #applicationLevel, #ndsuLevel, #tapestryLevel {
+				height: 40px;
+				width: 150px;
+			}
+		</style>
+		
+		<script>
+			//Set value threshold that pending proposals should be bolded for emphasis at.
+			const countToBoldProposal = 5;
+			
+			//Set value threshold that users unapproved should be bolded for emphasis at.
+			const countToBoldUser = 5;
+		</script>
+		
+		<script type="text/javascript" language="JavaScript" src="../js/adminPage.js" />
+	
+	</head>
+
+	<body>
+
+		<div class="text-info">
+			Use tabs to select areas to modify.
+		</div>
+		<div class = "list-group">
+			<a href="/international-capstone-exchange/admin/countries"
+			    class="list-group-item list-group-item-info">
+				<div>
+					Countries: Select countries to add to the International Capstone Exchange Project.
+				</div>
+			</a>
+			<a href="/international-capstone-exchange/admin/institutions"
+			    class="list-group-item list-group-item-info">
+				<div>
+					Instituions: Select institutions to add to the International Capstone Exchange Project.
+				</div>
+			</a>
+			<a href="/international-capstone-exchange/admin/pairings"
+			    class="list-group-item list-group-item-info">
+				<div>
+					Pairings: See current pairings of institutions.
+				</div>
+			</a>
+			<a href="/international-capstone-exchange/admin/proposals"
+			    class="list-group-item list-group-item-info">
+				<div>
+					Proposals: See all current proposals from institutions.
+				</div>
+			</a>
+			<a href="/international-capstone-exchange/admin/proposaltypes"
+			    class="list-group-item list-group-item-info">
+				<div>
+					Proposal Types: View current proposals types and add more.
+				</div>
+			</a>
+			<a href="/international-capstone-exchange/admin/subjects"
+			    class="list-group-item list-group-item-info">
+				<div>
+					Subjects: View current subjects and add more.
+				</div>
+			</a>
+			<a href="/international-capstone-exchange/admin/users"
+			    class="list-group-item list-group-item-info">
+				<div>
+					List of all users and admin users.
+				</div>
+			</a>
+		</div>
+		
+		<h3>Task List</h3>
+		
+		<table>
+			<tr>
+				<td>Pending Proposals: </td>
+				<td id="proposalCount">${proposalCount}</td>
+			</tr>
+			<tr>
+				<td>Users Unapproved:</td>
+				<td id="userCount">${userCount}</td>
+			</tr>
+		</table>
+		
+		
+		<h3>Set Logger Information Levels</h3>
+		
+		<t:Form t:id="root">
+			<t:Label for="rootLevel">Root Level:</t:Label>
+			<t:Select t:id="rootLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
+			<t:Submit value="Select"/>
+		</t:Form>
+		
+		<t:Form t:id="application">
+			<t:Label for="applicationLevel">Application Level:</t:Label>
+			<t:Select t:id="applicationLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
+			<t:Submit value="Select"/>
+		</t:Form>
+		
+		<t:Form t:id="cayenne">
+			<t:Label for="cayenneLevel">Cayenne Level:</t:Label>
+			<t:Select t:id="cayenneLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
+			<t:Submit value="Select"/>
+		</t:Form>
+		
+		<t:Form t:id="ndsu">
+			<t:Label for="ndsuLevel">NDSU Level:</t:Label>
+			<t:Select t:id="ndsuLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
+			<t:Submit value="Select"/>
+		</t:Form>
+		
+		<t:Form t:id="tapestry">
+			<t:Label for="tapestryLevel">Tapestry Level:</t:Label>
+			<t:Select t:id="tapestryLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
+			<t:Submit value="Select"/>
+		</t:Form>
+
+		
+	</body>
+	
 </html>

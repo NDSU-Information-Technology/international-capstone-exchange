@@ -84,6 +84,7 @@
     <Arg>
       <New class="edu.ndsu.eci.international_capstone_exchange.util.EmailConfig">
         <Set name="fromAddress">ndsu.icpe@ndsu.edu</Set>
+        <Set name="enabled">true</Set>
       </New>
     </Arg>
   </New>

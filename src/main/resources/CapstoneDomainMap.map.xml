@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data-map xmlns="http://cayenne.apache.org/schema/3.0/modelMap"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://cayenne.apache.org/schema/3.0/modelMap http://cayenne.apache.org/schema/3.0/modelMap.xsd"
-  project-version="3.0.0.1">
+		  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		  xsi:schemaLocation="http://cayenne.apache.org/schema/3.0/modelMap http://cayenne.apache.org/schema/3.0/modelMap.xsd"
+		  project-version="3.0.0.1">
 	<property name="defaultPackage" value="edu.ndsu.eci.international_capstone_exchange.persist"/>
 	<db-entity name="countries">
 		<db-attribute name="created" type="TIMESTAMP" isMandatory="true"/>
@@ -23,6 +23,7 @@
 		<db-attribute name="companyAddress" type="VARCHAR" isMandatory="true" length="255"/>
 		<db-attribute name="companyName" type="VARCHAR" isMandatory="true" length="255"/>
 		<db-attribute name="companyUrl" type="VARCHAR" length="255"/>
+		<db-attribute name="companyShare" type="BOOLEAN"/>
 		<db-attribute name="pk" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
 		<db-attribute name="proposalPk" type="INTEGER" isMandatory="true"/>
 	</db-entity>
@@ -61,6 +62,7 @@
 		<db-attribute name="pk" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
 		<db-attribute name="potentialStart" type="DATE" isMandatory="true"/>
 		<db-attribute name="proposalStatus" type="VARCHAR" isMandatory="true" length="20"/>
+		<db-attribute name="share" type="BOOLEAN"/>
 		<db-attribute name="submittingUser" type="INTEGER" isMandatory="true"/>
 		<db-attribute name="teamSize" type="INTEGER" isMandatory="true"/>
 	</db-entity>
@@ -117,6 +119,7 @@
 	<obj-entity name="PairingCompany" className="edu.ndsu.eci.international_capstone_exchange.persist.PairingCompany" dbEntityName="pairingCompany">
 		<obj-attribute name="companyAddress" type="java.lang.String" db-attribute-path="companyAddress"/>
 		<obj-attribute name="companyName" type="java.lang.String" db-attribute-path="companyName"/>
+		<obj-attribute name="companyShare" type="java.lang.Boolean" db-attribute-path="companyShare"/>
 		<obj-attribute name="companyUrl" type="java.lang.String" db-attribute-path="companyUrl"/>
 	</obj-entity>
 	<obj-entity name="PairingNotes" className="edu.ndsu.eci.international_capstone_exchange.persist.PairingNotes" dbEntityName="pairingNotes">
@@ -134,6 +137,7 @@
 		<obj-attribute name="perStudentWeekly" type="java.lang.Double" db-attribute-path="perStudentWeekly"/>
 		<obj-attribute name="potentialStart" type="java.util.Date" db-attribute-path="potentialStart"/>
 		<obj-attribute name="proposalStatus" type="edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus" db-attribute-path="proposalStatus"/>
+		<obj-attribute name="share" type="java.lang.Boolean" db-attribute-path="share"/>
 		<obj-attribute name="teamSize" type="java.lang.Integer" db-attribute-path="teamSize"/>
 	</obj-entity>
 	<obj-entity name="ProposalType" className="edu.ndsu.eci.international_capstone_exchange.persist.ProposalType" dbEntityName="types">

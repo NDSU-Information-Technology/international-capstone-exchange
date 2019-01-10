@@ -32,21 +32,28 @@
 		 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"/>
 		 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 	<style>
-		body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+		body,h1,h2,h3,h4,h5,h6 {
+			font-family: "Raleway", sans-serif;
+		}
 		body, html {
-   		height: 100%;
-    	line-height: 1.8;
+   			height: 100%;
+    		line-height: 1.8;
 		}
 		
 		.w3-bar .w3-button {
-    	padding: 16px;
+    		padding: 16px;
+		}
+		
+		.nav.navbar-nav li a {
+			color: #e1e1e1;
 		}
 	</style>
 </head>
 
 <body>
 
-<div class="navbar navbar-inverse" role="navigation">
+<!--<div class="navbar navbar-inverse" role="navigation">-->
+<div class="navbar navbar-inverse text-uppercase" role="navigation">
     <div class="container">
 	    <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -57,10 +64,10 @@
             </button>
         </div>
         <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav ml-auto">
                 <t:loop source="pageNames" value="pageName">
                     <t:any element="li" class="prop:classForPageName">
-                        <t:pagelink page="prop:pageName">${pageName}</t:pagelink>
+                        <t:pagelink page="prop:pageName" class="">${pageName}</t:pagelink>
                     </t:any>
                 </t:loop>
             </ul>

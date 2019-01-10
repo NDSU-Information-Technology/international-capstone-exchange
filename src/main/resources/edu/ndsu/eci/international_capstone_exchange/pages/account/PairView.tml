@@ -15,15 +15,15 @@
  limitations under the License.
 -->
 <html
-    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
-    xmlns:p="tapestry:parameter" t:type="layout" title="Pairing Details">
-    
-    <h2>${pairing.name}</h2>
-    <p>Created: ${pairing.tmstamp} by ${pairing.admin.name}</p>
-    <p><t:pagelink page="account/setcompany" context="proposal">Set Company Information</t:pagelink></p>
-    
-    <t:Loop source="pairing.proposals" value="row">
-      <t:BeanDisplay object="row" add="email,phone,proposalName,country,department" include="cost,created,description,durationInWeeks,lastModified,perStudentWeekly,potentialStart,teamSize,company,institution,subjects,types,name" reorder="name,email,phone,department,institution,country,subjects,types,company,proposalName,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified">
+        xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+        xmlns:p="tapestry:parameter" t:type="layout" title="Pairing Details">
+
+<h2>${pairing.name}</h2>
+<p>Created: ${pairing.tmstamp} by ${pairing.admin.name}</p>
+<p><t:pagelink page="account/setcompany" context="proposal">Set Company Information</t:pagelink></p>
+
+<t:Loop source="pairing.proposals" value="row">
+    <t:BeanDisplay object="row" add="email,phone,proposalName,country,department" include="cost,created,description,durationInWeeks,lastModified,perStudentWeekly,potentialStart,teamSize,company,institution,subjects,types,name" reorder="name,email,phone,department,institution,country,subjects,types,company,proposalName,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified">
         <p:email>${row.user.email}</p:email>
         <p:phone>${row.user.workphone}</p:phone>
         <p:proposalName>${row.name}</p:proposalName>
@@ -31,8 +31,8 @@
         <p:country>${row.institution.country}</p:country>
         <p:description><t:outputraw value="row.description"></t:outputraw></p:description>
         <p:department>${row.user.departmentName}</p:department>
-        <p:company>${row.company?.companyName} - ${row.company?.companyAddress}. ${row.company?.companyUrl}</p:company>
-      </t:BeanDisplay>
-    </t:Loop>
-    
+        <p:company>${row.company?.companyName} - ${row.company?.companyAddress}. ${row.company?.companyUrl} Share:${row.company?.companyShare}</p:company>
+    </t:BeanDisplay>
+</t:Loop>
+
 </html>

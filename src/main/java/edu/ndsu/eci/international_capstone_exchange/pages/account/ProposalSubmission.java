@@ -152,7 +152,22 @@ public class ProposalSubmission {
       proposal.setCreated(new Date());
     }
     proposal.setLastModified(new Date());
-    proposal.setProposalStatus(ProposalStatus.PENDING);
+
+    //if it's a new proposal for editing, set the status to Pending
+    //else if it's a pairing renewal proposal, set the status to PendingRenewal
+    //else it's creating a new proposal, set the status to pending
+    if(proposal.getProposalStatus() == ProposalStatus.PENDING)
+    {
+      proposal.setProposalStatus(ProposalStatus.PENDING);
+    }
+    else if(proposal.getProposalStatus() == ProposalStatus.PendingRenewal)
+    {
+      proposal.setProposalStatus(ProposalStatus.PendingRenewal);
+    }
+    else
+    {
+      proposal.setProposalStatus(ProposalStatus.PENDING);
+    }
     proposal.setDescription(cleaner.cleanCapstone(proposal.getDescription()));
     proposal.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
     
@@ -161,7 +176,7 @@ public class ProposalSubmission {
     
     context.commitChanges();
     alerts.success("Proposal submitted");
-    notifyAdmins();
+    //notifyAdmins();
     return dashboard;
   }
   

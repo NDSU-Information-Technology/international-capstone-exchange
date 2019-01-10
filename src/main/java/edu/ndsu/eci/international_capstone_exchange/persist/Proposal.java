@@ -31,7 +31,7 @@ public class Proposal extends _Proposal {
    * @return if the proposal can be changed by the author
    */
   public boolean isEditable() {
-    return getProposalStatus() == ProposalStatus.PENDING;
+    return (getProposalStatus() == ProposalStatus.PENDING || getProposalStatus() == ProposalStatus.PendingRenewal);
   }
   
   /**
@@ -39,7 +39,7 @@ public class Proposal extends _Proposal {
    * @return true if it can be deleted, false otherwise
    */
   public boolean isDeletable() {
-    return getProposalStatus() == ProposalStatus.PENDING;
+    return (getProposalStatus() == ProposalStatus.PENDING || getProposalStatus() == ProposalStatus.PendingRenewal);
   }
   
   @Override

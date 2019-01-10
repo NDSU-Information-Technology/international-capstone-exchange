@@ -20,6 +20,7 @@ import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.query.SelectQuery;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.PageActivationContext;
+import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -28,6 +29,7 @@ import com.googlecode.tapestry5cayenne.annotations.CommitAfter;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.Subject;
 import edu.ndsu.eci.international_capstone_exchange.services.HtmlCleaner;
+import edu.ndsu.eci.international_capstone_exchange.util.Status;
 
 public class Subjects {
 
@@ -44,6 +46,10 @@ public class Subjects {
   @Property
   private Subject row;
   
+  @Persist
+  @Property
+  private String deleteError;
+  
   @Inject
   private HtmlCleaner cleaner;
   
@@ -57,5 +63,18 @@ public class Subjects {
     subject.setDescription(cleaner.cleanCapstone(subject.getDescription()));;
     context.registerNewObject(subject);
     subject = null;
+  }
+  
+  @CommitAfter
+  public void onDeleteSubject(Subject subject) {
+    if(subject.getProposals().isEmpty() && !subject.getStatus().equals(Status.APPROVED)) {
+      context.deleteObject(subject);
+    } else {
+      deleteError = subject.getName() + " is an approved subject or has associated records and cannot be deleted.";
+    }
+  }
+  
+  public void AfterRender () {
+    deleteError = "";
   }
 }

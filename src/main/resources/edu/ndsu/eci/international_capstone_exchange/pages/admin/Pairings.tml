@@ -17,11 +17,24 @@
 <html
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
     xmlns:p="tapestry:parameter" t:type="adminlayout" title="Pairings">
+
+	<t:form t:type="form" t:id="myForm" class="eg" >
+    	<t:eventlink event="csvdownload" >DOWNLOAD CSV</t:eventlink>
+	</t:form>
     
-    <t:grid source="pairings" exclude="notes,proposals,admin" row="row" add="A,B" reorder="name,a,b"> 
-   <p:aCell>${row.proposals.get(0).name}</p:aCell>
-   <p:bCell>${row.proposals.get(1).name}</p:bCell>
-   <p:nameCell><t:pagelink page="account/pairview" context="row">${row.name}</t:pagelink></p:nameCell>
- </t:grid>
+	<t:grid source="pairings" exclude="notes, proposals, admin" row="row" add="proposalA, aCreator, proposalB, bCreator, Note" reorder="name, proposalA, aCreator,  proposalB, bCreator, Note">
+		<p:aCreatorHeader>A Creator</p:aCreatorHeader>
+		<p:bCreatorHeader>B Creator</p:bCreatorHeader>
+		<p:tmstampHeader>Timestamp</p:tmstampHeader>
+		
+		<p:proposalACell>${row.proposals.get(0).name}</p:proposalACell>
+		<p:aCreatorCell>${row.proposals.get(0).user.name}</p:aCreatorCell>
+		
+		<p:proposalBCell>${row.proposals.get(1).name}</p:proposalBCell>
+		<p:bCreatorCell>${row.proposals.get(0).user.name}</p:bCreatorCell>
+		
+		<p:nameCell><t:pagelink page="account/pairview" context="row">${row.name}</t:pagelink></p:nameCell>
+		<p:noteCell><t:pagelink page="account/viewnotes" context="row">View</t:pagelink></p:noteCell>
+	</t:grid>
     
 </html>

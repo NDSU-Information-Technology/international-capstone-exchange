@@ -30,7 +30,9 @@ public enum ProposalStatus implements ExtendedEnumeration {
   /** item was approved but is now decommissioned */
   DECOMMISSIONED,
   /** proposal has been paired */
-  PAIRED;
+  PAIRED,
+  /** proposal is on pending renewal status*/
+  PendingRenewal;
 
   @Override
   public Object getDatabaseValue() {
