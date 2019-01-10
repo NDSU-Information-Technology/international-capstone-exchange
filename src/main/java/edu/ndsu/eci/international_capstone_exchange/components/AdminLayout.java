@@ -23,44 +23,44 @@ import edu.ndsu.eci.international_capstone_exchange.util.Status;
 
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.apache.cayenne.ObjectContext;
-import org.apache.tapestry5.annotations.Environmental;
 
-
+/**
+ * Layout for admin pages
+ *
+ */
 @Import(stylesheet = "css/adminLayout.css")
-
 public class AdminLayout extends Layout{
 
-    /** Cayenne database reference */
-    @Inject
-    private ObjectContext context;
-  
-    @Environmental
-    private JavaScriptSupport javaScriptSupport;
+  /** Cayenne database reference */
+  @Inject
+  private ObjectContext context;
 
-    /** user info service */
-    @Inject
-    private UserInfo userInfo;
+  /** user info service */
+  @Inject
+  private UserInfo userInfo;
 
-    /** logged in user */
-    @Property
-    private User user;
-    
-    @Property
-    private int proposalCount;
-    
-    @Property
-    private int userCount;
-    
-    /** Database map reference */
-    private CapstoneDomainMap map = CapstoneDomainMap.getInstance();
+  /** logged in user */
+  @Property
+  private User user;
 
+  /** pending proposal count */
+  @Property
+  private int proposalCount;
 
-    public void setupRender() {
+  /** pending user count */
+  @Property
+  private int userCount;
 
-        user = userInfo.getUser();
-        proposalCount = map.performProposalsByStatus(context, ProposalStatus.PENDING).size();
-        userCount = map.performUsersByStatus(context, Status.PENDING).size();
-    }
+  /** Database map reference */
+  private CapstoneDomainMap map = CapstoneDomainMap.getInstance();
+
+  /**
+   * Setup render
+   */
+  public void setupRender() {
+    user = userInfo.getUser();
+    proposalCount = map.performProposalsByStatus(context, ProposalStatus.PENDING).size();
+    userCount = map.performUsersByStatus(context, Status.PENDING).size();
+  }
 }
