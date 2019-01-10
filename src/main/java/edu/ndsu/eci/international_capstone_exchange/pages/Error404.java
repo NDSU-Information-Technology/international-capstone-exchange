@@ -13,7 +13,6 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages;
 
-public class Error404
-{
+public class Error404 {
 
 }
