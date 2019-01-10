@@ -16,7 +16,6 @@ package edu.ndsu.eci.international_capstone_exchange.pages.admin;
 import java.util.List;
 
 import org.apache.cayenne.ObjectContext;
-import org.apache.commons.mail.SimpleEmail;
 import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.beaneditor.BeanModel;
@@ -30,7 +29,6 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 
 import com.googlecode.tapestry5cayenne.annotations.CommitAfter;
 
-import edu.ndsu.eci.international_capstone_exchange.auth.FederatedAccountsRealm;
 import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
 import edu.ndsu.eci.international_capstone_exchange.persist.Pairing;
 import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;

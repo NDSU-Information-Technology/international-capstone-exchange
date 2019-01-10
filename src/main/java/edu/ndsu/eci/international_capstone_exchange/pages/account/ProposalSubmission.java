@@ -22,7 +22,6 @@ import java.util.Set;
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.Persistent;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.mail.SimpleEmail;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.ValueEncoder;

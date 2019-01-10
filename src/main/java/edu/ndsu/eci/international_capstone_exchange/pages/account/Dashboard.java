@@ -13,10 +13,6 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages.account;
 
-
-import java.util.*;
-
-import edu.ndsu.eci.international_capstone_exchange.pages.Contact;
 import edu.ndsu.eci.international_capstone_exchange.pages.Privacy;
 import edu.ndsu.eci.international_capstone_exchange.services.VelocityEmailService;
 import org.apache.cayenne.ObjectContext;
@@ -44,10 +40,10 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
-
-
-
+import java.util.Set;
 
 /**
  * User's dashboard to direct them to after login.
@@ -272,6 +268,7 @@ public class Dashboard {
     }
     return dashboard;
   }
+  
   private void notifyAdmins() throws ResourceNotFoundException, ParseErrorException, Exception {
     VelocityContext velContext = new VelocityContext();
     velContext.put("proposal", renewProposal);

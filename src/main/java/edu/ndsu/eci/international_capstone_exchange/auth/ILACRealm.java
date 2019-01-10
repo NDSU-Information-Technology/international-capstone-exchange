@@ -13,7 +13,6 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.auth;
 
-import edu.ndsu.eci.international_capstone_exchange.persist.PairingNotes;
 import org.apache.cayenne.PersistenceState;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.tapestry5.plastic.MethodInvocation;

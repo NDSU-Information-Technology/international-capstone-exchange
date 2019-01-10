@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.cayenne.ObjectContext;
-import org.apache.commons.mail.SimpleEmail;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;

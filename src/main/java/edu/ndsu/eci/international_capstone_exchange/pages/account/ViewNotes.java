@@ -1,17 +1,13 @@
 package edu.ndsu.eci.international_capstone_exchange.pages.account;
 
-import com.googlecode.tapestry5cayenne.annotations.CommitAfter;
 import edu.ndsu.eci.international_capstone_exchange.persist.PairingNotes;
-import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
 import org.apache.cayenne.ObjectContext;
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 
 import edu.ndsu.eci.international_capstone_exchange.auth.ILACRealm;
 import edu.ndsu.eci.international_capstone_exchange.persist.Pairing;
-import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
 import edu.ndsu.eci.international_capstone_exchange.persist.User;
 

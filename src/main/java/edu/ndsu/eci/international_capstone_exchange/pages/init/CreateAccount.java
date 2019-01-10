@@ -13,22 +13,21 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages.init;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.query.SelectQuery;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.log4j.Logger;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
@@ -180,7 +179,7 @@ public class CreateAccount {
 
   public List<String> onProvideCompletionsFrominstitution(String partial) {
 
-    List<String> matches = new ArrayList<String>();
+    List<String> matches = new ArrayList<>();
     partial = partial.toLowerCase();
 
     for (String institution : institutions) {

@@ -1,42 +1,26 @@
 package edu.ndsu.eci.international_capstone_exchange.pages.account;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import com.googlecode.tapestry5cayenne.annotations.CommitAfter;
-import edu.ndsu.eci.international_capstone_exchange.auth.InstanceAccessMethod;
-import edu.ndsu.eci.international_capstone_exchange.persist.*;
 import org.apache.cayenne.ObjectContext;
-import org.apache.cayenne.Persistent;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.mail.SimpleEmail;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.tapestry5.SelectModel;
-import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.BeanEditForm;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.velocity.VelocityContext;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.ResourceNotFoundException;
 
-import com.google.common.collect.Sets;
-import com.google.common.collect.Sets.SetView;
-import com.googlecode.tapestry5cayenne.PersistentEntitySelectModel;
-import com.googlecode.tapestry5cayenne.annotations.Cayenne;
-
 import edu.ndsu.eci.international_capstone_exchange.auth.ILACRealm;
+import edu.ndsu.eci.international_capstone_exchange.persist.Pairing;
+import edu.ndsu.eci.international_capstone_exchange.persist.PairingNotes;
+import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.services.HtmlCleaner;
 import edu.ndsu.eci.international_capstone_exchange.services.UserInfo;
-import edu.ndsu.eci.international_capstone_exchange.services.VelocityEmailService;
-import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
-import edu.ndsu.eci.international_capstone_exchange.util.Status;
 
 public class AddNotes {
 
