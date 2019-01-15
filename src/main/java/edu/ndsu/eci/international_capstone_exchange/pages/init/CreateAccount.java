@@ -14,6 +14,7 @@
 package edu.ndsu.eci.international_capstone_exchange.pages.init;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,9 +26,11 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.log4j.Logger;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.corelib.components.Form;
+import org.apache.tapestry5.corelib.components.Zone;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.ajax.AjaxResponseRenderer;
@@ -88,19 +91,15 @@ public class CreateAccount {
   private Form form;
 
   /** institution zone */
-  /*@InjectComponent
-  private Zone institutionZone;*/
+  @InjectComponent
+  private Zone institutionZone;
 
   /** Country */
   @Property
   private Country country;
 
-
-
-  /*@Property
-  private List<Institution> institutions;*/
-
-  private Set<String> institutions;
+  @Property
+  private List<Institution> institutions;
 
   /** institution */
   @Property
@@ -148,15 +147,14 @@ public class CreateAccount {
     user = userInfo.getUser();
     name = user.getName();
     email = user.getEmail();
-    //institutions = Collections.emptyList();
+    institutions = Collections.emptyList();
   }
 
   /**
    * Handle when country is chosen to setup institutions
    * @param country chosen country
    */
-
-  /*public void onValueChangedFromCountry(Country country) {
+  public void onValueChangedFromCountry(Country country) {
     if (country == null) {
       institutions = Collections.emptyList();
     } else {
@@ -168,27 +166,6 @@ public class CreateAccount {
       ajaxReponse.addRender(institutionZone);
     }
 
-  }*/
-  public void onActivate() {
-    List<Institution> insts = context.performQuery(new SelectQuery(Institution.class));
-    institutions = new HashSet<>();
-    for (Institution inst : insts) {
-      institutions.add(inst.getName().toLowerCase());
-    }
-  }
-
-  public List<String> onProvideCompletionsFrominstitution(String partial) {
-
-    List<String> matches = new ArrayList<>();
-    partial = partial.toLowerCase();
-
-    for (String institution : institutions) {
-      if (institution.contains(partial)) {
-        matches.add(institution);
-      }
-    }
-
-    return matches;
   }
 
   /**

@@ -30,13 +30,15 @@
     <t:errors/>
 
     <label t:type="label" for="country"/><span style="color:red;">*</span>
-    <select t:type="select" t:id="country" value="country"  model="countries" blankOption="ALWAYS" blankLabel="Choose" validate="required"/>
+    <select t:type="select" t:id="country" value="country"  model="countries" blankOption="ALWAYS" blankLabel="Choose" zone="institutionZone" validate="required"/>
     <br/>
 
 
 
-    <label t:type="label" for="institution"/><span style="color:red;">*</span>
-    <input t:type="textfield" t:id="institution" t:translate="String" t:mixins="autocomplete" validate="required" value="institution"/>
+    <t:zone t:id="institutionZone"> 
+      <label t:type="label" for="institution"/><span style="color:red;">*</span>
+      <t:select t:id="institution" model="institutions" blankLabel="Choose" validate="required" value="institution"/>
+    </t:zone>
 
     <!--
     <label t:type="label" for ="institution"/>
