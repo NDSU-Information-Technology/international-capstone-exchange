@@ -102,7 +102,6 @@ public class AddNotes {
    */
   @CommitAfter
   public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception {
-
     pairingNotes.setPairing(pairing);
     pairingNotes.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
     pairingNotes.setTmstamp(new Date());
