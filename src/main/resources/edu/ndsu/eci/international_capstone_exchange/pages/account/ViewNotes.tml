@@ -25,15 +25,9 @@
     </h1>
 </p>
 <div>
-    <t:grid source="pairingNotes" exclude="pairing,adminonly" row="row" add="delete">
+    <t:grid source="pairingNotes" exclude="pairing,adminonly" row="row">
         <p:noteCell><t:outputraw value="row.note"></t:outputraw></p:noteCell>
         <p:tmstampCell>${row.tmstamp}</p:tmstampCell>
-        <p:deleteCell>
-            <t:if test="checkUser()">
-                <t:eventlink event="delete" context="row">Delete</t:eventlink>
-            </t:if>
-        </p:deleteCell>
-
     </t:grid>
 </div>
 <h3>

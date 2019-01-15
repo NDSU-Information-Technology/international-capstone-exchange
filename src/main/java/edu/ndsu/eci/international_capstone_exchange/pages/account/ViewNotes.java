@@ -73,17 +73,18 @@ public class ViewNotes {
     }
   }
 
+  // FIXME the commented out code below is horribly insecure and needs to be fixed
   //allow logged in user to delete their own notes
-  public boolean checkUser() {
-    if(row.getUser() == (User) context.localObject(userInfo.getUser().getObjectId(), null)) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+//  public boolean checkUser() {
+//    if(row.getUser() == (User) context.localObject(userInfo.getUser().getObjectId(), null)) {
+//      return true;
+//    } else {
+//      return false;
+//    }
+//  }
 
-  public void onDelete(PairingNotes pairingNote) {
-    context.deleteObject(pairingNote);
-    context.commitChanges();
-  }
+//  public void onDelete(PairingNotes pairingNote) {
+//    context.deleteObject(pairingNote);
+//    context.commitChanges();
+//  }
 }
