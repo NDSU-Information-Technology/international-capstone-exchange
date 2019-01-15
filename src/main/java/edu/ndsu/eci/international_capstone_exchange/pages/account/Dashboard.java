@@ -99,8 +99,8 @@ public class Dashboard {
   private VelocityEmailService emailService;
 
   /** form object */
-  @Property
-  private Proposal renewProposal;
+//  @Property
+//  private Proposal renewProposal;
 
 
   
@@ -148,130 +148,132 @@ public class Dashboard {
     context.commitChanges();
   }
 
-  String fileName = System.getProperty("user.home")+"/Desktop/ALL CSV.csv";
-  private static final String NEW_LINE_SEPARATOR = "\n";
+  // FIXME use an actual CSV library and don't write to local system
+//  String fileName = System.getProperty("user.home")+"/Desktop/ALL CSV.csv";
+//  private static final String NEW_LINE_SEPARATOR = "\n";
+//
+//  public void onCsvdownload() {
+//
+//    FileWriter fileWriter = null;
+//    setupRender();
+//
+//    try {
+//      fileWriter = new FileWriter(fileName);
+//
+//      //Write the CSV file header
+//      fileWriter.append("PROJECT_NAME_1, ");
+//      fileWriter.append("USER SUBMITTED_1, ");
+//      fileWriter.append("COST_PROJECT_1,");
+//      fileWriter.append("TEAM-SIZE_1,");
+//      fileWriter.append("WEEKLY_INDIVIDUAL_WORKLOAD_1,");
+//      fileWriter.append("DURATION_1,");
+//      fileWriter.append("POTENTIAL_START_DATE_1,");
+//      fileWriter.append("UNI_1, ");
+//
+//      fileWriter.append("PROJECT_NAME_2, ");
+//      fileWriter.append("USER SUBMITTED_2, ");
+//      fileWriter.append("COST_PROJECT_2,");
+//      fileWriter.append("TEAM-SIZE_2,");
+//      fileWriter.append("WEEKLY_INDIVIDUAL_WORKLOAD_2,");
+//      fileWriter.append("DURATION_2,");
+//      fileWriter.append("POTENTIAL_START_DATE_2,");
+//      fileWriter.append("UNI_2 ");
+//
+//      fileWriter.append(NEW_LINE_SEPARATOR);
+//
+//      for (Proposal proposal : proposals) {
+//        if (proposal.getProposalStatus() == ProposalStatus.PAIRED) {
+//
+//          //--PROPOSAL 1--//
+//          fileWriter.append(proposal.getName()+ ", ");
+//          fileWriter.append(proposal.getUser().getName()+ ", ");
+//          fileWriter.append(proposal.getCost()+ ", ");
+//          fileWriter.append(proposal.getTeamSize() +", ");
+//          fileWriter.append(proposal.getPerStudentWeekly()+", ");
+//          fileWriter.append(proposal.getDurationInWeeks()+ ", ");
+//          fileWriter.append(proposal.getPotentialStart()+", ");
+//          fileWriter.append(proposal.getInstitution() + ", " );
+//
+//          //--PROPOSAL 2--//
+//          fileWriter.append( proposal.getPaired().getName()+ ", ");
+//          fileWriter.append(proposal.getPaired().getUser().getName()+ ", ");
+//          fileWriter.append(proposal.getPaired().getCost()+ ", ");
+//          fileWriter.append(proposal.getPaired().getTeamSize() +", ");
+//          fileWriter.append(proposal.getPaired().getPerStudentWeekly()+", ");
+//          fileWriter.append(proposal.getPaired().getDurationInWeeks()+ ", ");
+//          fileWriter.append(proposal.getPaired().getPotentialStart()+", ");
+//          fileWriter.append(proposal.getPaired().getInstitution().toString());
+//
+//        }
+//        fileWriter.append(NEW_LINE_SEPARATOR);
+//      }
+//
+//      System.out.println("CSV file was created successfully !!!");
+//
+//    } catch (Exception e) {
+//      System.out.println("Error in CsvFileWriter !!!");
+//      e.printStackTrace();
+//    } finally {
+//
+//      try {
+//        fileWriter.flush();
+//        fileWriter.close();
+//      } catch (IOException e) {
+//        System.out.println("Error while flushing/closing fileWriter !!!");
+//        e.printStackTrace();
+//      }
+//
+//    }
+//  }
 
-  public void onCsvdownload() {
 
-    FileWriter fileWriter = null;
-    setupRender();
-
-    try {
-      fileWriter = new FileWriter(fileName);
-
-      //Write the CSV file header
-      fileWriter.append("PROJECT_NAME_1, ");
-      fileWriter.append("USER SUBMITTED_1, ");
-      fileWriter.append("COST_PROJECT_1,");
-      fileWriter.append("TEAM-SIZE_1,");
-      fileWriter.append("WEEKLY_INDIVIDUAL_WORKLOAD_1,");
-      fileWriter.append("DURATION_1,");
-      fileWriter.append("POTENTIAL_START_DATE_1,");
-      fileWriter.append("UNI_1, ");
-
-      fileWriter.append("PROJECT_NAME_2, ");
-      fileWriter.append("USER SUBMITTED_2, ");
-      fileWriter.append("COST_PROJECT_2,");
-      fileWriter.append("TEAM-SIZE_2,");
-      fileWriter.append("WEEKLY_INDIVIDUAL_WORKLOAD_2,");
-      fileWriter.append("DURATION_2,");
-      fileWriter.append("POTENTIAL_START_DATE_2,");
-      fileWriter.append("UNI_2 ");
-
-      fileWriter.append(NEW_LINE_SEPARATOR);
-
-      for (Proposal proposal : proposals) {
-        if (proposal.getProposalStatus() == ProposalStatus.PAIRED) {
-
-          //--PROPOSAL 1--//
-          fileWriter.append(proposal.getName()+ ", ");
-          fileWriter.append(proposal.getUser().getName()+ ", ");
-          fileWriter.append(proposal.getCost()+ ", ");
-          fileWriter.append(proposal.getTeamSize() +", ");
-          fileWriter.append(proposal.getPerStudentWeekly()+", ");
-          fileWriter.append(proposal.getDurationInWeeks()+ ", ");
-          fileWriter.append(proposal.getPotentialStart()+", ");
-          fileWriter.append(proposal.getInstitution() + ", " );
-
-          //--PROPOSAL 2--//
-          fileWriter.append( proposal.getPaired().getName()+ ", ");
-          fileWriter.append(proposal.getPaired().getUser().getName()+ ", ");
-          fileWriter.append(proposal.getPaired().getCost()+ ", ");
-          fileWriter.append(proposal.getPaired().getTeamSize() +", ");
-          fileWriter.append(proposal.getPaired().getPerStudentWeekly()+", ");
-          fileWriter.append(proposal.getPaired().getDurationInWeeks()+ ", ");
-          fileWriter.append(proposal.getPaired().getPotentialStart()+", ");
-          fileWriter.append(proposal.getPaired().getInstitution().toString());
-
-        }
-        fileWriter.append(NEW_LINE_SEPARATOR);
-      }
-
-      System.out.println("CSV file was created successfully !!!");
-
-    } catch (Exception e) {
-      System.out.println("Error in CsvFileWriter !!!");
-      e.printStackTrace();
-    } finally {
-
-      try {
-        fileWriter.flush();
-        fileWriter.close();
-      } catch (IOException e) {
-        System.out.println("Error while flushing/closing fileWriter !!!");
-        e.printStackTrace();
-      }
-
-    }
-  }
-
-
+  // FIXME doesn't work and doesn't have any permissions
   //Pairing Renew, allow users to create duplicate row
   //@RequiresPermissions(ILACRealm.PAIRING_VIEW_INSTANCE)
   //@RequiresPermissions(ILACRealm.PROPOSAL_EDIT_INSTANCE)
-  public Object onRenew(Pairing pairing) throws ResourceNotFoundException, ParseErrorException, Exception{
-
-    for (Proposal prop : pairing.getProposals()) {
-      if (StringUtils.equals(prop.getUser().getFederatedId(), userInfo.getUser().getFederatedId())) {
-        renewProposal = new Proposal();
-
-        if (renewProposal.getCreated() == null) {
-          renewProposal.setCreated(new Date());
-        }
-        renewProposal.setLastModified(new Date());
-        renewProposal.setShare(prop.getShare());
-        renewProposal.setProposalStatus(ProposalStatus.PendingRenewal);
-        renewProposal.setDescription(prop.getDescription());
-        renewProposal.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
-        renewProposal.setPerStudentWeekly(prop.getPerStudentWeekly());
-        renewProposal.setTeamSize(prop.getTeamSize());
-        renewProposal.setDurationInWeeks(prop.getDurationInWeeks());
-        renewProposal.setName(prop.getName());
-        renewProposal.setPotentialStart(prop.getPotentialStart());
-        renewProposal.setCost(prop.getCost());
-
-        Set<ProposalType> existingProposals = new HashSet<>(prop.getTypes());
-        for (ProposalType propType : existingProposals) {
-          renewProposal.addToTypes(propType);
-        }
-
-        Set<Subject> existingSubjects = new HashSet<>(prop.getSubjects());
-        for (Subject subject : existingSubjects) {
-          renewProposal.addToSubjects(subject);
-        }
-
-        context.commitChanges();
-        alerts.success("Renewal Proposal submitted");
-        //notifyAdmins();
-        return dashboard;
-      }
-    }
-    return dashboard;
-  }
+//  public Object onRenew(Pairing pairing) throws ResourceNotFoundException, ParseErrorException, Exception{
+//
+//    for (Proposal prop : pairing.getProposals()) {
+//      if (StringUtils.equals(prop.getUser().getFederatedId(), userInfo.getUser().getFederatedId())) {
+//        renewProposal = new Proposal();
+//
+//        if (renewProposal.getCreated() == null) {
+//          renewProposal.setCreated(new Date());
+//        }
+//        renewProposal.setLastModified(new Date());
+//        renewProposal.setShare(prop.getShare());
+//        renewProposal.setProposalStatus(ProposalStatus.PendingRenewal);
+//        renewProposal.setDescription(prop.getDescription());
+//        renewProposal.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
+//        renewProposal.setPerStudentWeekly(prop.getPerStudentWeekly());
+//        renewProposal.setTeamSize(prop.getTeamSize());
+//        renewProposal.setDurationInWeeks(prop.getDurationInWeeks());
+//        renewProposal.setName(prop.getName());
+//        renewProposal.setPotentialStart(prop.getPotentialStart());
+//        renewProposal.setCost(prop.getCost());
+//
+//        Set<ProposalType> existingProposals = new HashSet<>(prop.getTypes());
+//        for (ProposalType propType : existingProposals) {
+//          renewProposal.addToTypes(propType);
+//        }
+//
+//        Set<Subject> existingSubjects = new HashSet<>(prop.getSubjects());
+//        for (Subject subject : existingSubjects) {
+//          renewProposal.addToSubjects(subject);
+//        }
+//
+//        context.commitChanges();
+//        alerts.success("Renewal Proposal submitted");
+//        //notifyAdmins();
+//        return dashboard;
+//      }
+//    }
+//    return dashboard;
+//  }
   
-  private void notifyAdmins() throws ResourceNotFoundException, ParseErrorException, Exception {
-    VelocityContext velContext = new VelocityContext();
-    velContext.put("proposal", renewProposal);
-    emailService.sendAdminEmail(velContext, "proposal-submitted.vm", "Proposal submission");
-  }
+//  private void notifyAdmins() throws ResourceNotFoundException, ParseErrorException, Exception {
+//    VelocityContext velContext = new VelocityContext();
+//    velContext.put("proposal", renewProposal);
+//    emailService.sendAdminEmail(velContext, "proposal-submitted.vm", "Proposal submission");
+//  }
 }

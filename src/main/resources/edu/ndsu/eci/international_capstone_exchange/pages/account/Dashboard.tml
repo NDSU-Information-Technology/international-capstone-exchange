@@ -52,21 +52,20 @@
 		    <div class="tab-content">
 		        <div id="tab1" class="tab-pane active">
 		            <h2>Account Info</h2>
-		            <t:Beandisplay object="user" exclude="proposals,roles,credentialsExpired,accountLocked,id,status,pairingNotes,federatedId,pairsMade"></t:Beandisplay>
+		            <t:Beandisplay object="user" exclude="proposals,roles,credentialsExpired,accountLocked,id,status,pairingNotes,federatedId,pairsMade,source"></t:Beandisplay>
 		            <div><t:pagelink page="account/updateaccount">Update Account</t:pagelink></div>
 		        </div>
 		        <div id="tab2" class="tab-pane">
 		            <h2>Pairings</h2>
 		
-		            <t:form t:type="form" t:id="myForm" class="eg" >
-		                <t:eventlink event="csvdownload" >DOWNLOAD CSV</t:eventlink>
-		            </t:form>
+<!-- 		            <t:form t:type="form" t:id="myForm" class="eg" > -->
+<!-- 		                <t:eventlink event="csvdownload" >DOWNLOAD CSV</t:eventlink> -->
+<!-- 		            </t:form> -->
 		
 		            <p>Follow link for more details.</p>
-		            <t:grid source="pairings" exclude="notes,proposals,admin" row="pairRow" add="A,B,Note,Renew" reorder="name,a,b,Note,Tmstamp,Renew">
+		            <t:grid source="pairings" exclude="notes,proposals,admin" row="pairRow" add="A,B,Note" reorder="name,a,b,Note,Tmstamp">
 		                <p:aCell>${pairRow.proposals.get(0).name}</p:aCell>
 		                <p:bCell>${pairRow.proposals.get(1).name}</p:bCell>
-		                <p:RenewCell><t:eventlink event="renew" context="pairRow" t:mixins="Confirm" Confirm.message="Are you sure to renew this pairing?">Renew</t:eventlink></p:RenewCell>
 		                <p:nameCell><t:pagelink page="account/pairview" context="pairRow">${pairRow.name}</t:pagelink></p:nameCell>
 		                <p:noteCell><t:pagelink page="account/viewnotes" context="pairRow">View</t:pagelink></p:noteCell>
 		            </t:grid>
