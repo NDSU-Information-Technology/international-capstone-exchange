@@ -7,7 +7,7 @@
 	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
 	the specific language governing permissions and limitations under the License. -->
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
-	xmlns:p="tapestry:parameter" t:type="adminlayout" title="Proposals">
+	xmlns:p="tapestry:parameter" t:type="adminlayout" title="Requests">
 
 	<head>
 		<style>
@@ -21,21 +21,21 @@
 	<body>
 		<ul t:id="tabs" t:type="any" class="nav nav-tabs">
 			<li class="active">
-				<a href="#tab1" data-toggle="tab">Pending / Pairable Proposals</a>
+				<a href="#tab1" data-toggle="tab">Pending / Pairable Requests</a>
 			</li>
 			<li>
-				<a href="#tab2" data-toggle="tab">Pairing Renewal Proposals</a>
+				<a href="#tab2" data-toggle="tab">Pairing Renewal Requests</a>
 			</li>
 			<li>
-				<a href="#tab3" data-toggle="tab">Paired Proposals</a>
+				<a href="#tab3" data-toggle="tab">Paired Requests</a>
 			</li>
 			<li>
-				<a href="#tab4" data-toggle="tab">All Proposals</a>
+				<a href="#tab4" data-toggle="tab">All Requests</a>
 			</li>
 		</ul>
 		<div class="tab-content">
 			<div id="tab1" class="tab-pane active">
-				<h3>Pending / Pairable Proposals</h3>
+				<h3>Pending / Pairable Requests</h3>
 
 				<t:grid source="pendingProposals" row="row"
 					include="institution, subjects, types, user, share"
@@ -54,7 +54,7 @@
 			</div>
 
 			<div id="tab2" class="tab-pane">
-				<h3>Pairing Renewal Proposals</h3>
+				<h3>Pairing Renewal Requests</h3>
 
 				<t:grid source="RenewalProposals" row="row"
 					include="institution, subjects, types, user"
@@ -73,7 +73,7 @@
 			</div>
 
 			<div id="tab3" class="tab-pane">
-				<h3>Paired Proposals</h3>
+				<h3>Paired Requests</h3>
 
 				<t:grid source="pairedProposals" row="row" 
 					include="institution, name, subjects, types, user, share, pairing"
@@ -90,7 +90,7 @@
 			</div>
 
 			<div id="tab4" class="tab-pane">
-				<h3>All Proposals</h3>
+				<h3>All Requests</h3>
 
 				<!--<t:grid source="allProposals" row="row" add="country" reorder="institution,country,subjects,types,user,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified"> -->
 				<t:grid source="allProposals" row="row" 

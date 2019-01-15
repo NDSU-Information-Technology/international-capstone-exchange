@@ -15,17 +15,12 @@
  limitations under the License.
 -->
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
-	  xmlns:p="tapestry:parameter" t:type="layout" title="Proposal Submission">
+	  xmlns:p="tapestry:parameter" t:type="layout" title="Pairing Request Submission">
 
-<p>
-	<h1>
-		<b>Add Proposal for Project</b>
-	</h1>
-</p>
-<h3>
-	<b>Enter Proposal Details</b>
-</h3>
 
+<h1>
+	Create / Update Pairing Request
+</h1>
 
 <t:beaneditform t:id="form" object="proposal" add="subjects,propTypes" submitLabel="Save" include="name, share, cost, potentialStart, teamSize, perStudentWeekly, durationInWeeks, description"  
 reorder="name, share, cost, potentialStart, teamSize, perStudentWeekly, durationInWeeks, subjects, propTypes, description">
@@ -38,7 +33,7 @@ reorder="name, share, cost, potentialStart, teamSize, perStudentWeekly, duration
 		<t:checklist t:id="selectedSubjects" encoder="encoder" model="subjectsModel" t:validate="required"/>
 	</p:subjects>
 	<p:propTypes>
-		<t:label for="selectedPropTypes">Proposal Types</t:label>
+		<t:label for="selectedPropTypes">Pairing Types</t:label>
 		<t:checklist t:id="selectedPropTypes" encoder="encoder" model="propTypesModel" t:validate="required"/>
 	</p:propTypes>
 </t:beaneditform>

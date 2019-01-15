@@ -63,7 +63,7 @@ public class SetPairing {
   private ProposalType typeRow;
   
   @InjectPage
-  private Proposals successPage;
+  private Requests successPage;
   
   // FIXME this is a horrible abuse to get the > symbol in without it going to &gt;
   @Property

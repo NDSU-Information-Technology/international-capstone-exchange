@@ -29,7 +29,7 @@ import com.googlecode.tapestry5cayenne.annotations.CommitAfter;
 import edu.ndsu.eci.international_capstone_exchange.persist.ProposalType;
 import edu.ndsu.eci.international_capstone_exchange.services.HtmlCleaner;
 
-public class ProposalTypes {
+public class PairingTypes {
 
   @PageActivationContext
   @Property

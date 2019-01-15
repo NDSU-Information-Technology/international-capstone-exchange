@@ -39,10 +39,10 @@
 		            <a href="#tab2" data-toggle="tab">Pairings</a>
 		        </li>
 		        <li>
-		            <a href="#tab3" data-toggle="tab">Proposals</a>
+		            <a href="#tab3" data-toggle="tab">Pairing Request</a>
 		        </li>
 		        <li>
-		            <a href="#tab4" data-toggle="tab">Proposal Types</a>
+		            <a href="#tab4" data-toggle="tab">Pairing Types</a>
 		        </li>
 		        <li>
 		            <a href="#tab5" data-toggle="tab">Subjects</a>
@@ -79,7 +79,7 @@
 		
 		                <p:editCell>
 		                    <t:if test="proposalRow.editable">
-		                        <t:pagelink page="account/proposalsubmission" context="proposalRow">Edit ${proposalRow.name}</t:pagelink>
+		                        <t:pagelink page="account/requestsubmission" context="proposalRow">Edit ${proposalRow.name}</t:pagelink>
 		                    </t:if>
 		                </p:editCell>
 		                <p:deleteCell>
@@ -88,11 +88,11 @@
 		                    </t:if>
 		                </p:deleteCell>
 		            </t:grid>
-		            <div><t:pagelink page="account/proposalsubmission">Create Proposal</t:pagelink></div>
+		            <div><t:pagelink page="account/requestsubmission">Create Pairing Request</t:pagelink></div>
 		        </div>
 		        <div id="tab4" class="tab-pane">
-		            <h2>Proposal Types</h2>
-		            <div>Description of the types of proposals in the system..</div>
+		            <h2>Pairing Types</h2>
+		            <div>Description of the types of pairings in the system.</div>
 		            <t:grid source="proposalTypes" row="propTypeRow" include="name,description">
 		                <p:descriptionCell><t:outputraw value="propTypeRow.description"></t:outputraw></p:descriptionCell>
 		            </t:grid>

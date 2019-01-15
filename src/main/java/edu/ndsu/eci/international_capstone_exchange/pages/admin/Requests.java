@@ -31,7 +31,7 @@ import edu.ndsu.eci.international_capstone_exchange.persist.Subject;
  * Admin display of Proposals.
  *
  */
-public class Proposals {
+public class Requests {
 
   /** Cayenne database reference */
   @Inject

@@ -52,7 +52,7 @@ import edu.ndsu.eci.international_capstone_exchange.services.VelocityEmailServic
 import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
 import edu.ndsu.eci.international_capstone_exchange.util.Status;
 
-public class ProposalSubmission {
+public class RequestSubmission {
 
   /** user info service */
   @Inject
@@ -80,7 +80,7 @@ public class ProposalSubmission {
   /** selected subjects from palette */
   @Property
   List<Subject> selectedSubjects;
-  
+
   /** selected proposal types */
   @Property
   List<ProposalType> selectedPropTypes;
@@ -94,7 +94,7 @@ public class ProposalSubmission {
   /** html cleaner */
   @Inject
   private HtmlCleaner cleaner;
-  
+
   @Inject
   private VelocityEmailService emailService;
 
@@ -155,65 +155,60 @@ public class ProposalSubmission {
     //if it's a new proposal for editing, set the status to Pending
     //else if it's a pairing renewal proposal, set the status to PendingRenewal
     //else it's creating a new proposal, set the status to pending
-    if(proposal.getProposalStatus() == ProposalStatus.PENDING)
-    {
+    if(proposal.getProposalStatus() == ProposalStatus.PENDING) {
       proposal.setProposalStatus(ProposalStatus.PENDING);
-    }
-    else if(proposal.getProposalStatus() == ProposalStatus.PendingRenewal)
-    {
+    } else if(proposal.getProposalStatus() == ProposalStatus.PendingRenewal) {
       proposal.setProposalStatus(ProposalStatus.PendingRenewal);
-    }
-    else
-    {
+    } else {
       proposal.setProposalStatus(ProposalStatus.PENDING);
     }
     proposal.setDescription(cleaner.cleanCapstone(proposal.getDescription()));
     proposal.setUser((User) context.localObject(userInfo.getUser().getObjectId(), null));
-    
+
     fixupSubjects();
     fixupPropTypes();
-    
+
     context.commitChanges();
-    alerts.success("Proposal submitted");
-    //notifyAdmins();
+    alerts.success("Pairing request submitted.");
+    notifyAdmins();
     return dashboard;
   }
-  
+
   private void notifyAdmins() throws ResourceNotFoundException, ParseErrorException, Exception {
     VelocityContext velContext = new VelocityContext();
     velContext.put("proposal", proposal);
-    emailService.sendAdminEmail(velContext, "proposal-submitted.vm", "Proposal submission");
+    emailService.sendAdminEmail(velContext, "proposal-submitted.vm", "Pairing request submission");
   }
-  
+
   private void fixupSubjects() {
     Set<Subject> existing = new HashSet<>(proposal.getSubjects());
     Set<Subject> newSubjects = new HashSet<>(selectedSubjects);
-    
+
     SetView<Subject> newView = Sets.difference(newSubjects, existing);
-    
+
     for (Subject subject : newView) {
       proposal.addToSubjects(subject);
     }
 
     SetView<Subject> oldView = Sets.difference(existing, newSubjects);
-    
+
     for (Subject subject : oldView) {
       proposal.removeFromSubjects(subject);
     }
   }
-  
+
   private void fixupPropTypes() {
     Set<ProposalType> existing = new HashSet<>(proposal.getTypes());
     Set<ProposalType> newPropTypes = new HashSet<>(selectedPropTypes);
-    
+
     SetView<ProposalType> newView = Sets.difference(newPropTypes, existing);
-    
+
     for (ProposalType propType : newView) {
       proposal.addToTypes(propType);
     }
 
     SetView<ProposalType> oldView = Sets.difference(existing, newPropTypes);
-    
+
     for (ProposalType propType : oldView) {
       proposal.removeFromTypes(propType);
     }
@@ -234,7 +229,7 @@ public class ProposalSubmission {
   public SelectModel getPropTypesModel() {
     return new PersistentEntitySelectModel<>(ProposalType.class, getProposalTypes());
   }
-  
+
   /**
    * Possible subjects
    * @return sort approved subjects
@@ -242,8 +237,8 @@ public class ProposalSubmission {
   private List<Subject> getSubjects() {
     return CapstoneDomainMap.getInstance().performSubjectsByStatus(context, Status.APPROVED);
   } 
-  
-  
+
+
   /**
    * Possible proposal types
    * @return sort approved proposal types
