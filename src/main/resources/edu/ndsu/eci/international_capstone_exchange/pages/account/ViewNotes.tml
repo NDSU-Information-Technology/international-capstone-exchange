@@ -20,6 +20,7 @@
 <p>
     <h2>${pairing.name}</h2>
     <p>Created: ${pairing.tmstamp} by ${pairing.admin.name}</p>
+    <p><t:pagelink page="account/pairview" context="pairing">Pairing details</t:pagelink></p>
     <h1>
         <p>Pairing Notes</p>
     </h1>
