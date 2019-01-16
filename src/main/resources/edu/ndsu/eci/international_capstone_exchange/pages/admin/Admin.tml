@@ -110,37 +110,7 @@
 		</table>
 		
 		
-		<h3>Set Logger Information Levels</h3>
-		
-		<t:Form t:id="root">
-			<t:Label for="rootLevel">Root Level:</t:Label>
-			<t:Select t:id="rootLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
-			<t:Submit value="Select"/>
-		</t:Form>
-		
-		<t:Form t:id="application">
-			<t:Label for="applicationLevel">Application Level:</t:Label>
-			<t:Select t:id="applicationLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
-			<t:Submit value="Select"/>
-		</t:Form>
-		
-		<t:Form t:id="cayenne">
-			<t:Label for="cayenneLevel">Cayenne Level:</t:Label>
-			<t:Select t:id="cayenneLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
-			<t:Submit value="Select"/>
-		</t:Form>
-		
-		<t:Form t:id="ndsu">
-			<t:Label for="ndsuLevel">NDSU Level:</t:Label>
-			<t:Select t:id="ndsuLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
-			<t:Submit value="Select"/>
-		</t:Form>
-		
-		<t:Form t:id="tapestry">
-			<t:Label for="tapestryLevel">Tapestry Level:</t:Label>
-			<t:Select t:id="tapestryLevel" model="allLevels" validate="required" encoder="levelEncoder"/>
-			<t:Submit value="Select"/>
-		</t:Form>
+
 
 		
 	</body>
