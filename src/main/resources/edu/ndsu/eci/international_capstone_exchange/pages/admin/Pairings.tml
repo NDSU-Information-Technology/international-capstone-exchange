@@ -17,10 +17,6 @@
 <html
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
     xmlns:p="tapestry:parameter" t:type="adminlayout" title="Pairings">
-
-	<t:form t:type="form" t:id="myForm" class="eg" >
-    	<t:eventlink event="csvdownload" >DOWNLOAD CSV</t:eventlink>
-	</t:form>
     
 	<t:grid source="pairings" exclude="notes, proposals, admin" row="row" add="proposalA, aCreator, proposalB, bCreator, Note" reorder="name, proposalA, aCreator,  proposalB, bCreator, Note">
 		<p:aCreatorHeader>A Creator</p:aCreatorHeader>
