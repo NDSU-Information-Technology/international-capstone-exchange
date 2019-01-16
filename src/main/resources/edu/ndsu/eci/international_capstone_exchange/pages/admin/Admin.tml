@@ -70,16 +70,16 @@
 					Pairings: See current pairings of institutions.
 				</div>
 			</a>
-			<a href="/international-capstone-exchange/admin/proposals"
+			<a href="/international-capstone-exchange/admin/requests"
 			    class="list-group-item list-group-item-info">
 				<div>
-					Proposals: See all current proposals from institutions.
+					Pairing Requests: See all current requests from institutions.
 				</div>
 			</a>
-			<a href="/international-capstone-exchange/admin/proposaltypes"
+			<a href="/international-capstone-exchange/admin/pairingtypes"
 			    class="list-group-item list-group-item-info">
 				<div>
-					Proposal Types: View current proposals types and add more.
+					Pairing Types: View current pairing types and add more.
 				</div>
 			</a>
 			<a href="/international-capstone-exchange/admin/subjects"

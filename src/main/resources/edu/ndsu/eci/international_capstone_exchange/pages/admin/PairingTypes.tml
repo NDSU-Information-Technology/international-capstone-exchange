@@ -25,7 +25,7 @@
     </t:beaneditform>
     
     <t:grid source="propTypes" row="row" reorder="name,description" exclude="proposal">
-    	<p:nameCell><t:pagelink page="admin/proposaltypes" context="row">${row.name}</t:pagelink></p:nameCell>
+    	<p:nameCell><t:pagelink page="admin/pairingtypes" context="row">${row.name}</t:pagelink></p:nameCell>
     	<p:descriptionCell><t:outputraw value="row.description"></t:outputraw></p:descriptionCell>
     </t:grid>
     
