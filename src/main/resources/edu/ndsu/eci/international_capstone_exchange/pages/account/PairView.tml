@@ -21,6 +21,7 @@
 <h2>${pairing.name}</h2>
 <p>Created: ${pairing.tmstamp} by ${pairing.admin.name}</p>
 <p><t:pagelink page="account/setcompany" context="proposal">Set Company Information</t:pagelink></p>
+<p><t:pagelink page="account/viewnotes" context="pairing">Pairing Notes</t:pagelink></p>
 
 <t:Loop source="pairing.proposals" value="row">
     <t:BeanDisplay object="row" add="email,phone,proposalName,country,department" include="cost,created,description,durationInWeeks,lastModified,perStudentWeekly,potentialStart,teamSize,company,institution,subjects,types,name" reorder="name,email,phone,department,institution,country,subjects,types,company,proposalName,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified">
