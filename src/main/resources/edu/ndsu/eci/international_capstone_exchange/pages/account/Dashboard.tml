@@ -71,7 +71,7 @@
 		            </t:grid>
 		        </div>
 		        <div id="tab3" class="tab-pane">
-		            <h2>Proposals</h2>
+		            <h2>Pairing Requests</h2>
 		            <t:grid source="proposals" include="created,name,potentialStart,subjects,types,share" row="proposalRow" add="notes,edit,delete">
 		                <p:notesCell>
 		                	<div class="description"><t:outputraw value="proposalRow.description"></t:outputraw></div>
