@@ -32,7 +32,7 @@
         <p:country>${row.institution.country}</p:country>
         <p:description><t:outputraw value="row.description"></t:outputraw></p:description>
         <p:department>${row.user.departmentName}</p:department>
-        <p:company>${row.company?.companyName} - ${row.company?.companyAddress}. ${row.company?.companyUrl} Share:${row.company?.companyShare}</p:company>
+        <p:company>${row.company?.companyName} - ${row.company?.companyAddress}. ${row.company?.companyUrl}</p:company>
     </t:BeanDisplay>
 </t:Loop>
 
