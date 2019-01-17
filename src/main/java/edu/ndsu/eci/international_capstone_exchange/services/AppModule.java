@@ -174,12 +174,12 @@ public class AppModule {
 
     // This goes to true in production, and then parts of Summernote throw errors on minify, or rather the minifier throws errors on Summernote
     configuration.add(SymbolConstants.MINIFICATION_ENABLED, Boolean.FALSE.toString());
-
-    Context initCtx = new InitialContext();
-    Context envCtx = (Context) initCtx.lookup("java:comp/env");
-    EmailConfig emailConf =  (EmailConfig) envCtx.lookup("bean/emailconf");
-    configuration.add(FROM_ADDRESS, emailConf.getFromAddress());
-    
+    // FIXME update the context to get this
+//    Context initCtx = new InitialContext();
+//    Context envCtx = (Context) initCtx.lookup("java:comp/env");
+//    EmailConfig emailConf =  (EmailConfig) envCtx.lookup("bean/emailconf");
+//    configuration.add(FROM_ADDRESS, emailConf.getFromAddress());
+    configuration.add(FROM_ADDRESS, "ndsu.icpe@ndsu.edu");
   }
 
   public static void contributeWebSecurityManager(Configuration<Realm> configuration, @InjectService("FederatedAccountsRealm") AuthorizingRealm authorizingRealm, Environment environment, UserInfo userInfo, @Symbol(RUN_MODE) String runMode) throws NamingException {
