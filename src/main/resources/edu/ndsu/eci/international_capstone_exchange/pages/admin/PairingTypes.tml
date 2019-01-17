@@ -16,7 +16,7 @@
 -->
 <html
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
-    xmlns:p="tapestry:parameter" t:type="adminlayout" title="Proposal Types">
+    xmlns:p="tapestry:parameter" t:type="adminlayout" title="Pairing Types">
     
     <t:beaneditform t:id="form" object="propType" exclude="created" reorder="name,status">
     	<p:description>
