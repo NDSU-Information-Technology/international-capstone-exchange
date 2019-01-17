@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.ndsu.eci</groupId>
     <artifactId>international-capstone-exchange</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>International Capstone Exchange </name>
         <dependencies>
