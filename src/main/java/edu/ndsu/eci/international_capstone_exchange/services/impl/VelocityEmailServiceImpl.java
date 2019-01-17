@@ -76,11 +76,14 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
     velocityService = velocity;
     emailService = email;
     this.userInfo = userInfo;
-    try {
-      emailConfig = EmailConfig.createConfig("bean/emailconf");
-    } catch (NamingException e) {
-      LOGGER.error("Could not send email due to error in email configuration settings. Please check the settings in the jetty-env.xml file.", e);
-    }
+    emailConfig = new EmailConfig();
+    emailConfig.setEnabled("true");
+    emailConfig.setFromAddress("ndsu.icpe@ndsu.edu");
+//    try {
+//      emailConfig = EmailConfig.createConfig("bean/emailconf");
+//    } catch (NamingException e) {
+//      LOGGER.error("Could not send email due to error in email configuration settings. Please check the settings in the jetty-env.xml file.", e);
+//    }
   }
 
   @Override
