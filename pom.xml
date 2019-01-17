@@ -189,74 +189,6 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
                 </configuration>
             </plugin>
 
-            <!-- Run the application using "mvn jetty:run" -->
-            <plugin>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.16</version>
-                <configuration>
-                    <!-- Log to the console. -->
-                    <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
-                        <!-- This doesn't do anything for Jetty, but is a workaround for a Maven bug
-                             that prevents the requestLog from being set. -->
-                        <append>true</append>
-                    </requestLog>
-                    <systemProperties>
-                        <systemProperty>
-                            <name>tapestry.execution-mode</name>
-                            <value>development</value>
-                        </systemProperty>
-                    </systemProperties>
-                </configuration>
-            </plugin>
-                  <plugin>
-        <groupId>org.mortbay.jetty</groupId>
-        <artifactId>maven-jetty-plugin</artifactId>
-        <configuration>
-          <!-- Log to the console. -->
-          <requestLog implementation="org.mortbay.jetty.NCSARequestLog">
-            <!-- This doesn't do anything for Jetty, but is a workaround for a 
-              Maven bug that prevents the requestLog from being set. -->
-            <append>true</append>
-          </requestLog>
-          <systemProperties>
-            <systemProperty>
-              <name>run.mode</name>
-              <value>prototype</value>
-            </systemProperty>
-          </systemProperties>
-        </configuration>
-      </plugin>
-            <!--
-            <plugin>
-                <groupId>org.apache.cayenne.plugins</groupId>
-                <artifactId>maven-cayenne-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <dataSource>
-                        <driver>com.mysql.jdbc.Driver</driver>
-                        <url>jdbc:mysql://localhost:3306/capstone_exchange</url>
-                        <username>yifu</username>
-                        <password>password</password>
-                    </dataSource>
-                    <cayenneProject>${project.basedir}/src/main/resources/cayenne/cayenne.xml</cayenneProject>
-                    <map>${project.basedir}/src/main/resources/CapstoneDomainMap.map.xml</map>
-                    <dbImport>
-                        <defaultPackage>edu.ndsu.eci.international_capstone_exchange.persist</defaultPackage>
-                        <catalog>cayenne</catalog>
-                    </dbImport>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>5.1.46</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-            -->
-
-    <!--
      <plugin>
        <groupId>org.codehaus.mojo</groupId>
        <artifactId>rpm-maven-plugin</artifactId>
@@ -321,7 +253,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
          <keyname>${gpg.name}</keyname>
        </configuration>
      </plugin>
-    -->
+     
       <plugin>
         <groupId>org.apache.rat</groupId>
         <artifactId>apache-rat-plugin</artifactId>
@@ -367,5 +299,9 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
         <slf4j-release-version>1.7.19</slf4j-release-version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <description>Internation Capstone Exchange application to gather school applications to be part of the program.</description>
+    <description>International Capstone Exchange application to gather school applications to be part of the program.</description>
+    <scm>
+      <tag>HEAD</tag>
+      <developerConnection>scm:git:https://github.com/NDSU-Information-Technology/international-capstone-exchange.git</developerConnection>
+    </scm>
 </project>
