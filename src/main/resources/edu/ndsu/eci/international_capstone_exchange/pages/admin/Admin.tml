@@ -100,7 +100,7 @@
 		
 		<table>
 			<tr>
-				<td>Pending Proposals: </td>
+				<td>Pending Requests: </td>
 				<td id="proposalCount">${proposalCount}</td>
 			</tr>
 			<tr>
