@@ -89,7 +89,7 @@
 				   </ul>
 			   </li>
 			   <li>
-				   <t:pagelink page="account/dashboard">Dashboard</t:pagelink>
+				   <t:pagelink page="account/dashboard">Account Information</t:pagelink>
 			   </li>
 			   <li>
 				   <t:pagelink page="Logout">Logout</t:pagelink>
