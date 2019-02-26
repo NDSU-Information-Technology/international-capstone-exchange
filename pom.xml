@@ -37,29 +37,11 @@
             <version>${slf4j-release-version}</version>
         </dependency>
 
-<!--REMINDER: EDITS-->
-
-
-
-
-
-<!---->
-
-
         <dependency>
             <groupId>org.apache.tapestry</groupId>
             <artifactId>tapestry-webresources</artifactId>
             <version>${tapestry-release-version}</version>
         </dependency>
-
-        <!-- Uncomment this to add support for file uploads: -->
-        <!--
-         <dependency>
-            <groupId>org.apache.tapestry</groupId>
-            <artifactId>tapestry-upload</artifactId>
-            <version>${tapestry-release-version}</version>
-        </dependency>
-        -->
 
         <!-- A dependency on either JUnit or TestNG is required, or the surefire plugin (which runs the tests)
 will fail, preventing Maven from packaging the WAR. Tapestry includes a large number
@@ -162,6 +144,10 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
           <groupId>xerces</groupId>
           <artifactId>xercesImpl</artifactId>
           <version>2.11.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.pac4j</groupId>
+          <artifactId>pac4j-oauth</artifactId>
         </dependency>
         </dependencies>
     <build>
@@ -304,4 +290,13 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
       <tag>HEAD</tag>
       <developerConnection>scm:git:https://github.com/NDSU-Information-Technology/international-capstone-exchange.git</developerConnection>
     </scm>
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>org.pac4j</groupId>
+          <artifactId>pac4j-oauth</artifactId>
+          <version>2.0.1</version>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
 </project>
