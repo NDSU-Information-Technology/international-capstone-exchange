@@ -24,6 +24,7 @@ import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.access.DataContext;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
+import edu.ndsu.eci.international_capstone_exchange.util.CORSResponseFilter;
 import edu.ndsu.eci.international_capstone_exchange.util.Status;
 
 /**
@@ -41,13 +42,17 @@ public class SubjectList {
   @Context
   private HttpServletRequest request;
   
+  /** cors filter for ndsu.edu and ndsu.nodak.edu */
+  private CORSResponseFilter filter = new CORSResponseFilter();
+  
   @GET
   @Produces("application/json")
   public Object getAllSubjectsResource() {
     ObjectContext context = DataContext.createDataContext();
     CapstoneDomainMap map = CapstoneDomainMap.getInstance();
     
-    // TODO CORS
+    filter.doFilter(request, response);
+
     return map.performSubjectsByStatus(context, Status.APPROVED);
   }
 }

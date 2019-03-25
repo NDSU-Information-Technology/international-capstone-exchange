@@ -31,6 +31,7 @@ import org.apache.cayenne.access.DataContext;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
 import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
+import edu.ndsu.eci.international_capstone_exchange.util.CORSResponseFilter;
 import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
 
 /**
@@ -50,11 +51,16 @@ public class InstList {
   @Context
   private HttpServletRequest request;
   
+  /** cors filter for ndsu.edu and ndsu.nodak.edu */
+  private CORSResponseFilter filter = new CORSResponseFilter();
+  
   @GET
   @Produces("application/json")
   public Object getAllInstitutionsResource() {
     ObjectContext context = DataContext.createDataContext();
     CapstoneDomainMap map = CapstoneDomainMap.getInstance();
+    
+    filter.doFilter(request, response);
     
     List<Proposal> proposals =  map.performProposalsByStatus(context, ProposalStatus.PAIRED);
     
@@ -68,7 +74,6 @@ public class InstList {
       countries.get(country).add(prop.getInstitution().getName());
     }
     
-    // TODO CORS
     return countries;
   }
 }
