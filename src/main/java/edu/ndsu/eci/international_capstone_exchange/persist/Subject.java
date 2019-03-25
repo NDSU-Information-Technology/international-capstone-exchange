@@ -13,10 +13,13 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.persist;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import com.googlecode.tapestry5cayenne.annotations.Label;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.auto._Subject;
 
+@JsonIgnoreProperties({"objectContext", "persistenceState", "dataContext", "objEntity", "snapshotVersion", "objectId", "proposals"})
 public class Subject extends _Subject {
 
   @Label

@@ -149,6 +149,16 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
           <groupId>org.pac4j</groupId>
           <artifactId>pac4j-oauth</artifactId>
         </dependency>
+        <dependency>
+          <groupId>org.tynamo</groupId>
+          <artifactId>tapestry-resteasy</artifactId>
+          <version>0.5.0</version>
+        </dependency>
+        <dependency>
+          <groupId>org.jboss.resteasy</groupId>
+          <artifactId>resteasy-jackson-provider</artifactId>
+          <version>3.6.3.Final</version>
+        </dependency>
         </dependencies>
     <build>
         <finalName>international-capstone-exchange</finalName>

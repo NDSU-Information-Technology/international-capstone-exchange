@@ -281,6 +281,8 @@
 		<ordering><![CDATA[name]]></ordering>
 	</query>
 	<query name="ProposalsByStatus" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="Proposal">
+		<prefetch>institution</prefetch>
+		<prefetch>institution.country</prefetch>
 		<qualifier><![CDATA[proposalStatus = $status]]></qualifier>
 		<ordering><![CDATA[created]]></ordering>
 	</query>
