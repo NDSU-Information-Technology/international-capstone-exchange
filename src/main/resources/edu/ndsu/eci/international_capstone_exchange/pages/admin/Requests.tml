@@ -38,9 +38,9 @@
 				<h3>Pending / Pairable Requests</h3>
 
 				<t:grid source="pendingProposals" row="row"
-					include="institution, subjects, types, user"
+					include="institution, subjects, types, user,potentialstart"
 					add="performPairing, country, notes"
-					reorder="performPairing, institution, country, subjects, types, user, notes">
+					reorder="performPairing, institution, country, subjects, types, user, potentialstart, notes">
 					<p:performPairingCell>
 						<t:pagelink page="admin/setpairing" context="row">
 							<span class="action">${row.name}<span class="sr-only">${row.institution}</span></span>
