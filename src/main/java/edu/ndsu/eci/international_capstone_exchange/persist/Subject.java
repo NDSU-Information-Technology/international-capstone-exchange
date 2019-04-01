@@ -27,4 +27,13 @@ public class Subject extends _Subject {
   public String getName() {
     return super.getName();
   }
+  
+  /**
+   * Subject ID getter
+   * Used to get the subjectId value as subjectID
+   * @return subject id
+   */
+  public int getSubjectId() {
+    return (Integer) super.getObjectId().getIdSnapshot().get("pk");
+  }
 }

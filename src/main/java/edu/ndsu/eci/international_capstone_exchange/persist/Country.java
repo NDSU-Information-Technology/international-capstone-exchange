@@ -13,10 +13,13 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.persist;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import com.googlecode.tapestry5cayenne.annotations.Label;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.auto._Country;
 
+@JsonIgnoreProperties({"objectContext", "persistenceState", "dataContext", "objEntity", "snapshotVersion", "objectId", "institutions"})
 public class Country extends _Country {
 
   @Label
@@ -28,5 +31,14 @@ public class Country extends _Country {
   @Override
   public String toString() {
     return getName();
+  }
+  
+  /**
+   * Country ID getter
+   * Used to get the country Id value 
+   * @return country id
+   */
+  public int getCountryId() {
+    return (Integer) super.getObjectId().getIdSnapshot().get("pk");
   }
 }

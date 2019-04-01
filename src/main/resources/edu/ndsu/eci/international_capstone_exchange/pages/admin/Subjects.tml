@@ -35,7 +35,7 @@
     
     <div id="error">${deleteError}</div>
     
-    <t:grid source="subjects" row="row" add="delete" reorder="name,description">
+    <t:grid source="subjects" row="row" add="delete" reorder="name,description" exclude="proposals,subjectId">
     	<p:nameCell><t:pagelink page="admin/subjects" context="row">${row.name}</t:pagelink></p:nameCell>
     	<p:descriptionCell><t:outputraw value="row.description"></t:outputraw></p:descriptionCell>
     	<p:deleteCell><t:eventlink class="action" event="deleteSubject" context="row">Delete?</t:eventlink></p:deleteCell>
