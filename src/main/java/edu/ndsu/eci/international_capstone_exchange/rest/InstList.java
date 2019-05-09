@@ -67,7 +67,7 @@ public class InstList {
     Map<String, Set<String>> countries = new HashMap<>();
     
     for (Proposal prop : proposals) {
-      String country = prop.getInstitution().getCountry().getName();
+      String country = prop.getInstitution().getCountry().getIsoA2();
       if (!countries.containsKey(country)) {
         countries.put(country, new HashSet<>());
       }
