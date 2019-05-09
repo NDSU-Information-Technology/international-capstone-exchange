@@ -17,6 +17,7 @@ import edu.ndsu.eci.international_capstone_exchange.util.Status;
 public abstract class _Country extends CayenneDataObject {
 
     public static final String CREATED_PROPERTY = "created";
+    public static final String ISO_A2_PROPERTY = "isoA2";
     public static final String NAME_PROPERTY = "name";
     public static final String STATUS_PROPERTY = "status";
     public static final String INSTITUTIONS_PROPERTY = "institutions";
@@ -28,6 +29,13 @@ public abstract class _Country extends CayenneDataObject {
     }
     public Date getCreated() {
         return (Date)readProperty("created");
+    }
+
+    public void setIsoA2(String isoA2) {
+        writeProperty("isoA2", isoA2);
+    }
+    public String getIsoA2() {
+        return (String)readProperty("isoA2");
     }
 
     public void setName(String name) {
