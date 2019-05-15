@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>edu.ndsu.eci</groupId>
     <artifactId>international-capstone-exchange</artifactId>
-    <version>1.2.1-SNAPSHOT</version>
+    <version>1.2.1</version>
     <packaging>war</packaging>
     <name>International Capstone Exchange </name>
         <dependencies>
@@ -297,7 +297,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
     </properties>
     <description>International Capstone Exchange application to gather school applications to be part of the program.</description>
     <scm>
-      <tag>HEAD</tag>
+      <tag>1.2.1</tag>
       <developerConnection>scm:git:ssh:git@github.com:NDSU-Information-Technology/international-capstone-exchange.git</developerConnection>
     </scm>
     <dependencyManagement>
