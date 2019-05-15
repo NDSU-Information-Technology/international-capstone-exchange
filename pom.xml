@@ -298,7 +298,7 @@ of testing facilities designed for use with TestNG (http://testng.org/), so it's
     <description>International Capstone Exchange application to gather school applications to be part of the program.</description>
     <scm>
       <tag>1.2.1</tag>
-      <developerConnection>scm:git:ssh:git@github.com:NDSU-Information-Technology/international-capstone-exchange.git</developerConnection>
+      <developerConnection>scm:git:ssh:git@github.com/NDSU-Information-Technology/international-capstone-exchange.git</developerConnection>
     </scm>
     <dependencyManagement>
       <dependencies>
