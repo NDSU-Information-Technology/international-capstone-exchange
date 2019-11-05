@@ -30,9 +30,9 @@ import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.access.DataContext;
 
 import edu.ndsu.eci.international_capstone_exchange.persist.CapstoneDomainMap;
-import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
+import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.util.CORSResponseFilter;
-import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
+import edu.ndsu.eci.international_capstone_exchange.util.Status;
 
 /**
  * Get list of institutions in countries.
@@ -62,16 +62,16 @@ public class InstList {
     
     filter.doFilter(request, response);
     
-    List<Proposal> proposals =  map.performProposalsByStatus(context, ProposalStatus.PAIRED);
-    
+    List<User> users = map.performUsersByStatus(context, Status.APPROVED);
+        
     Map<String, Set<String>> countries = new HashMap<>();
     
-    for (Proposal prop : proposals) {
-      String country = prop.getInstitution().getCountry().getIsoA2();
+    for (User user : users) {
+      String country = user.getInstitution().getCountry().getIsoA2();
       if (!countries.containsKey(country)) {
         countries.put(country, new HashSet<>());
       }
-      countries.get(country).add(prop.getInstitution().getName());
+      countries.get(country).add(user.getInstitution().getName());
     }
     
     return countries;
