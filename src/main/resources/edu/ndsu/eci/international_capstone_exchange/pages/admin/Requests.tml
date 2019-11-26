@@ -83,7 +83,7 @@
 					<p:countryCell>${row.institution.country}</p:countryCell>
 					<p:pairingCell>
 						<t:if test="row.pairing">
-							${row.paired.institution} - ${row.paired.name}
+							${row.paired.institution}
 						</t:if>
 					</p:pairingCell>
 				</t:grid>
