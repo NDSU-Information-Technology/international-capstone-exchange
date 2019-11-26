@@ -113,7 +113,7 @@
             <div id="tab4" class="tab-pane">
                 <h2>Admin Users</h2>
                 <t:jquery.DataTable t:row="row" source="admins" model="bModel" options="options" add="removeAdmin"
-                exclude="created, id, source, ssoEmail, ssoName, url, pairingNotes, roles, credentialsExpired, federatedId"
+                exclude="created, id, source, ssoEmail, ssoName, url, pairingNotes, roles, credentialsExpired, federatedId, proposals"
                 reorder="institution, departmentName, name, pairsMade, proposals, email, workPhone, status,  accountLocked, removeAdmin">
                 	<p:pairsMadeCell>
                 		<t:If test="row.pairsMade">
