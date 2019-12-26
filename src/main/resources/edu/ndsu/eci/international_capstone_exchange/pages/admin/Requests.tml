@@ -76,7 +76,7 @@
 			<div id="tab3" class="tab-pane">
 				<h3>Paired Requests</h3>
 
-				<t:grid source="pairedProposals" row="row" 
+				<t:grid source="pairedProposals" row="row" inPlace="true"
 					include="institution, name, subjects, types, user, pairing"
 					add="country, pairedDate"
 					reorder="institution, name, country, subjects, types, user">
@@ -95,7 +95,7 @@
 				<h3>All Requests</h3>
 
 				<!--<t:grid source="allProposals" row="row" add="country" reorder="institution,country,subjects,types,user,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified"> -->
-				<t:grid source="allProposals" row="row"
+				<t:grid source="allProposals" row="row" inPlace="true"
 					include="institution, name, subjects, types, user, proposalStatus, pairing"
 					add="country"
 					reorder="institution, name, country, subjects, types, user">
