@@ -83,7 +83,7 @@
 					<p:countryCell>${row.institution.country}</p:countryCell>
 					<p:pairingCell>
 						<t:if test="row.pairing">
-							${row.paired.institution}
+							${row.paired.institution} - ${row.paired.institution.country} - ${row.paired.user.name}
 						</t:if>
 					</p:pairingCell>
           <p:pairedDateCell>${row.pairing.tmstamp}</p:pairedDateCell>
@@ -94,7 +94,7 @@
 				<h3>All Requests</h3>
 
 				<!--<t:grid source="allProposals" row="row" add="country" reorder="institution,country,subjects,types,user,description,potentialStart,teamSize,cost,created,durationInWeeks,perStudentWeekly,lastModified"> -->
-				<t:grid source="allProposals" row="row" 
+				<t:grid source="allProposals" row="row"
 					include="institution, name, subjects, types, user, proposalStatus, pairing"
 					add="country"
 					reorder="institution, name, country, subjects, types, user">
@@ -103,7 +103,7 @@
 					<!--<p:subjectsCell><span t:type="loop" t:source="row.subjects" t:value="subject">${subject.name}</span></p:subjectsCell> -->
 					<p:pairingCell>
 						<t:if test="row.pairing">
-							${row.paired.institution} - ${row.paired.name}
+							${row.paired.institution} - ${row.paired.institution.country} - ${row.paired.user.name}
 						</t:if>
 					</p:pairingCell>
 				</t:grid>
