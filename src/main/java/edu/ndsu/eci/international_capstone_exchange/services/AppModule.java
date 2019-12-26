@@ -202,6 +202,7 @@ public class AppModule {
 
   /**
    * Use annotation or method naming convention: <code>contributeApplicationDefaults</code>
+   * @param configuration configuration
    */
   @Contribute(SymbolProvider.class)
   @ApplicationDefaults
@@ -255,6 +256,8 @@ public class AppModule {
    * By default, Tapestry's ExceptionReporter implementation writes verbose text files to the
    * "build/exceptions" directory. This replaces that implementation with one that does nothing.
    * (The exceptions still get logged elsewhere.)
+   * @param exceptionReporter exception reporter
+   * @return do nothing reporter
    */
   @Decorate(serviceInterface = ExceptionReporter.class)
   public static ExceptionReporter preventExceptionFileWriting(final ExceptionReporter exceptionReporter) {

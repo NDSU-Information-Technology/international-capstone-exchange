@@ -71,6 +71,7 @@ public class VelocityEmailServiceImpl implements VelocityEmailService {
    * Constructor
    * @param velocity velocity service
    * @param email email service
+   * @param userInfo user info service
    */
   public VelocityEmailServiceImpl(VelocityService velocity, EmailService email, UserInfo userInfo) {
     velocityService = velocity;

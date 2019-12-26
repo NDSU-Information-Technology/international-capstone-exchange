@@ -142,9 +142,9 @@ public class RequestSubmission {
   /**
    * On form success submission
    * @return return page
-   * @throws Exception 
-   * @throws ParseErrorException 
-   * @throws ResourceNotFoundException 
+   * @throws Exception when failing on velocity
+   * @throws ParseErrorException when failing on velocity
+   * @throws ResourceNotFoundException when failing on velocity
    */
   public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception {
     if (proposal.getCreated() == null) {

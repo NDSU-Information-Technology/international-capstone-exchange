@@ -26,10 +26,11 @@ public interface VelocityEmailService {
    * Get a pre-configured email object with the body populated from velocity
    * @param context populated context
    * @param templateName path (with file name) for template to use
+   * @param subject subject of message
    * @return pre-configured email object
-   * @throws Exception 
-   * @throws ParseErrorException 
-   * @throws ResourceNotFoundException 
+   * @throws Exception when failing on velocity
+   * @throws ParseErrorException when failing on velocity
+   * @throws ResourceNotFoundException when failing on velocity
    */
   public SimpleEmail setupSimpleEmail(VelocityContext context, String templateName, String subject) throws ResourceNotFoundException, ParseErrorException, Exception;
 

@@ -128,9 +128,9 @@ public class Users {
   /**
    * Handles User approval and emails the update.
    * @param user The User being approved.
-   * @throws ResourceNotFoundException
-   * @throws ParseErrorException
-   * @throws Exception
+   * @throws ResourceNotFoundException when failing on velocity
+   * @throws ParseErrorException when failing on velocity
+   * @throws Exception when failing on velocity
    */
   @CommitAfter
   public void onApprove(User user) throws ResourceNotFoundException, ParseErrorException, Exception {
@@ -227,7 +227,7 @@ public class Users {
   /**
    * Returns the BeanModel for the datatable, needed to help with empty lists
    * 
-   * @return BeanModel<Organization> beanmodel for datatable
+   * @return beanmodel for datatable
    */
   public BeanModel<User> getBModel() {
     this.bmodel = beanModelSource.createDisplayModel(User.class, resources.getMessages());

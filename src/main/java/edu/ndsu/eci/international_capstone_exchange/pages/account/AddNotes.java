@@ -96,9 +96,9 @@ public class AddNotes {
   /**
    * On form success submission
    * @return return page
-   * @throws Exception
-   * @throws ParseErrorException
-   * @throws ResourceNotFoundException
+   * @throws Exception when failing on velocity
+   * @throws ParseErrorException when failing on velocity
+   * @throws ResourceNotFoundException when failing on velocity
    */
   @CommitAfter
   public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception {

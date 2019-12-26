@@ -26,6 +26,7 @@ public @interface InstanceAccessMethod {
 
   /**
    * Used to store the wild card permission used by this method
+   * @return list of pieces of values
    */
   String[] value();
 }

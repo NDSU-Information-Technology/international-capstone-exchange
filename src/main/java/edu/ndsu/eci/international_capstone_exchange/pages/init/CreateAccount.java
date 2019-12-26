@@ -13,14 +13,9 @@
 // limitations under the License.
 package edu.ndsu.eci.international_capstone_exchange.pages.init;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import org.apache.cayenne.ObjectContext;
-import org.apache.cayenne.query.SelectQuery;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.log4j.Logger;
@@ -211,9 +206,9 @@ public class CreateAccount {
   /**
    * Handle a successful form validate
    * @return page to send user to
-   * @throws Exception
-   * @throws ParseErrorException
-   * @throws ResourceNotFoundException
+   * @throws Exception general error
+   * @throws ParseErrorException when failing on velocity
+   * @throws ResourceNotFoundException when failing on velocity
    */
   public Object onSuccessFromForm() throws ResourceNotFoundException, ParseErrorException, Exception{
 
