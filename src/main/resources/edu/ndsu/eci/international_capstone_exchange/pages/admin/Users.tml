@@ -51,17 +51,7 @@
                 <h2>Active Users</h2>
                 <t:jquery.DataTable t:row="row" source="active" model="bModel" options="options" add="makeAdmin, deactivate"
                 exclude="created, id, source, ssoEmail, ssoName, status, url, pairingNotes, roles, credentialsExpired, accountLocked, federatedId, pairsMade"
-                reorder="institution, departmentName, name, pairsmade, proposals, email, workPhone, makeAdmin, deactivate">
-                	<p:pairsMadeCell>
-                		<t:If test="row.pairsMade">
-                			<ul>
-                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
-                			</ul>
-                			<p:Else>
-                				None
-                			</p:Else>
-                		</t:If>
-                	</p:pairsMadeCell>
+                reorder="institution, departmentName, name, proposals, email, workPhone, makeAdmin, deactivate">
                 	<p:proposalsCell>
                 		<t:If test="row.proposals">
                 			<ul>
@@ -84,17 +74,7 @@
                 <h2>Inactive Users</h2>
                 <t:jquery.DataTable t:row="row" source="deactivated" model="bModel" options="options" add="reactivate"
                 exclude="created, id, source, ssoEmail, ssoName, status, url, pairingNotes, pairsMade, roles, credentialsExpired, accountLocked, federatedId"
-                reorder="institution, departmentName, name, pairsmade, proposals, email, workPhone, reactivate">
-                	<p:pairsMadeCell>
-                		<t:If test="row.pairsMade">
-                			<ul>
-                				<li t:type="loop" t:source="row.pairsMade" t:value="pairing">${pairing.name}</li> 
-                			</ul>
-                			<p:Else>
-                				None
-                			</p:Else>
-                		</t:If>
-                	</p:pairsMadeCell>
+                reorder="institution, departmentName, name, proposals, email, workPhone, reactivate">
                 	<p:proposalsCell>
                 		<t:If test="row.proposals">
                 			<ul>
@@ -114,7 +94,7 @@
                 <h2>Admin Users</h2>
                 <t:jquery.DataTable t:row="row" source="admins" model="bModel" options="options" add="removeAdmin"
                 exclude="created, id, source, ssoEmail, ssoName, url, pairingNotes, roles, credentialsExpired, federatedId, proposals"
-                reorder="institution, departmentName, name, pairsMade, proposals, email, workPhone, status,  accountLocked, removeAdmin">
+                reorder="institution, departmentName, name, pairsMade, email, workPhone, status,  accountLocked, removeAdmin">
                 	<p:pairsMadeCell>
                 		<t:If test="row.pairsMade">
                 			<ul>
