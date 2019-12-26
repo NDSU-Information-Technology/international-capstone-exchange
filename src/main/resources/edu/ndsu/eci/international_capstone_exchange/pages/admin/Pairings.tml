@@ -18,15 +18,15 @@
     xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
     xmlns:p="tapestry:parameter" t:type="adminlayout" title="Pairings">
     
-	<t:grid source="pairings" exclude="notes, proposals, admin" row="row" add="proposalA, aCreator, proposalB, bCreator, Note" reorder="name, proposalA, aCreator,  proposalB, bCreator, Note">
+	<t:grid source="pairings" exclude="notes, proposals, admin" row="row" add="countryA, aCreator, countryB, bCreator, Note" reorder="name, countryA, aCreator,  countryB, bCreator, Note">
 		<p:aCreatorHeader>A Creator</p:aCreatorHeader>
 		<p:bCreatorHeader>B Creator</p:bCreatorHeader>
 		<p:tmstampHeader>Timestamp</p:tmstampHeader>
 		
-		<p:proposalACell>${row.proposals.get(0).name}</p:proposalACell>
+		<p:countryACell>${row.proposals.get(0).institution.country}</p:countryACell>
 		<p:aCreatorCell>${row.proposals.get(0).user.name}</p:aCreatorCell>
 		
-		<p:proposalBCell>${row.proposals.get(1).name}</p:proposalBCell>
+		<p:countryBCell>${row.proposals.get(1).institution.country}</p:countryBCell>
 		<p:bCreatorCell>${row.proposals.get(1).user.name}</p:bCreatorCell>
 		
 		<p:nameCell><t:pagelink page="account/pairview" context="row">${row.name}</t:pagelink></p:nameCell>
