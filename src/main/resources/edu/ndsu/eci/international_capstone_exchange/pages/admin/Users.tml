@@ -62,6 +62,7 @@
                 			</p:Else>
                 		</t:If>
                 	</p:proposalsCell>
+                  <p:nameCell><t:pagelink page="admin/editUser" context="row"><span class="action">${row.name}</span></t:pagelink></p:nameCell>
                 	<p:makeAdminCell>
                 		<t:eventlink event="makeAdmin" context="row"><span class="action">Make <!--${row.ssoemail}--> admin</span></t:eventlink>
                 	</p:makeAdminCell>
