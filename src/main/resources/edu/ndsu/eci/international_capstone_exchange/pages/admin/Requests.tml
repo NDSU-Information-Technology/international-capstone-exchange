@@ -38,8 +38,8 @@
 				<h3>Pending / Pairable Requests</h3>
 
 				<t:grid source="pendingProposals" row="row"
-					include="institution, subjects, types, user,potentialstart"
-					add="performPairing, country, notes"
+					include="institution, subjects, types, user, potentialstart"
+					add="performPairing, country, notes, editProposal"
 					reorder="performPairing, institution, country, subjects, types, user, potentialstart, notes">
 					<p:performPairingCell>
 						<t:pagelink page="admin/setpairing" context="row">
@@ -50,6 +50,7 @@
 					<p:notesCell>
 						<div class="description"><t:outputraw value="row.description"></t:outputraw></div>
 					</p:notesCell>
+          <p:editProposalCell><t:pagelink page="admin/editproposal" context="row">Edit</t:pagelink></p:editProposalCell>
 				</t:grid>
 			</div>
 
