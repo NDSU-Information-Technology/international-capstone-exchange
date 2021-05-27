@@ -70,6 +70,14 @@
 		<db-attribute name="role" type="VARCHAR" isMandatory="true" length="20"/>
 		<db-attribute name="userPk" type="INTEGER" isMandatory="true"/>
 	</db-entity>
+	<db-entity name="sponsoredProjects">
+		<db-attribute name="added" type="TIMESTAMP" isMandatory="true"/>
+		<db-attribute name="company" type="VARCHAR" isMandatory="true" length="50"/>
+		<db-attribute name="pk" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="projectFile" type="BLOB" isMandatory="true"/>
+		<db-attribute name="projectTitle" type="VARCHAR" isMandatory="true" length="50"/>
+		<db-attribute name="show" type="BOOLEAN" isMandatory="true"/>
+	</db-entity>
 	<db-entity name="subjects">
 		<db-attribute name="created" type="TIMESTAMP" isMandatory="true"/>
 		<db-attribute name="description" type="CLOB" isMandatory="true"/>
@@ -146,6 +154,13 @@
 	</obj-entity>
 	<obj-entity name="Role" className="edu.ndsu.eci.international_capstone_exchange.persist.Role" dbEntityName="roles">
 		<obj-attribute name="role" type="edu.ndsu.eci.international_capstone_exchange.util.UserRole" db-attribute-path="role"/>
+	</obj-entity>
+	<obj-entity name="SponsoredProject" className="edu.ndsu.eci.international_capstone_exchange.persist.SponsoredProject" dbEntityName="sponsoredProjects">
+		<obj-attribute name="added" type="java.util.Date" db-attribute-path="added"/>
+		<obj-attribute name="company" type="java.lang.String" db-attribute-path="company"/>
+		<obj-attribute name="projectFile" type="byte[]" db-attribute-path="projectFile"/>
+		<obj-attribute name="projectTitle" type="java.lang.String" db-attribute-path="projectTitle"/>
+		<obj-attribute name="show" type="java.lang.Boolean" db-attribute-path="show"/>
 	</obj-entity>
 	<obj-entity name="Subject" className="edu.ndsu.eci.international_capstone_exchange.persist.Subject" dbEntityName="subjects">
 		<obj-attribute name="created" type="java.util.Date" db-attribute-path="created"/>
@@ -290,6 +305,9 @@
 	</query>
 	<query name="RoleByNameQuery" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="Role">
 		<qualifier><![CDATA[role = $name]]></qualifier>
+	</query>
+	<query name="ShownProjects" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="SponsoredProject">
+		<qualifier><![CDATA[show = 1]]></qualifier>
 	</query>
 	<query name="SubjectsByStatus" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="Subject">
 		<qualifier><![CDATA[status = $status]]></qualifier>

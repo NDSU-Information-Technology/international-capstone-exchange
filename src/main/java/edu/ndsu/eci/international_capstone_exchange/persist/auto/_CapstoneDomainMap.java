@@ -9,6 +9,7 @@ import edu.ndsu.eci.international_capstone_exchange.persist.Country;
 import edu.ndsu.eci.international_capstone_exchange.persist.Proposal;
 import edu.ndsu.eci.international_capstone_exchange.persist.ProposalType;
 import edu.ndsu.eci.international_capstone_exchange.persist.Role;
+import edu.ndsu.eci.international_capstone_exchange.persist.SponsoredProject;
 import edu.ndsu.eci.international_capstone_exchange.persist.Subject;
 import edu.ndsu.eci.international_capstone_exchange.persist.User;
 import edu.ndsu.eci.international_capstone_exchange.util.ProposalStatus;
@@ -31,6 +32,8 @@ public class _CapstoneDomainMap {
 
     public static final String ROLE_BY_NAME_QUERY_QUERYNAME = "RoleByNameQuery";
 
+    public static final String SHOWN_PROJECTS_QUERYNAME = "ShownProjects";
+
     public static final String SUBJECTS_BY_STATUS_QUERYNAME = "SubjectsByStatus";
 
     public static final String USER_BY_SOURCE_ID_QUERY_QUERYNAME = "UserBySourceIdQuery";
@@ -41,11 +44,11 @@ public class _CapstoneDomainMap {
 
     public List<Country> performCountries(ObjectContext context , Status status) {
         String[] parameters = {
-                "status",
+            "status",
         };
 
         Object[] values = {
-                status,
+            status,
         };
 
         return context.performQuery(new NamedQuery("Countries", parameters, values));
@@ -53,11 +56,11 @@ public class _CapstoneDomainMap {
 
     public List<ProposalType> performPropTypesByStatus(ObjectContext context , Status status) {
         String[] parameters = {
-                "status",
+            "status",
         };
 
         Object[] values = {
-                status,
+            status,
         };
 
         return context.performQuery(new NamedQuery("PropTypesByStatus", parameters, values));
@@ -65,11 +68,11 @@ public class _CapstoneDomainMap {
 
     public List<Proposal> performProposalsByStatus(ObjectContext context , ProposalStatus status) {
         String[] parameters = {
-                "status",
+            "status",
         };
 
         Object[] values = {
-                status,
+            status,
         };
 
         return context.performQuery(new NamedQuery("ProposalsByStatus", parameters, values));
@@ -77,23 +80,27 @@ public class _CapstoneDomainMap {
 
     public List<Role> performRoleByNameQuery(ObjectContext context , UserRole name) {
         String[] parameters = {
-                "name",
+            "name",
         };
 
         Object[] values = {
-                name,
+            name,
         };
 
         return context.performQuery(new NamedQuery("RoleByNameQuery", parameters, values));
     }
 
+    public List<SponsoredProject> performShownProjects(ObjectContext context ) {
+        return context.performQuery(new NamedQuery("ShownProjects"));
+    }
+
     public List<Subject> performSubjectsByStatus(ObjectContext context , Status status) {
         String[] parameters = {
-                "status",
+            "status",
         };
 
         Object[] values = {
-                status,
+            status,
         };
 
         return context.performQuery(new NamedQuery("SubjectsByStatus", parameters, values));
@@ -101,13 +108,13 @@ public class _CapstoneDomainMap {
 
     public List<User> performUserBySourceIdQuery(ObjectContext context , String source, String id) {
         String[] parameters = {
-                "source",
-                "id",
+            "source",
+            "id",
         };
 
         Object[] values = {
-                source,
-                id,
+            source,
+            id,
         };
 
         return context.performQuery(new NamedQuery("UserBySourceIdQuery", parameters, values));
@@ -115,11 +122,11 @@ public class _CapstoneDomainMap {
 
     public List<User> performUsersByRoleQuery(ObjectContext context , UserRole role) {
         String[] parameters = {
-                "role",
+            "role",
         };
 
         Object[] values = {
-                role,
+            role,
         };
 
         return context.performQuery(new NamedQuery("UsersByRoleQuery", parameters, values));
@@ -127,11 +134,11 @@ public class _CapstoneDomainMap {
 
     public List<User> performUsersByStatus(ObjectContext context , Status status) {
         String[] parameters = {
-                "status",
+            "status",
         };
 
         Object[] values = {
-                status,
+            status,
         };
 
         return context.performQuery(new NamedQuery("UsersByStatus", parameters, values));
