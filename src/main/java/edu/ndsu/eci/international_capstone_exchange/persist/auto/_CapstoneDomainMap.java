@@ -24,15 +24,17 @@ import edu.ndsu.eci.international_capstone_exchange.util.UserRole;
  */
 public class _CapstoneDomainMap {
 
+    public static final String CLOSED_SPONSORED_PROJECTS_QUERYNAME = "ClosedSponsoredProjects";
+
     public static final String COUNTRIES_QUERYNAME = "Countries";
+
+    public static final String OPEN_SPONSORED_PROJECTS_QUERYNAME = "OpenSponsoredProjects";
 
     public static final String PROP_TYPES_BY_STATUS_QUERYNAME = "PropTypesByStatus";
 
     public static final String PROPOSALS_BY_STATUS_QUERYNAME = "ProposalsByStatus";
 
     public static final String ROLE_BY_NAME_QUERY_QUERYNAME = "RoleByNameQuery";
-
-    public static final String SHOWN_PROJECTS_QUERYNAME = "ShownProjects";
 
     public static final String SUBJECTS_BY_STATUS_QUERYNAME = "SubjectsByStatus";
 
@@ -41,6 +43,10 @@ public class _CapstoneDomainMap {
     public static final String USERS_BY_ROLE_QUERY_QUERYNAME = "UsersByRoleQuery";
 
     public static final String USERS_BY_STATUS_QUERYNAME = "UsersByStatus";
+
+    public List<SponsoredProject> performClosedSponsoredProjects(ObjectContext context ) {
+        return context.performQuery(new NamedQuery("ClosedSponsoredProjects"));
+    }
 
     public List<Country> performCountries(ObjectContext context , Status status) {
         String[] parameters = {
@@ -52,6 +58,10 @@ public class _CapstoneDomainMap {
         };
 
         return context.performQuery(new NamedQuery("Countries", parameters, values));
+    }
+
+    public List<SponsoredProject> performOpenSponsoredProjects(ObjectContext context ) {
+        return context.performQuery(new NamedQuery("OpenSponsoredProjects"));
     }
 
     public List<ProposalType> performPropTypesByStatus(ObjectContext context , Status status) {
@@ -88,10 +98,6 @@ public class _CapstoneDomainMap {
         };
 
         return context.performQuery(new NamedQuery("RoleByNameQuery", parameters, values));
-    }
-
-    public List<SponsoredProject> performShownProjects(ObjectContext context ) {
-        return context.performQuery(new NamedQuery("ShownProjects"));
     }
 
     public List<Subject> performSubjectsByStatus(ObjectContext context , Status status) {

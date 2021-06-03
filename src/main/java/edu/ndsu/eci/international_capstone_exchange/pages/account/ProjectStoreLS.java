@@ -11,10 +11,16 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package edu.ndsu.eci.international_capstone_exchange.persist;
+package edu.ndsu.eci.international_capstone_exchange.pages.account;
 
-import edu.ndsu.eci.international_capstone_exchange.persist.auto._SponsoredProject;
+import java.io.ByteArrayInputStream;
 
-public class SponsoredProject extends _SponsoredProject {
+import edu.ndsu.eci.international_capstone_exchange.persist.SponsoredProject;
+import edu.ndsu.eci.international_capstone_exchange.util.BinaryStreamResponse;
 
+public class ProjectStoreLS {
+
+  public BinaryStreamResponse onActivate(SponsoredProject proj) {
+    return new BinaryStreamResponse(new ByteArrayInputStream(proj.getProjectFile()), proj.getFilename());
+  }
 }

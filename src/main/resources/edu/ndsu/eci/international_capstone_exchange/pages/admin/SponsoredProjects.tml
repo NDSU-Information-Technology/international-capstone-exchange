@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2021 North Dakota State University
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<html
+    xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+    xmlns:p="tapestry:parameter" t:type="adminlayout" title="Sponsored Projects">
+    
+    <style>
+    	#error {
+    		color: red;
+    		text-align: center;
+    		width: 100%;
+    		font-size: 20px;
+    	}
+    </style>
+    
+    <p>Upload and manage sponsored projects from here. The filename of the file that is uploaded is what it will be saved as on
+    the computers of anyone downloading the file in this app. So rename before you upload if necessary. Open proposals will be shown first. Closed
+    proposals will be shown in a separate table for historical purposes. To delete a proposal, close it first.</p>
+    
+    <form t:type="form" t:id="form">
+      <t:errors/>
+      <t:label for="company">Company</t:label>
+      <input t:type="textfield" t:id="company" t:value="company" t:validate="required"/><br/>
+    
+      <t:label for="title">Title</t:label>
+      <input t:type="textfield" t:id="title" t:value="title" t:validate="required"/><br/>
+      
+      <t:label for="document">Document</t:label>
+      <input t:type="upload" t:id="document" t:value="document" t:validate="required"/><br/>
+      
+      <input type="submit" value="Add project"/>
+    </form>
+    <br/>
+
+    <t:grid source="projects" row="row" include="company,projectTitle,added,open" add="delete,close">
+      <p:projectTitleCell><t:pagelink page="admin/projectStore" context="row">${row.projectTitle}</t:pagelink></p:projectTitleCell>
+      <p:deleteCell><t:if test="row.open"><p:else><t:eventlink context="row" event="delete">Delete ${row.projectTitle}</t:eventlink></p:else></t:if></p:deleteCell>
+      <p:closeCell><t:eventlink context="row" event="toggle">Toggle ${row.projectTitle}</t:eventlink></p:closeCell>
+    </t:grid>
+    
+</html>

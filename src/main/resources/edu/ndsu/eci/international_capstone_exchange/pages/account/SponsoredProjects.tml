@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+ Copyright 2021 North Dakota State University
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd"
+      xmlns:p="tapestry:parameter" t:type="layout" title="Sponsored Projects">
+      
+      <p>Follow the link on the project title to download the sponsor provided documentation. That will include more details, including how to bid on the project. When bidding on a project, you should include:</p>
+      <ul>
+      <li>University Information: name, location, etc.</li>  
+<li>What majors will be on the group  </li>
+<li>Number of students in the group  </li>
+<li>Level of students (senior, 3rd year, graduate, etc.)</li>  
+<li>Hours worked per student per week  </li>
+<li>How are the teams run (e.g., is there a faculty advisor?)</li>  
+<li>Start/end dates (one/two semester)  </li>
+<li>Special skills - e.g., all students will have completed a course in xxx </li> 
+<li>Cost to sponsor (e.g., expect company to pay for materials)  </li>
+<li>Why your university should be picked  </li>
+<li>Contact information  </li>
+      </ul>
+      
+    <t:grid source="openprojects" row="row" include="company,projectTitle,added">
+      <p:projectTitleCell><t:pagelink page="account/projectStorels" context="row">${row.projectTitle}</t:pagelink></p:projectTitleCell>
+    </t:grid>
+    
+    <p>Historic projects</p>
+    <t:grid source="closedprojects" row="row" include="company,projectTitle,added">
+      <p:projectTitleCell><t:pagelink page="account/projectStorels" context="row">${row.projectTitle}</t:pagelink></p:projectTitleCell>
+    </t:grid>
+</html>

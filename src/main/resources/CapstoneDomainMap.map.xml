@@ -73,10 +73,11 @@
 	<db-entity name="sponsoredProjects">
 		<db-attribute name="added" type="TIMESTAMP" isMandatory="true"/>
 		<db-attribute name="company" type="VARCHAR" isMandatory="true" length="50"/>
-		<db-attribute name="pk" type="INTEGER" isPrimaryKey="true" isMandatory="true"/>
+		<db-attribute name="filename" type="VARCHAR" isMandatory="true" length="100"/>
+		<db-attribute name="open" type="BOOLEAN" isMandatory="true"/>
+		<db-attribute name="pk" type="INTEGER" isPrimaryKey="true" isGenerated="true" isMandatory="true"/>
 		<db-attribute name="projectFile" type="BLOB" isMandatory="true"/>
 		<db-attribute name="projectTitle" type="VARCHAR" isMandatory="true" length="50"/>
-		<db-attribute name="show" type="BOOLEAN" isMandatory="true"/>
 	</db-entity>
 	<db-entity name="subjects">
 		<db-attribute name="created" type="TIMESTAMP" isMandatory="true"/>
@@ -158,9 +159,10 @@
 	<obj-entity name="SponsoredProject" className="edu.ndsu.eci.international_capstone_exchange.persist.SponsoredProject" dbEntityName="sponsoredProjects">
 		<obj-attribute name="added" type="java.util.Date" db-attribute-path="added"/>
 		<obj-attribute name="company" type="java.lang.String" db-attribute-path="company"/>
+		<obj-attribute name="filename" type="java.lang.String" db-attribute-path="filename"/>
+		<obj-attribute name="open" type="java.lang.Boolean" db-attribute-path="open"/>
 		<obj-attribute name="projectFile" type="byte[]" db-attribute-path="projectFile"/>
 		<obj-attribute name="projectTitle" type="java.lang.String" db-attribute-path="projectTitle"/>
-		<obj-attribute name="show" type="java.lang.Boolean" db-attribute-path="show"/>
 	</obj-entity>
 	<obj-entity name="Subject" className="edu.ndsu.eci.international_capstone_exchange.persist.Subject" dbEntityName="subjects">
 		<obj-attribute name="created" type="java.util.Date" db-attribute-path="created"/>
@@ -289,9 +291,15 @@
 	<obj-relationship name="pairsMade" source="User" target="Pairing" deleteRule="Deny" db-relationship-path="pairsMade"/>
 	<obj-relationship name="proposals" source="User" target="Proposal" deleteRule="Deny" db-relationship-path="proposals"/>
 	<obj-relationship name="roles" source="User" target="Role" deleteRule="Deny" db-relationship-path="roles"/>
+	<query name="ClosedSponsoredProjects" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="SponsoredProject">
+		<qualifier><![CDATA[open = 0]]></qualifier>
+	</query>
 	<query name="Countries" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="Country">
 		<qualifier><![CDATA[status = $status]]></qualifier>
 		<ordering><![CDATA[name]]></ordering>
+	</query>
+	<query name="OpenSponsoredProjects" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="SponsoredProject">
+		<qualifier><![CDATA[open = 1]]></qualifier>
 	</query>
 	<query name="PropTypesByStatus" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="ProposalType">
 		<qualifier><![CDATA[status = $status]]></qualifier>
@@ -305,9 +313,6 @@
 	</query>
 	<query name="RoleByNameQuery" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="Role">
 		<qualifier><![CDATA[role = $name]]></qualifier>
-	</query>
-	<query name="ShownProjects" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="SponsoredProject">
-		<qualifier><![CDATA[show = 1]]></qualifier>
 	</query>
 	<query name="SubjectsByStatus" factory="org.apache.cayenne.map.SelectQueryBuilder" root="obj-entity" root-name="Subject">
 		<qualifier><![CDATA[status = $status]]></qualifier>

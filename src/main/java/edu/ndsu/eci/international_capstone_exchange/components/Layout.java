@@ -87,6 +87,7 @@ public class Layout {
     
     if (securityService.hasRole(FederatedAccountsRealm.APPROVED_USER_ROLE)) {
       pageNames.add("Account/Dashboard");
+      pageNames.add("Account/SponsoredProjects");
     }
     
     pageNames.add("Logout");

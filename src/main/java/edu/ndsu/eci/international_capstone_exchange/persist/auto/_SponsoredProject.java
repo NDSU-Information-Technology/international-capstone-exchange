@@ -14,9 +14,10 @@ public abstract class _SponsoredProject extends CayenneDataObject {
 
     public static final String ADDED_PROPERTY = "added";
     public static final String COMPANY_PROPERTY = "company";
+    public static final String FILENAME_PROPERTY = "filename";
+    public static final String OPEN_PROPERTY = "open";
     public static final String PROJECT_FILE_PROPERTY = "projectFile";
     public static final String PROJECT_TITLE_PROPERTY = "projectTitle";
-    public static final String SHOW_PROPERTY = "show";
 
     public static final String PK_PK_COLUMN = "pk";
 
@@ -34,6 +35,20 @@ public abstract class _SponsoredProject extends CayenneDataObject {
         return (String)readProperty("company");
     }
 
+    public void setFilename(String filename) {
+        writeProperty("filename", filename);
+    }
+    public String getFilename() {
+        return (String)readProperty("filename");
+    }
+
+    public void setOpen(Boolean open) {
+        writeProperty("open", open);
+    }
+    public Boolean getOpen() {
+        return (Boolean)readProperty("open");
+    }
+
     public void setProjectFile(byte[] projectFile) {
         writeProperty("projectFile", projectFile);
     }
@@ -46,13 +61,6 @@ public abstract class _SponsoredProject extends CayenneDataObject {
     }
     public String getProjectTitle() {
         return (String)readProperty("projectTitle");
-    }
-
-    public void setShow(Boolean show) {
-        writeProperty("show", show);
-    }
-    public Boolean getShow() {
-        return (Boolean)readProperty("show");
     }
 
 }
